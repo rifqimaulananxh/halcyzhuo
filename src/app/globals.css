@@ -1,0 +1,436 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f8f8f8;
+  --color-surface: #ededed;
+  --color-ink: #222222;
+  --color-muted: #7a7a7a;
+  --color-outline: rgba(34, 34, 34, 0.3);
+  --color-ink-soft: rgba(34, 34, 34, 0.12);
+  --color-online: #22c55e;
+
+  --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Inter Tight Variable", ui-monospace, monospace;
+
+  --radius-sm: 9px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 30px;
+  --radius-pill: 100px;
+
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
+
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+}
+
+:root {
+  --gap-section: 160px;
+  --max-w: 1816px;
+  --pad-inner: 52px;
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --pad-inner: 40px;
+  }
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --pad-inner: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --pad-inner: 16px;
+  }
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  #main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad-inner) 56px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-section);
+  }
+
+  section {
+    scroll-margin-top: 110px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-soft);
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 34, 34, 0.4);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 34, 34, 0.3) var(--color-bg);
+}
+
+/* ---------- film grain overlay ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- reveal on scroll ---------- */
+/* unified slow mask reveal, obscura-style */
+html.js .reveal--fade {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(56px);
+  transition:
+    clip-path 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: clip-path, transform;
+}
+
+html.js .reveal--fade.visible {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+/* heading mask reveal (per line) */
+.reveal--mask {
+  overflow: hidden;
+}
+
+/* staggered list reveal */
+html.js .reveal--stagger > * {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(56px);
+  transition:
+    clip-path 1.7s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 130ms),
+    transform 1.7s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 130ms),
+    padding-left 0.3s ease;
+}
+
+html.js .reveal--stagger.visible > * {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+/* ---------- hero load animation ---------- */
+.hero-title {
+  overflow: hidden;
+}
+
+.hero-item {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(48px);
+  animation: hero-mask-up 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 130ms + 350ms);
+  will-change: clip-path, transform;
+}
+
+@keyframes hero-mask-up {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(48px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+
+/* ---------- gsap split text (obscura-style line masks) ---------- */
+html.js [data-text-reveal] {
+  visibility: hidden;
+}
+
+.text-line {
+  padding-bottom: 0.075em !important;
+}
+
+/* ---------- small text reveal (mask clip, unified slow) ---------- */
+html.js .reveal .rv {
+  display: inline-block;
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(56px);
+  transition:
+    clip-path 1.7s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 130ms),
+    transform 1.7s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 130ms);
+  will-change: clip-path, transform;
+}
+
+html.js .reveal.visible .rv {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+/* ---------- nav logo intro ---------- */
+.logo-mask {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.logo-char {
+  display: inline-block;
+  transform: translateY(115%);
+  animation: logo-char-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 45ms + 200ms);
+  will-change: transform;
+}
+
+@keyframes logo-char-up {
+  from {
+    transform: translateY(115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ---------- magnetic buttons ---------- */
+.magnetic {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+/* ---------- lenis smooth scroll ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- marquee ---------- */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--color-surface);
+  border-bottom: 1px solid var(--color-surface);
+}
+
+.marquee-row {
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 40px) 0;
+}
+
+.marquee-row + .marquee-row {
+  border-top: 1px solid var(--color-surface);
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: var(--animate-marquee);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.marquee-track--reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-track span {
+  padding-right: 56px;
+  font-size: clamp(64px, 9vw, 110px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+.marquee-track--fill span {
+  color: var(--color-ink);
+}
+
+.marquee-track--outline span {
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--color-ink);
+}
+
+@supports not (-webkit-text-stroke: 2.5px) {
+  .marquee-track--outline span {
+    color: var(--color-ink);
+  }
+}
+
+/* ---------- footer ---------- */
+.footer__logo {
+  margin-bottom: clamp(30px, 4vw, 60px);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
+  gap: 24px;
+}
+
+.footer__menu {
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.footer__menu li {
+  margin-bottom: clamp(10px, 4vw, 20px);
+}
+
+.footer__link {
+  transition: opacity 0.2s ease;
+}
+
+.footer__link:hover {
+  opacity: 0.75;
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: clamp(48px, 6vw, 90px);
+  padding-top: 24px;
+  font-size: 14px;
+  border-top: 1px dotted var(--color-outline);
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  align-items: baseline;
+}
+
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --gap-section: 110px;
+  }
+}
+
+@media (max-width: 809px) {
+  :root {
+    --gap-section: 80px;
+  }
+  #main {
+    padding: 0 var(--pad-inner) 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal--fade,
+  html.js .reveal--stagger > *,
+  html.js .reveal .rv {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+    transition: none;
+  }
+  html.js [data-text-reveal] {
+    visibility: visible;
+  }
+  .hero-item {
+    animation: none;
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+  .logo-char {
+    animation: none;
+    transform: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .magnetic {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

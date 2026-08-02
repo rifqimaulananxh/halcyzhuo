@@ -1,0 +1,26 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f1f1f1"/>
+  <rect width="800" height="600" fill="url(#g)" opacity="0.5"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e4e8ec"/>
+      <stop offset="1" stop-color="#d8dcE2"/>
+    </linearGradient>
+  </defs>
+  <text x="48" y="120" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="600" letter-spacing="-3" fill="#222">Pulse<span fill="#7a7a7a">.</span></text>
+  <text x="50" y="150" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" letter-spacing="4" fill="#7a7a7a">REALTIME ANALYTICS</text>
+  <g stroke="#222" stroke-opacity="0.08">
+    <path d="M48 480 H752"/>
+    <path d="M48 424 H752"/>
+    <path d="M48 368 H752"/>
+    <path d="M48 312 H752"/>
+    <path d="M48 256 H752"/>
+    <path d="48 200 H752" transform="translate(0,0)"/>
+  </g>
+  <path d="M48 470 L150 470 L172 412 L194 330 L216 452 L240 300 L264 478 L290 250 L316 410 L336 170 L360 300 L384 190 L430 330 L456 120 L500 240 L524 170 L584 300 L620 140 L660 220 L710 160 L752 190" stroke="#222" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="456" cy="120" r="9" fill="#222"/>
+  <path d="M456 120 L520 120" stroke="#222" stroke-width="2" stroke-dasharray="4 6" opacity="0.4"/>
+  <text x="470" y="106" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#222">0.4s LCP</text>
+  <circle cx="656" cy="560" r="4" fill="#22c55e"/>
+  <text x="672" y="566" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#7a7a7a">live · 99.9% uptime</text>
+</svg>

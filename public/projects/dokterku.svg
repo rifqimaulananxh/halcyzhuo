@@ -1,0 +1,24 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#e8edec"/>
+  <text x="48" y="120" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="600" letter-spacing="-3" fill="#222">Dokterku<span fill="#7a7a7a">.</span></text>
+  <text x="50" y="150" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" letter-spacing="4" fill="#7a7a7a">TELEHEALTH PLATFORM</text>
+  <g>
+    <rect x="96" y="248" width="220" height="128" rx="20" fill="#222" transform="rotate(-3 206 312)"/>
+    <path d="M170 296 V336 M150 316 H190" stroke="#f8f8f8" stroke-width="7" stroke-linecap="round"/>
+    <text x="206" y="252" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#f8f8f8" transform="rotate(-3 206 312)" opacity="0.85">today</text>
+  </g>
+  <g>
+    <rect x="356" y="224" width="200" height="176" rx="20" fill="#cfd8d6"/>
+    <rect x="376" y="248" width="160" height="12" rx="6" fill="#222" opacity="0.35"/>
+    <rect x="376" y="278" width="120" height="12" rx="6" fill="#222" opacity="0.2"/>
+    <rect x="376" y="308" width="140" height="12" rx="6" fill="#222" opacity="0.2"/>
+    <rect x="376" y="338" width="80" height="12" rx="6" fill="#22c55e" opacity="0.8"/>
+  </g>
+  <g>
+    <rect x="596" y="280" width="120" height="120" rx="20" fill="#222"/>
+    <text x="656" y="352" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="600" fill="#f8f8f8">60k</text>
+    <text x="656" y="384" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#f8f8f8" opacity="0.7">MAU</text>
+  </g>
+  <path d="M96 520 H704" stroke="#222" stroke-width="3"/>
+  <text x="96" y="564" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#222">2k → 60k users, no rewrite</text>
+</svg>
