@@ -26,8 +26,8 @@ const gridColumns = [
 ];
 
 const bottomLinks = [
-  { label: "Privacy policy", href: "#" },
-  { label: "Terms of service", href: "#" },
+  { label: "Privacy policy", href: "/privacy" },
+  { label: "Terms of service", href: "/terms" },
 ];
 
 const connectLinks = [
@@ -44,7 +44,7 @@ export function Footer() {
         <Reveal variant="mask">
           <div className="flex flex-col items-start gap-7 border-b border-surface pb-[clamp(56px,8vw,120px)]">
             <span
-              className="rv rv-label text-[13px] font-semibold uppercase tracking-wider text-muted"
+              className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted"
               style={{ "--i": 0 } as CSSProperties}
             >
               Have a project in mind?
@@ -53,11 +53,12 @@ export function Footer() {
               as="h2"
               split="chars"
               y={160}
-              className="text-[clamp(56px,10vw,150px)] font-semibold tracking-[-0.05em] leading-[0.9]"
+              className="text-[clamp(56px,10vw,150px)] font-bold tracking-[-0.05em] leading-[0.9]"
             >
               Let&apos;s work
               <br />
-              together<span className="text-muted">.</span>
+              <span className="accent-word">together</span>
+              <span className="text-accent">.</span>
             </TextReveal>
             <div className="rv rv-cta" style={{ "--i": 3 } as CSSProperties}>
               <a

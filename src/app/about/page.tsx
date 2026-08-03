@@ -8,43 +8,43 @@ import { BackLink } from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About halcyzhuo — a software engineer who ships. How I work, what I value, and where I've been.",
+    "About halcyzhuo — an engineering studio that ships. How we work, what we value, and where we've been.",
   alternates: { canonical: "/about" },
 };
 
 const rows = [
   {
     num: "01",
-    title: "Who I am",
-    desc: "Full-stack engineer dengan fokus di TypeScript, React, Node.js, dan arsitektur yang bertahan lama. Enam tahun pengalaman membawa produk dari ide ke produksi — solo maupun leading small teams.",
+    title: "Who we are",
+    desc: "An engineering studio focused on TypeScript, React, Node.js, and architecture built to last. Experience taking products from idea to production for a range of clients.",
   },
   {
     num: "02",
-    title: "How I work",
-    desc: "Transparan dan langsung. Scope jelas, estimasi jujur, dan check-in yang bisa dipantau. Saya percaya komunikasi yang baik sama pentingnya dengan kode yang baik.",
+    title: "How we work",
+    desc: "Transparent and direct. Clear scope, honest estimates, and check-ins you can track. Good communication matters as much as good code.",
   },
   {
     num: "03",
-    title: "What I value",
-    desc: "Performa yang terukur, aksesibilitas sebagai standar, dan kode yang bisa diserah-terimakan. Produk yang dibangun untuk dipakai lama, bukan untuk demo.",
+    title: "What we value",
+    desc: "Measurable performance, accessibility as a baseline, and code that's easy to hand over. Products built to last, not built to demo.",
   },
 ];
 
 const timeline = [
   {
     step: "2023 — now",
-    title: "Independent engineer",
-    desc: "Client projects end-to-end: fintech, healthtech, dan e-commerce. Merancang arsitektur, memimpin build, dan menjaga produk tetap hidup setelah launch.",
+    title: "Independent studio",
+    desc: "Client projects end-to-end: fintech, healthtech, and e-commerce. Designing architecture, leading the build, and keeping products alive after launch.",
   },
   {
     step: "2020 — 2023",
     title: "Senior full-stack · fintech",
-    desc: "Memimpin tim lima engineer, memperbaiki performa, dan membangun payment infrastructure yang dipakai jutaan transaksi.",
+    desc: "Leading a five-engineer team, improving performance, and building payment infrastructure that processes millions of transactions.",
   },
   {
     step: "2018 — 2020",
     title: "Full-stack developer · startup",
-    desc: "Dari frontend ke backend ke infra — belajar bahwa shipping cepat dan arsitektur rapi bukan dua hal yang terpisah.",
+    desc: "From frontend to backend to infra — learning that fast shipping and clean architecture aren't two separate things.",
   },
 ];
 
@@ -60,11 +60,11 @@ export default function AboutPage() {
                 className="rv rv-label mb-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-muted"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                About · the engineer
+                About <span className="text-accent">·</span> the studio
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(56px,9vw,120px)] font-semibold tracking-[-0.05em] leading-[0.95]"
+                className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.95]"
               >
                 About<span className="text-muted">.</span>
               </TextReveal>
@@ -73,10 +73,9 @@ export default function AboutPage() {
               className="rv rv-desc text-[16px] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Software engineer yang mengejar hasil terukur — bukan sekadar code
-              yang jalan. Berbasis Jakarta, bekerja remote.
-            </p>
-          </div>
+              An engineering studio chasing measurable results — not just code
+              that runs. Based in Jakarta, working remotely.
+            </p>          </div>
         </Reveal>
       </header>
 
@@ -114,17 +113,17 @@ export default function AboutPage() {
               </p>
               <TextReveal
                 as="h2"
-                className="text-[clamp(40px,6vw,72px)] font-semibold tracking-[-0.05em] leading-[1]"
+                className="text-[clamp(40px,6vw,72px)] font-bold tracking-[-0.05em] leading-[1]"
               >
-                Where I&apos;ve shipped<span className="text-muted">.</span>
+                Where we&apos;ve shipped<span className="text-muted">.</span>
               </TextReveal>
             </div>
             <p
               className="rv rv-desc text-[16px] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Enam tahun membawa produk dari ide ke produksi — dari startup
-              sampai independent engineering.
+              A track record of taking products from idea to production — from
+              startups to an engineering studio.
             </p>
           </div>
         </Reveal>
@@ -154,7 +153,11 @@ export default function AboutPage() {
       <Reveal variant="mask">
         <Cta
           pillLabel="let's build"
-          title="Tell me what you're building."
+          title={
+            <>
+              Tell us what you&apos;re <span className="accent-word">building</span>.
+            </>
+          }
           btnLabel="~/start-a-project"
         />
       </Reveal>

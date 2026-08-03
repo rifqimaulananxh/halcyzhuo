@@ -1,22 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/inter-tight";
+import "@fontsource-variable/inter-tight/wght-italic.css";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { Preloader } from "@/components/Preloader";
+import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { Spotlight } from "@/components/Spotlight";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "halcyzhuo — Software Engineer",
+    default: "halcyzhuo — Engineering Studio",
     template: "%s — halcyzhuo",
   },
   description: SITE.description,
   keywords: [
     "halcyzhuo",
-    "software engineer",
-    "full-stack developer",
+    "engineering studio",
+    "full-stack development",
     "Next.js",
     "React",
     "TypeScript",
@@ -30,20 +35,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.name,
-    title: "halcyzhuo — Software Engineer",
+    title: "halcyzhuo — Engineering Studio",
     description: SITE.description,
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "halcyzhuo — Software Engineer",
+        alt: "halcyzhuo — Engineering Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "halcyzhuo — Software Engineer",
+    title: "halcyzhuo — Engineering Studio",
     description: SITE.description,
     images: ["/og.png"],
   },
@@ -81,13 +86,12 @@ export default function RootLayout({
                   description: SITE.description,
                 },
                 {
-                  "@type": "Person",
-                  "@id": `${SITE.url}/#person`,
+                  "@type": "Organization",
+                  "@id": `${SITE.url}/#org`,
                   name: SITE.name,
                   url: SITE.url,
                   email: `mailto:${SITE.email}`,
-                  jobTitle: "Software Engineer",
-                  worksFor: { "@type": "Organization", name: SITE.name },
+                  description: SITE.description,
                 },
               ],
             }),
@@ -96,6 +100,10 @@ export default function RootLayout({
       </head>
       <body className="min-h-full bg-bg text-ink font-sans">
         <SmoothScroll />
+        <Preloader />
+        <Spotlight />
+        <ScrollProgress />
+        <CustomCursor />
         <Nav />
         {children}
         <Footer />

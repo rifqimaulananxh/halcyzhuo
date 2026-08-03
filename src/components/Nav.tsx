@@ -57,7 +57,10 @@ export function Nav() {
       >
         <div className="mx-auto max-w-[var(--max-w)] px-[var(--pad-inner)] py-4 flex items-center justify-between">
           <div className="flex items-center gap-12">
-            <Link href="/" className="logo-mask text-xl font-semibold tracking-tight">
+            <Link
+              href="/"
+              className="logo-mask text-xl font-semibold tracking-tight text-ink"
+            >
               {LOGO.split("").map((c, i) => (
                 <span
                   key={i}
@@ -80,7 +83,7 @@ export function Nav() {
                   key={link.key}
                   href={link.href}
                   data-active={pathname === link.href}
-                  className="relative text-[15px] font-semibold transition-opacity after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-ink after:transition-all after:duration-200 hover:opacity-70 hover:after:w-full data-[active=true]:after:w-full"
+                  className="relative text-[15px] font-semibold transition-opacity after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-200 hover:opacity-70 hover:after:w-full data-[active=true]:after:w-full"
                 >
                   {link.label}
                 </Link>
@@ -99,7 +102,7 @@ export function Nav() {
             <Magnetic>
               <Link
                 href="/#contact"
-                className="inline-flex items-center rounded-[8px] bg-ink px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-ink/85"
+                className="inline-flex items-center rounded-[8px] bg-ink px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-accent"
               >
                 Let&apos;s talk
               </Link>
@@ -148,7 +151,7 @@ export function Nav() {
           <Link
             href="/#contact"
             onClick={() => setOpen(false)}
-            className="inline-flex items-center justify-center rounded-[8px] bg-ink px-4 py-3.5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-ink/85"
+            className="inline-flex items-center justify-center rounded-[8px] bg-ink px-4 py-3.5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-accent"
           >
             Let&apos;s talk
           </Link>

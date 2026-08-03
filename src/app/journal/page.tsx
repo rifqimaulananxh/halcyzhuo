@@ -26,11 +26,11 @@ export default function JournalPage() {
                 className="rv rv-label mb-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-muted"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                Journal · insights
+                Journal <span className="text-accent">·</span> insights
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(56px,9vw,120px)] font-semibold tracking-[-0.05em] leading-[0.95]"
+                className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.95]"
               >
                 Journal<span className="text-muted">.</span>
               </TextReveal>
@@ -39,8 +39,8 @@ export default function JournalPage() {
               className="rv rv-desc text-[16px] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Catatan teknis tentang engineering, performa, dan keputusan produk
-              — ditulis saat sedang membangun, bukan sesudahnya.
+              Technical notes on engineering, performance, and product decisions
+              — written while building, not after.
             </p>
           </div>
         </Reveal>
@@ -81,7 +81,7 @@ export default function JournalPage() {
         <Cta
           pillLabel="writing about building"
           title="Ideas worth shipping."
-          sub="Punya project yang butuh diselesaikan? Gue senang ngobrol soal scope dan arsitektur — gratis, tanpa komitmen."
+          sub="Have a project that needs to ship? We're happy to talk through scope and architecture — free, no commitment."
         />
       </Reveal>
     </div>

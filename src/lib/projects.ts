@@ -17,6 +17,8 @@ export interface Project {
   metric: string;
   cover: string;
   url: string;
+  quote: string;
+  quoteBy: { name: string; role: string };
   sections: ProjectSection[];
 }
 
@@ -34,6 +36,9 @@ export const projects: Project[] = [
     metric: "0.4s LCP",
     cover: "/projects/pulse.svg",
     url: "pulse.app",
+    quote:
+      "Real-time dashboards we can actually trust. Decisions now run on fresh data — our team catches issues before customers do.",
+    quoteBy: { name: "Maya Raharja", role: "CEO · Pulse Labs" },
     sections: [
       {
         heading: "Challenge",
@@ -71,6 +76,9 @@ export const projects: Project[] = [
     metric: "↓42% bundle",
     cover: "/projects/finread.svg",
     url: "finread.io",
+    quote:
+      "The LCP dropped from 2.1s to 0.4s. Our signups went up 38% the next month. Nobody asks about our tech stack anymore — it just works.",
+    quoteBy: { name: "Daniel Kusuma", role: "CTO · Finread" },
     sections: [
       {
         heading: "Challenge",
@@ -105,6 +113,9 @@ export const projects: Project[] = [
     metric: "2× conversion",
     cover: "/projects/nusantara.svg",
     url: "nusantara.co.id",
+    quote:
+      "Shipped two weeks ahead of schedule. Clean code, honest reviews, and measurable performance wins — not just promises.",
+    quoteBy: { name: "Rina Setiawan", role: "Founder · Nusantara Labs" },
     sections: [
       {
         heading: "Challenge",
@@ -139,6 +150,9 @@ export const projects: Project[] = [
     metric: "60k MAU",
     cover: "/projects/dokterku.svg",
     url: "dokterku.id",
+    quote:
+      "Halcyzhuo translated product chaos into a roadmap we could ship. Testing infrastructure, monitoring, docs — all sorted from day one.",
+    quoteBy: { name: "Andi Malik", role: "Product Lead · Dokterku" },
     sections: [
       {
         heading: "Challenge",
@@ -173,6 +187,9 @@ export const projects: Project[] = [
     metric: "0.2s TTFB",
     cover: "/projects/arunapay.svg",
     url: "arunapay.com",
+    quote:
+      "Edge serving and observability were baked in from day one. Now our team sees problems before customers do — trust in the numbers is back.",
+    quoteBy: { name: "Sari Puspita", role: "Founder · Aruna Pay" },
     sections: [
       {
         heading: "Challenge",
@@ -207,6 +224,9 @@ export const projects: Project[] = [
     metric: "+3× retention",
     cover: "/projects/sahamrakyat.svg",
     url: "sahamrakyat.id",
+    quote:
+      "Rare to find an engineer who cares about accessibility. Halcyzhuo shipped WCAG AA out of the box — our audit passed on the first try.",
+    quoteBy: { name: "Bagus Firmansyah", role: "Founder · Saham Rakyat" },
     sections: [
       {
         heading: "Challenge",

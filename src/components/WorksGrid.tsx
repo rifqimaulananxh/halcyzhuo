@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, type CSSProperties } from "react";
 import Link from "next/link";
+import { Parallax } from "@/components/Parallax";
 import { Reveal } from "@/components/Reveal";
 import { projects, type ProjectCategory } from "@/lib/projects";
 
@@ -68,22 +69,24 @@ export function WorksGrid() {
             className="group block"
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] bg-surface">
-              <img
-                src={p.cover}
-                alt={`${p.title} — ${p.tagline}`}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
+              <Parallax speed={0.04} clamp={0.08} className="absolute inset-0">
+                <img
+                  src={p.cover}
+                  alt={`${p.title} — ${p.tagline}`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
+                />
+              </Parallax>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end justify-between p-6">
                 <div className="translate-y-1 transition-transform duration-300 group-hover:translate-y-0">
-                  <small className="block text-white/70 text-[12px] font-semibold uppercase tracking-wider mb-1">
+                  <small className="block text-white/70 text-[12px] font-semibold uppercase tracking-[0.16em] mb-1">
                     {p.category.replace("-", " ")}
                   </small>
                   <h3 className="text-white text-[clamp(20px,2.2vw,28px)] font-medium leading-tight">
                     {p.title}
                   </h3>
                 </div>
-                <span className="w-10 h-10 rounded-full bg-white text-ink flex items-center justify-center shrink-0">
+                <span className="w-10 h-10 rounded-full bg-white text-ink flex items-center justify-center shrink-0 transition-transform duration-300 ease-out group-hover:rotate-[45deg] group-hover:scale-110">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -91,7 +94,7 @@ export function WorksGrid() {
               </div>
             </div>
             <div className="flex items-center justify-between gap-4 pt-6">
-              <h3 className="text-[clamp(18px,1.8vw,22px)] font-semibold tracking-[-0.02em] transition-opacity duration-200 group-hover:opacity-60">
+              <h3 className="text-[clamp(18px,1.8vw,22px)] font-semibold tracking-[-0.02em] transition-all duration-300 group-hover:translate-x-1.5 group-hover:opacity-60">
                 {p.title}
               </h3>
               <span className="text-[14px] font-medium text-muted whitespace-nowrap">

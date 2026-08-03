@@ -66,14 +66,14 @@ export default async function WorkDetail({ params }: Props) {
           <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start max-[809px]:gap-6">
             <div>
               <p
-                className="rv rv-label text-[13px] font-semibold uppercase tracking-wider text-muted mb-5"
+                className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                Case study <span className="text-ink/30">·</span> {project.year}
+                Case study <span className="text-accent">·</span> {project.year}
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(56px,9vw,120px)] font-semibold tracking-[-0.05em] leading-[0.95]"
+                className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.95]"
               >
                 {project.title}
                 <span className="text-muted">.</span>
@@ -104,7 +104,7 @@ export default async function WorkDetail({ params }: Props) {
             <div className="flex flex-col gap-[14px]">
               {meta.map((m) => (
                 <div key={m.dt} className="flex flex-col gap-[6px] border-b border-surface pb-[14px] last:border-b-0 max-[1024px]:flex-1 max-[1024px]:basis-[200px]">
-                  <dt className="text-[13px] font-semibold uppercase tracking-wider text-muted">
+                  <dt className="text-[13px] font-semibold uppercase tracking-[0.16em] text-muted">
                     {m.dt}
                   </dt>
                   <dd className="text-[16px] font-medium">{m.dd}</dd>
@@ -137,11 +137,41 @@ export default async function WorkDetail({ params }: Props) {
         </div>
 
         <Reveal variant="mask">
+          <figure className="border-y border-surface py-[clamp(56px,7vw,96px)]">
+            <span
+              className="block text-accent font-display text-[clamp(72px,9vw,120px)] leading-[0.5] select-none mb-8"
+              aria-hidden="true"
+            >
+              “
+            </span>
+            <blockquote className="font-display text-[clamp(28px,4vw,48px)] font-medium tracking-[-0.035em] leading-[1.12] max-w-[900px]">
+              {project.quote}
+            </blockquote>
+            <figcaption className="mt-10 flex items-center gap-4">
+              <span className="w-[44px] h-[44px] rounded-full bg-ink text-white flex items-center justify-center text-[14px] font-semibold flex-shrink-0">
+                {project.quoteBy.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </span>
+              <div>
+                <strong className="text-[16px] font-semibold block">
+                  {project.quoteBy.name}
+                </strong>
+                <span className="text-[15px] text-muted">
+                  {project.quoteBy.role}
+                </span>
+              </div>
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        <Reveal variant="mask">
           <Link
             href={`/work/${next.slug}`}
             className="block border-t border-surface py-16 group"
           >
-            <span className="text-[13px] font-semibold uppercase tracking-wider text-muted block mb-4">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.16em] text-muted block mb-4">
               Next project
             </span>
             <h3 className="text-[clamp(34px,5vw,64px)] tracking-[-0.04em] leading-none inline-flex items-center gap-5 transition-all duration-300 group-hover:pl-3">

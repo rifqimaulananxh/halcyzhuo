@@ -23,14 +23,14 @@ export default function WorkPage() {
           <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start max-[809px]:gap-6">
             <div>
               <p
-                className="rv rv-label text-[13px] font-semibold uppercase tracking-wider text-muted mb-5"
+                className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                All projects <span className="text-ink/30">·</span> 2025–2026
+                All projects <span className="text-accent">·</span> 2025–2026
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(56px,9vw,120px)] font-semibold tracking-[-0.05em] leading-[0.95]"
+                className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.95]"
               >
                 Work<span className="text-muted">.</span>
               </TextReveal>
@@ -39,8 +39,7 @@ export default function WorkPage() {
               className="rv rv-desc text-muted text-[17px] leading-normal max-w-[360px] text-right max-[809px]:text-left"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Case studies dengan hasil yang bisa diukur — bukan sekadar
-              screenshot.
+              Case studies with measurable outcomes — not just screenshots.
             </p>
           </div>
         </Reveal>
@@ -63,7 +62,7 @@ export default function WorkPage() {
                   {p.title}
                 </h3>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2">
-                  <span className="inline-block border border-outline text-[12px] font-semibold uppercase tracking-wider rounded-[100px] px-2.5 py-[3px]">
+                  <span className="inline-block border border-outline text-[12px] font-semibold uppercase tracking-[0.16em] rounded-[100px] px-2.5 py-[3px]">
                     {p.category.replace("-", " ")}
                   </span>
                   <span className="text-[15px] text-muted">{p.tagline}</span>
@@ -87,7 +86,7 @@ export default function WorkPage() {
         <Cta
           pillLabel="open to new work"
           title="Like what you see?"
-          sub="Ceritain produkmu — gue kasih pandangan jujur soal scope, arsitektur, dan estimasi."
+          sub="Tell us about your product — we'll give you an honest take on scope, architecture, and estimates."
           btnLabel="~/start-a-project"
         />
       </Reveal>

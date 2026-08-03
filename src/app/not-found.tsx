@@ -15,15 +15,15 @@ export default function NotFound() {
       <Reveal variant="mask">
         <div className="flex flex-col items-start gap-8 max-w-[900px]">
           <p
-            className="rv rv-label text-[13px] font-semibold uppercase tracking-wider text-muted"
+            className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted"
             style={{ "--i": 0 } as CSSProperties}
           >
-            Error <span className="text-ink/30">·</span> 404
+            Error <span className="text-accent">·</span> 404
           </p>
           <TextReveal
             as="h1"
             trigger="load"
-            className="text-[clamp(64px,12vw,160px)] font-semibold tracking-[-0.05em] leading-[0.92]"
+            className="text-[clamp(64px,12vw,160px)] font-bold tracking-[-0.05em] leading-[0.92]"
           >
             Lost in the
             <br />
@@ -33,8 +33,9 @@ export default function NotFound() {
             className="rv rv-desc text-muted text-[17px] leading-normal max-w-[420px]"
             style={{ "--i": 3 } as CSSProperties}
           >
-            Halaman yang kamu cari nggak ada — mungkin dihapus, atau URL-nya
-            salah. Kayak bug yang udah di-fix, mari kembali ke jalan yang benar.
+            The page you&apos;re looking for doesn&apos;t exist — maybe it was removed, or
+            the URL is wrong. Like a bug that&apos;s already been fixed, let&apos;s head
+            back to the right path.
           </p>
           <div className="rv rv-cta" style={{ "--i": 4 } as CSSProperties}>
             <Link

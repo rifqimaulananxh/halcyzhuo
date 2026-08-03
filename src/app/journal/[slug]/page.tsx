@@ -62,7 +62,7 @@ export default async function JournalPost({ params }: Props) {
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(40px,6vw,88px)] font-semibold tracking-[-0.05em] leading-[0.95]"
+                className="text-[clamp(40px,6vw,88px)] font-bold tracking-[-0.05em] leading-[0.95]"
               >
                 {post.title}
                 <span className="text-muted">.</span>

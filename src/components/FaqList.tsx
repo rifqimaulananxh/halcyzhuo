@@ -11,23 +11,23 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     q: "Do you take on small projects?",
-    a: "Yes. MVPs, single features, dan bug-fix yang terarah — selama scopenya jelas, gue ambil. Kadang project kecil justru yang paling berdampak.",
+    a: "Yes. MVPs, single features, and focused bug-fixes — as long as the scope is clear, we'll take it. Sometimes small projects are the ones that matter most.",
   },
   {
     q: "Can you work with an existing codebase?",
-    a: "Absolutely. Gue terbiasa masuk ke codebase lama, baca dulu konteksnya, dan refactor bertahap tanpa menghentikan development yang lagi jalan.",
+    a: "Absolutely. We're used to stepping into existing codebases, reading the context first, and refactoring incrementally without stopping the development that's already underway.",
   },
   {
     q: "What's a typical project timeline?",
-    a: "MVP biasanya 4–8 minggu tergantung scope. Retainer partner jalan bulanan dengan milestone mingguan yang bisa kamu pantau di tiap check-in.",
+    a: "MVPs typically take 4–8 weeks depending on scope. Retainer partners run monthly with weekly milestones you can track at every check-in.",
   },
   {
     q: "What happens after I reach out?",
-    a: "Kita janjian 20 menit, bahas goals & constraint. Kalau cocok, gue kasih proposal + timeline + harga dalam 2–3 hari. Kalau nggak cocok, gue bilang terus terang.",
+    a: "We'll book 20 minutes and talk through goals and constraints. If it's a fit, we'll send a proposal with timeline and pricing within 2–3 days. If it's not, we'll tell you straight.",
   },
   {
     q: "Do you provide support after launch?",
-    a: "Setiap project dapat 2 minggu post-launch support. Untuk perawatan lanjutan (monitoring, tuning, fitur baru), tersedia retainer bulanan.",
+    a: "Every project gets 2 weeks of post-launch support. For ongoing maintenance — monitoring, tuning, new features — a monthly retainer is available.",
   },
 ];
 
@@ -56,8 +56,8 @@ export function FaqList() {
                   isOpen ? "rotate-45" : ""
                 }`}
               >
-                <i className="absolute left-0 top-1/2 w-full h-[2px] bg-ink -translate-y-1/2" />
-                <i className="absolute top-0 left-1/2 h-full w-[2px] bg-ink -translate-x-1/2" />
+                <i className="absolute left-0 top-1/2 w-full h-[2px] bg-accent -translate-y-1/2" />
+                <i className="absolute top-0 left-1/2 h-full w-[2px] bg-accent -translate-x-1/2" />
               </span>
             </button>
             <div

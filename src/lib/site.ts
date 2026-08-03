@@ -4,7 +4,7 @@ export const SITE = {
   email: "hello@halcyzhuo.dev",
   tagline: "Engineering that ships",
   description:
-    "halcyzhuo — software engineer. Full-stack development, performance, and reliable products.",
+    "halcyzhuo — an engineering studio. Full-stack development, performance, and reliable products.",
 } as const;
 
 export const NAV_LINKS = [

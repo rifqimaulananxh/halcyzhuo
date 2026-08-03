@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-type Variant = "fade" | "mask" | "stagger" | "none";
+type Variant = "fade" | "mask" | "stagger" | "stagger-left" | "stagger-right" | "none";
 
 export function Reveal({
   children,
