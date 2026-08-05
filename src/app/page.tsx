@@ -1,11 +1,10 @@
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
-import { Parallax } from "@/components/Parallax";
 import { WorksGrid } from "@/components/WorksGrid";
 import { FaqList } from "@/components/FaqList";
 import { TextBtn } from "@/components/UI";
-import { Magnetic } from "@/components/Magnetic";
 import { Cta } from "@/components/Cta";
+import { Hero } from "@/components/Hero";
 import { posts } from "@/lib/posts";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
@@ -93,67 +92,7 @@ export default function Home() {
   return (
     <div id="main">
       {/* HERO */}
-      <section className="hero flex flex-col gap-20 pt-40 max-[809px]:gap-14 max-[809px]:pt-24">
-        <div
-          className="hero-item hero-meta flex items-center justify-between gap-6 border-b border-surface pb-8 max-[809px]:flex-col max-[809px]:items-start max-[809px]:gap-4"
-          style={{ "--i": 0 } as CSSProperties}
-        >
-          <p className="text-[15px] font-semibold tracking-wide">
-            <span className="text-muted">hi, we&apos;re</span> halcyzhuo
-            <span className="text-muted"> — engineering studio</span>
-          </p>
-          <span className="inline-flex items-center gap-2.5 text-[13px] font-medium uppercase tracking-[0.16em]">
-            <i className="w-[8px] h-[8px] rounded-full bg-online animate-pulse" />
-            available for Q3 · 2026
-          </span>
-        </div>
-        <div className="flex items-start justify-between gap-8 max-[809px]:flex-col max-[809px]:items-start">
-          <Parallax speed={0.05} clamp={0.1} className="max-w-full">
-            <TextReveal
-              as="h1"
-              split="chars"
-              trigger="load"
-              y={160}
-              delay={0.15}
-              className="hero-title text-[clamp(72px,12vw,152px)] font-bold tracking-[-0.05em] leading-[0.92] max-w-[1200px]"
-            >
-              Build things
-              <br />
-              that <span className="accent-word">ship</span>
-              <span className="text-accent">.</span>
-            </TextReveal>
-          </Parallax>
-          <Magnetic>
-            <a
-              href="#contact"
-              className="hero-item hero-cta inline-flex items-center gap-3 mt-4 text-[16px] font-semibold group"
-              style={{ "--i": 2 } as CSSProperties}
-            >
-              <span className="underline underline-offset-8 decoration-1 group-hover:decoration-2">
-                ~/start-a-project
-              </span>
-              <span className="transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </span>
-            </a>
-          </Magnetic>
-        </div>
-        <div
-          className="hero-item hero-bottom flex items-start justify-between gap-8 max-[809px]:flex-col"
-          style={{ "--i": 3 } as CSSProperties}
-        >
-          <p className="text-muted text-[19px] max-w-[560px] leading-normal">
-            An engineering studio turning ideas into fast, reliable software.
-            <br />
-            <span>Not just code — products that actually ship.</span>
-          </p>
-          <span className="text-[15px] font-medium text-muted">
-            Jakarta, Indonesia · Remote
-          </span>
-        </div>
-      </section>
+      <Hero />
 
       {/* STACK MARQUEE */}
       <section className="marquee" aria-label="Tech stack">
@@ -198,7 +137,7 @@ export default function Home() {
               <span className="text-muted">.</span>
             </TextReveal>
             <p
-              className="rv rv-desc text-muted text-[17px] leading-normal max-w-[480px]"
+              className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[480px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               Typed end to end, measured in production, designed to be
@@ -213,20 +152,20 @@ export default function Home() {
         <Reveal variant="mask">
           <div className="flex flex-col gap-7 border-b border-surface pb-[clamp(48px,7vw,104px)] mb-12">
             <span
-              className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted"
+              className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted"
               style={{ "--i": 0 } as CSSProperties}
             >
               About <span className="text-accent">·</span> the studio
             </span>
             <TextReveal
               as="h2"
-              className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.94] max-w-[1100px]"
+              className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[1100px]"
             >
               Code with <span className="accent-word">intent</span>
               <span className="text-accent">.</span>
             </TextReveal>
             <p
-              className="rv rv-desc text-muted text-[19px] leading-normal max-w-[560px]"
+              className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[560px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               We help founders and teams take products from an idea to production
@@ -241,13 +180,13 @@ export default function Home() {
               style={{ "--i": i } as CSSProperties}
               className="grid grid-cols-[120px_1fr_1fr] gap-8 items-baseline py-11 border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[100px_1fr] max-[809px]:grid-cols-1 max-[809px]:gap-3"
             >
-              <span className="text-[15px] font-semibold text-accent tracking-wide">
+              <span className="text-[var(--fs-body-sm)] font-semibold text-accent tracking-wide">
                 {row.num}
               </span>
-              <h3 className="text-[clamp(26px,3.4vw,42px)] font-semibold tracking-[-0.04em] leading-tight">
+              <h3 className="text-[var(--fs-h4)] font-semibold tracking-[-0.04em] leading-[1.4]">
                 {row.title}
               </h3>
-              <p className="text-muted text-[16px] leading-normal max-w-[460px] max-[1024px]:col-start-2 max-[809px]:col-start-1">
+              <p className="text-muted text-[var(--fs-body)] leading-normal max-w-[460px] max-[1024px]:col-start-2 max-[809px]:col-start-1">
                 {row.desc}
               </p>
             </div>
@@ -261,14 +200,14 @@ export default function Home() {
           <div className="flex items-end justify-between gap-10 border-b border-surface pb-12 mb-12 max-[809px]:flex-col max-[809px]:items-start max-[809px]:gap-6">
             <div>
               <p
-                className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
+                className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 Works <span className="text-accent">·</span> 2026
               </p>
               <TextReveal
                 as="h2"
-                className="text-[clamp(52px,7.5vw,88px)] font-bold tracking-[-0.05em] leading-none"
+                className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2]"
               >
                 Shipped, not
                 <br />
@@ -278,7 +217,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-end gap-6 max-[809px]:items-start">
               <p
-                className="rv rv-desc text-muted text-[17px] leading-normal max-w-[360px] text-right max-[809px]:text-left"
+                className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] text-right max-[809px]:text-left"
                 style={{ "--i": 3 } as CSSProperties}
               >
                 Case studies with measurable outcomes — not just screenshots.
@@ -297,21 +236,21 @@ export default function Home() {
         <Reveal variant="mask">
           <div className="flex flex-col items-center text-center gap-6 border-b border-surface pb-[clamp(48px,7vw,96px)] mb-12">
             <span
-              className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted"
+              className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted"
               style={{ "--i": 0 } as CSSProperties}
             >
               Approach <span className="text-accent">·</span> how we work
             </span>
             <TextReveal
               as="h2"
-              className="text-[clamp(52px,7.5vw,88px)] font-bold tracking-[-0.05em] leading-none max-w-[820px]"
+              className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[820px]"
             >
               From <span className="accent-word">idea</span> to ship,
               <br />
               clearly<span className="text-accent">.</span>
             </TextReveal>
             <p
-              className="rv rv-desc text-muted text-[17px] leading-normal max-w-[460px]"
+              className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[460px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               Not a vague agency process — a working rhythm you can follow at
@@ -326,21 +265,21 @@ export default function Home() {
               style={{ "--i": i } as CSSProperties}
               className="grid grid-cols-[140px_1fr] gap-12 py-[52px] border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[110px_1fr] max-[1024px]:gap-8 max-[809px]:grid-cols-1 max-[809px]:gap-4"
             >
-              <span className="text-[15px] font-semibold uppercase tracking-wide text-accent pt-2">
+              <span className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-wide text-accent pt-2">
                 {step.step}
               </span>
               <div className="max-w-[720px]">
-                <h3 className="text-[clamp(30px,4vw,52px)] mb-[18px] tracking-[-0.04em] leading-tight">
+                <h3 className="text-[var(--fs-h4)] mb-[18px] tracking-[-0.04em] leading-[1.4]">
                   {step.title}
                 </h3>
-                <p className="text-muted text-[17px] leading-normal">
+                <p className="text-muted text-[var(--fs-body)] leading-normal">
                   {step.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-6">
                   {step.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="border border-outline rounded-[100px] px-4 py-[7px] text-[13px] text-muted transition-colors duration-200 hover:border-ink hover:text-ink"
+                      className="border border-outline rounded-[100px] px-4 py-[7px] text-[var(--fs-bold-sm)] text-muted transition-colors duration-200 hover:border-ink hover:text-ink"
                     >
                       {tag}
                     </span>
@@ -358,7 +297,7 @@ export default function Home() {
           <div className="self-start border-b border-surface pb-12 mb-12 max-[1024px]:border-b max-[809px]:pb-8 max-[809px]:mb-8 lg:sticky lg:top-28">
             <Reveal variant="mask">
               <span
-                className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted mb-5 block"
+                className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5 block"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 Stack <span className="text-accent">·</span> production-proven
@@ -366,14 +305,14 @@ export default function Home() {
             </Reveal>
             <TextReveal
               as="h2"
-              className="text-[clamp(44px,5.5vw,72px)] font-bold tracking-[-0.05em] leading-[0.96]"
+              className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2]"
             >
               Tools we
               <br />
               actually <span className="accent-word">use</span>
               <span className="text-accent">.</span>
             </TextReveal>
-            <p className="rv rv-desc text-muted text-[17px] leading-normal max-w-[360px] mt-7">
+            <p className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] mt-7">
               No buzzword bingo — only what&apos;s been used in production.
             </p>
           </div>
@@ -385,14 +324,14 @@ export default function Home() {
                   style={{ "--i": i } as CSSProperties}
                   className="grid grid-cols-[220px_1fr] gap-8 items-baseline py-9 border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[100px_1fr] max-[809px]:grid-cols-1"
                 >
-                  <span className="text-[15px] font-semibold uppercase tracking-[0.16em] text-muted pt-1">
+                  <span className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-[0.16em] text-muted pt-1">
                     {row.label}
                   </span>
                   <div className="flex flex-wrap gap-[10px]">
                     {row.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="border border-outline rounded-[100px] px-[18px] py-2 text-[15px] text-muted transition-colors duration-200 hover:border-ink hover:text-ink"
+                        className="border border-outline rounded-[100px] px-[18px] py-2 text-[var(--fs-bold-sm)] text-muted transition-colors duration-200 hover:border-ink hover:text-ink"
                       >
                         {tag}
                       </span>
@@ -410,14 +349,14 @@ export default function Home() {
         <Reveal variant="mask">
           <div className="border-b border-surface pb-12 mb-12">
             <p
-              className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
+              className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
               style={{ "--i": 0 } as CSSProperties}
             >
               FAQ <span className="text-accent">·</span> common questions
             </p>
             <TextReveal
               as="h2"
-              className="text-[clamp(52px,7.5vw,88px)] font-bold tracking-[-0.05em] leading-none max-w-[760px]"
+              className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[760px]"
             >
               Questions <span className="accent-word">asked</span>
               <br />
@@ -434,21 +373,21 @@ export default function Home() {
           <div className="flex items-end justify-between gap-10 border-b border-surface pb-12 mb-12 max-[809px]:flex-col max-[809px]:items-start max-[809px]:gap-6">
             <div>
               <p
-                className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
+                className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 Journal <span className="text-accent">·</span> insights
               </p>
               <TextReveal
                 as="h2"
-                className="text-[clamp(52px,7.5vw,88px)] font-bold tracking-[-0.05em] leading-none"
+                className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2]"
               >
                 Journal<span className="text-accent">.</span>
               </TextReveal>
             </div>
             <div className="flex flex-col items-end gap-2 max-[809px]:items-start">
               <p
-                className="rv rv-desc text-muted text-[17px] leading-normal max-w-[360px] text-right max-[809px]:text-left"
+                className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] text-right max-[809px]:text-left"
                 style={{ "--i": 2 } as CSSProperties}
               >
                 Technical notes on engineering, performance, and product
@@ -468,13 +407,13 @@ export default function Home() {
               style={{ "--i": i } as CSSProperties}
               className="grid grid-cols-[90px_1fr_auto_auto] gap-8 items-center py-10 border-b border-surface transition-all duration-300 hover:pl-3 group max-[1024px]:grid-cols-[70px_1fr_auto] max-[809px]:grid-cols-[1fr_auto] max-[809px]:gap-3"
             >
-              <span className="text-[15px] font-semibold text-muted tracking-wide">
+              <span className="text-[var(--fs-body-sm)] font-semibold text-muted tracking-wide">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="text-[clamp(24px,3.2vw,38px)] tracking-[-0.03em] leading-tight">
+              <h3 className="text-[var(--fs-h4)] tracking-[-0.03em] leading-[1.4]">
                 {post.title}
               </h3>
-              <span className="font-mono text-[14px] text-muted whitespace-nowrap max-[1024px]:col-start-2 max-[809px]:col-start-1">
+              <span className="font-mono text-[var(--fs-body-sm)] text-muted whitespace-nowrap max-[1024px]:col-start-2 max-[809px]:col-start-1">
                 {post.date} · {post.readTime}
               </span>
               <span className="text-[26px] transition-transform duration-300 group-hover:translate-x-1.5">

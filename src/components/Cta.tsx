@@ -24,7 +24,7 @@ export function Cta({
       className="flex flex-col items-center text-center gap-6 border border-surface rounded-[var(--radius-md)] px-6 py-[88px]"
     >
       <span
-        className="rv rv-label inline-flex items-center gap-2.5 text-[13px] font-medium uppercase tracking-[0.16em]"
+        className="rv rv-label inline-flex items-center gap-2.5 text-[var(--fs-label)] font-medium uppercase tracking-[0.16em]"
         style={{ "--i": 0 } as CSSProperties}
       >
         <i className="w-[8px] h-[8px] rounded-full bg-online animate-pulse" />
@@ -32,12 +32,12 @@ export function Cta({
       </span>
       <TextReveal
         as="h2"
-        className="text-[clamp(52px,7.5vw,88px)] font-bold tracking-[-0.05em] leading-none max-w-[700px]"
+        className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[700px]"
       >
         {title}
       </TextReveal>
       <p
-        className="rv rv-desc text-muted text-xl max-w-[560px] leading-normal"
+        className="rv rv-desc text-muted text-[var(--fs-body)] max-w-[560px] leading-normal"
         style={{ "--i": 2 } as CSSProperties}
       >
         {sub}
@@ -47,7 +47,7 @@ export function Cta({
       </div>
       <a
         href={`mailto:${SITE.email}`}
-        className="rv rv-desc text-[15px] text-muted transition-opacity duration-200 hover:opacity-75"
+        className="rv rv-desc text-[var(--fs-body-sm)] text-muted transition-opacity duration-200 hover:opacity-75"
         style={{ "--i": 4 } as CSSProperties}
       >
         {SITE.email}

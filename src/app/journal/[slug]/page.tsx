@@ -55,21 +55,21 @@ export default async function JournalPost({ params }: Props) {
           <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start">
             <div>
               <p
-                className="rv rv-label mb-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-muted"
+                className="rv rv-label mb-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.08em] text-muted"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 {post.category} · {post.date}
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(40px,6vw,88px)] font-bold tracking-[-0.05em] leading-[0.95]"
+                className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
               >
                 {post.title}
                 <span className="text-muted">.</span>
               </TextReveal>
             </div>
             <p
-              className="rv rv-desc text-[16px] text-muted leading-normal max-w-[420px]"
+              className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               {post.description}
@@ -81,7 +81,7 @@ export default async function JournalPost({ params }: Props) {
       <article>
         <Reveal variant="mask">
           <header className="py-14 flex flex-col gap-6 max-w-[860px]">
-            <div className="flex gap-5 text-[15px] text-muted">
+            <div className="flex gap-5 text-[var(--fs-body-sm)] text-muted">
               <span>{post.date}</span>
               <span>·</span>
               <span>{post.readTime}</span>
@@ -97,7 +97,7 @@ export default async function JournalPost({ params }: Props) {
               block.type === "p" ? (
                 <p
                   key={i}
-                  className="text-[18px] leading-[1.7] text-muted mb-[22px]"
+                  className="text-[var(--fs-body)] leading-normal text-muted mb-[22px]"
                 >
                   {block.text}
                 </p>
@@ -115,13 +115,13 @@ export default async function JournalPost({ params }: Props) {
 
         <div className="border-t border-surface py-14 max-w-[720px]">
           <Reveal variant="mask">
-            <TextReveal as="h3" className="text-[clamp(30px,4vw,48px)] tracking-[-0.04em] mb-6">
+            <TextReveal as="h3" className="text-[var(--fs-h2)] tracking-[-0.04em] mb-6 leading-[1.2]">
               Got a stack that feels heavier than the product?
             </TextReveal>
             <div className="rv rv-cta" style={{ "--i": 1 } as CSSProperties}>
               <a
                 href={`mailto:${SITE.email}`}
-                className="inline-flex items-center gap-3 rounded-[var(--radius-md)] bg-ink text-white text-[15px] font-semibold uppercase tracking-[0.08em] px-8 py-[18px] transition-colors duration-200 hover:bg-ink/85"
+                className="inline-flex items-center gap-3 rounded-[var(--radius-md)] bg-ink text-white text-[var(--fs-bold-sm)] font-semibold uppercase tracking-[0.08em] px-8 py-[18px] transition-colors duration-200 hover:bg-ink/85"
               >
                 ~/lets-talk
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

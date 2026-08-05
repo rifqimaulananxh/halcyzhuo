@@ -5,6 +5,7 @@ import { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { Parallax } from "@/components/Parallax";
 import { Reveal } from "@/components/Reveal";
+import { useCursor } from "@/components/CustomCursor";
 import { projects, type ProjectCategory } from "@/lib/projects";
 
 const FILTERS: { key: "all" | ProjectCategory; label: string }[] = [
@@ -21,6 +22,7 @@ const count = (key: "all" | ProjectCategory) =>
 
 export function WorksGrid() {
   const [filter, setFilter] = useState<"all" | ProjectCategory>("all");
+  const { setCursor, resetCursor } = useCursor();
 
   const visible = projects.filter(
     (p) => filter === "all" || p.category === filter
@@ -39,7 +41,7 @@ export function WorksGrid() {
             role="tab"
             aria-selected={filter === f.key}
             onClick={() => setFilter(f.key)}
-            className={`rounded-[100px] px-5 py-2 text-[14px] font-medium transition-colors duration-200 ${
+            className={`rounded-[100px] px-5 py-2 text-[var(--fs-bold-sm)] font-medium transition-colors duration-200 ${
               filter === f.key
                 ? "bg-ink text-white"
                 : "border border-outline text-ink hover:border-ink"
@@ -67,6 +69,8 @@ export function WorksGrid() {
             href={`/work/${p.slug}`}
             style={{ "--i": i } as CSSProperties}
             className="group block"
+            onMouseEnter={() => setCursor("project", "View Project")}
+            onMouseLeave={resetCursor}
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] bg-surface">
               <Parallax speed={0.04} clamp={0.08} className="absolute inset-0">
@@ -82,7 +86,7 @@ export function WorksGrid() {
                   <small className="block text-white/70 text-[12px] font-semibold uppercase tracking-[0.16em] mb-1">
                     {p.category.replace("-", " ")}
                   </small>
-                  <h3 className="text-white text-[clamp(20px,2.2vw,28px)] font-medium leading-tight">
+                  <h3 className="text-white text-[var(--fs-h4)] font-medium leading-[1.4]">
                     {p.title}
                   </h3>
                 </div>
@@ -94,10 +98,10 @@ export function WorksGrid() {
               </div>
             </div>
             <div className="flex items-center justify-between gap-4 pt-6">
-              <h3 className="text-[clamp(18px,1.8vw,22px)] font-semibold tracking-[-0.02em] transition-all duration-300 group-hover:translate-x-1.5 group-hover:opacity-60">
+              <h3 className="text-[var(--fs-h5)] font-semibold tracking-[-0.02em] transition-all duration-300 group-hover:translate-x-1.5 group-hover:opacity-60">
                 {p.title}
               </h3>
-              <span className="text-[14px] font-medium text-muted whitespace-nowrap">
+              <span className="text-[var(--fs-body-sm)] font-medium text-muted whitespace-nowrap">
                 {p.metric}
               </span>
             </div>

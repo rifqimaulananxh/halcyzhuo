@@ -9,7 +9,7 @@ export function BackLink({ href, children }: { href: string; children: ReactNode
       <Magnetic>
         <Link
           href={href}
-          className="inline-flex items-center gap-[10px] text-[15px] font-semibold text-muted w-fit transition-colors duration-200 hover:text-ink group"
+          className="inline-flex items-center gap-[10px] text-[var(--fs-body-sm)] font-semibold text-muted w-fit transition-colors duration-200 hover:text-ink group"
         >
           <svg
             width="18"

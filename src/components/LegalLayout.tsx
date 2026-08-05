@@ -22,19 +22,19 @@ export function LegalLayout({
         <Reveal variant="mask">
           <div className="mt-10 border-b border-surface pb-12">
             <p
-              className="rv rv-label mb-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-muted"
+              className="rv rv-label mb-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.08em] text-muted"
               style={{ "--i": 0 } as CSSProperties}
             >
               {label}
             </p>
             <TextReveal
               as="h1"
-              className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.95]"
+              className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
             >
               {title}
             </TextReveal>
             <p
-              className="rv rv-desc text-[16px] text-muted leading-normal max-w-[560px] mt-8"
+              className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[560px] mt-8"
               style={{ "--i": 2 } as CSSProperties}
             >
               {intro}
@@ -51,17 +51,17 @@ export function LegalLayout({
               style={{ "--i": i } as CSSProperties}
               className="grid grid-cols-[180px_1fr] gap-12 py-[52px] border-b border-surface max-[1024px]:grid-cols-[130px_1fr] max-[1024px]:gap-8 max-[809px]:grid-cols-1 max-[809px]:gap-4"
             >
-              <span className="text-[15px] font-semibold uppercase tracking-wide text-muted pt-2">
+              <span className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-wide text-muted pt-2">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="max-w-[760px]">
-                <h2 className="text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.03em] mb-4">
+                <h2 className="text-[var(--fs-h4)] font-bold tracking-[-0.03em] leading-[1.4] mb-4">
                   {s.title}
                 </h2>
                 {s.body.map((p, j) => (
                   <p
                     key={j}
-                    className="text-muted text-[17px] leading-normal mb-3 last:mb-0"
+                    className="text-muted text-[var(--fs-body)] leading-normal mb-3 last:mb-0"
                   >
                     {p}
                   </p>
@@ -70,7 +70,7 @@ export function LegalLayout({
             </div>
           ))}
         </Reveal>
-        <p className="text-muted text-[15px] mt-10">
+        <p className="text-muted text-[var(--fs-body-sm)] mt-10">
           Questions?{" "}
           <a
             href={`mailto:${SITE.email}`}

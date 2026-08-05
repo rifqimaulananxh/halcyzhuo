@@ -44,7 +44,7 @@ export function Footer() {
         <Reveal variant="mask">
           <div className="flex flex-col items-start gap-7 border-b border-surface pb-[clamp(56px,8vw,120px)]">
             <span
-              className="rv rv-label text-[13px] font-semibold uppercase tracking-[0.16em] text-muted"
+              className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted"
               style={{ "--i": 0 } as CSSProperties}
             >
               Have a project in mind?
@@ -53,7 +53,7 @@ export function Footer() {
               as="h2"
               split="chars"
               y={160}
-              className="text-[clamp(56px,10vw,150px)] font-bold tracking-[-0.05em] leading-[0.9]"
+              className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
             >
               Let&apos;s work
               <br />
@@ -63,7 +63,7 @@ export function Footer() {
             <div className="rv rv-cta" style={{ "--i": 3 } as CSSProperties}>
               <a
                 href={`mailto:${SITE.email}`}
-                className="group inline-flex items-center gap-4 text-[clamp(22px,3vw,34px)] font-semibold tracking-[-0.02em]"
+                className="group inline-flex items-center gap-4 text-[var(--fs-h4)] font-semibold tracking-[-0.02em] leading-[1.4]"
               >
                 <span className="underline underline-offset-8 decoration-1 group-hover:decoration-2 transition-all duration-300">
                   {SITE.email}
@@ -75,7 +75,7 @@ export function Footer() {
         </Reveal>
         <div className="footer__top">
           <p className="footer__logo">
-            <Link href="/" className="text-xl font-semibold tracking-tight">
+            <Link href="/" className="font-semibold tracking-tight">
               halcyzhuo<span className="text-muted">.</span>
             </Link>
           </p>

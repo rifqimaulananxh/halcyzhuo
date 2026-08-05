@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/inter-tight";
-import "@fontsource-variable/inter-tight/wght-italic.css";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Preloader } from "@/components/Preloader";
-import { CustomCursor } from "@/components/CustomCursor";
+import { CursorProvider, CustomCursor } from "@/components/CustomCursor";
+import { PagePreload } from "@/components/PagePreload";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Spotlight } from "@/components/Spotlight";
@@ -71,7 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js','is-loading')" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -103,10 +102,13 @@ export default function RootLayout({
         <Preloader />
         <Spotlight />
         <ScrollProgress />
-        <CustomCursor />
-        <Nav />
-        {children}
-        <Footer />
+        <CursorProvider>
+          <CustomCursor />
+          <PagePreload />
+          <Nav />
+          {children}
+          <Footer />
+        </CursorProvider>
       </body>
     </html>
   );

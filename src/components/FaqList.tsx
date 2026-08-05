@@ -48,7 +48,7 @@ export function FaqList() {
               onClick={() => setOpen(isOpen ? null : i)}
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${i}`}
-              className="w-full bg-transparent border-0 text-left font-sans text-[clamp(19px,2.4vw,26px)] font-medium tracking-[-0.02em] text-ink py-[30px] px-0 cursor-pointer flex items-center justify-between gap-4 transition-all duration-300 group"
+              className="w-full bg-transparent border-0 text-left font-sans text-[var(--fs-h4)] font-medium tracking-[-0.02em] leading-[1.4] text-ink py-[30px] px-0 cursor-pointer flex items-center justify-between gap-4 transition-all duration-300 group"
             >
               {item.q}
               <span
@@ -67,7 +67,7 @@ export function FaqList() {
               style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
             >
               <div className="overflow-hidden">
-                <p className="text-muted text-[17px] leading-normal pb-7 max-w-[760px]">
+                <p className="text-muted text-[var(--fs-body)] leading-normal pb-7 max-w-[760px]">
                   {item.a}
                 </p>
               </div>

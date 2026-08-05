@@ -57,20 +57,20 @@ export default function AboutPage() {
           <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start">
             <div>
               <p
-                className="rv rv-label mb-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-muted"
+                className="rv rv-label mb-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.08em] text-muted"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 About <span className="text-accent">·</span> the studio
               </p>
               <TextReveal
                 as="h1"
-                className="text-[clamp(56px,9vw,120px)] font-bold tracking-[-0.05em] leading-[0.95]"
+                className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
               >
                 About<span className="text-muted">.</span>
               </TextReveal>
             </div>
             <p
-              className="rv rv-desc text-[16px] text-muted leading-normal max-w-[420px]"
+              className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               An engineering studio chasing measurable results — not just code
@@ -87,13 +87,13 @@ export default function AboutPage() {
               style={{ "--i": i } as CSSProperties}
               className="grid grid-cols-[120px_1fr_1fr] gap-8 items-baseline py-11 border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[100px_1fr] max-[809px]:grid-cols-1 max-[809px]:gap-3"
             >
-              <span className="text-[15px] font-semibold text-muted tracking-wide">
+              <span className="text-[var(--fs-body-sm)] font-semibold text-muted tracking-wide">
                 {row.num}
               </span>
-              <h3 className="text-[clamp(26px,3.4vw,42px)] font-semibold tracking-[-0.04em] leading-tight">
+              <h3 className="text-[var(--fs-h2)] font-semibold tracking-[-0.04em] leading-[1.2]">
                 {row.title}
               </h3>
-              <p className="text-muted text-[16px] leading-normal max-w-[460px] max-[1024px]:col-start-2 max-[809px]:col-start-1">
+              <p className="text-muted text-[var(--fs-body)] leading-normal max-w-[460px] max-[1024px]:col-start-2 max-[809px]:col-start-1">
                 {row.desc}
               </p>
             </div>
@@ -106,20 +106,20 @@ export default function AboutPage() {
           <div className="flex items-end justify-between gap-10 border-b border-surface pb-12 mb-12 max-[809px]:flex-col max-[809px]:items-start">
             <div>
               <p
-                className="rv rv-label mb-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-muted"
+                className="rv rv-label mb-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.08em] text-muted"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 Experience · timeline
               </p>
               <TextReveal
                 as="h2"
-                className="text-[clamp(40px,6vw,72px)] font-bold tracking-[-0.05em] leading-[1]"
+                className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
               >
                 Where we&apos;ve shipped<span className="text-muted">.</span>
               </TextReveal>
             </div>
             <p
-              className="rv rv-desc text-[16px] text-muted leading-normal max-w-[420px]"
+              className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               A track record of taking products from idea to production — from
@@ -134,14 +134,14 @@ export default function AboutPage() {
               style={{ "--i": i } as CSSProperties}
               className="grid grid-cols-[140px_1fr] gap-12 py-[52px] border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[110px_1fr] max-[1024px]:gap-8 max-[809px]:grid-cols-1 max-[809px]:gap-4"
             >
-              <span className="text-[15px] font-semibold uppercase tracking-wide text-muted pt-2">
+              <span className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-wide text-muted pt-2">
                 {item.step}
               </span>
               <div className="max-w-[720px]">
-                <h3 className="text-[clamp(30px,4vw,52px)] mb-[18px] tracking-[-0.04em] leading-tight">
+                <h3 className="text-[var(--fs-h2)] mb-[18px] tracking-[-0.04em] leading-[1.2]">
                   {item.title}
                 </h3>
-                <p className="text-muted text-[17px] leading-normal">
+                <p className="text-muted text-[var(--fs-body)] leading-normal">
                   {item.desc}
                 </p>
               </div>

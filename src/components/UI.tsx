@@ -19,7 +19,7 @@ export function SolidBtn({
     <Magnetic>
       <a
         href={href}
-        className="inline-flex items-center gap-3 rounded-[var(--radius-md)] bg-ink text-white text-[15px] font-semibold uppercase tracking-[0.08em] px-8 py-[18px] transition-colors duration-200 hover:bg-accent"
+        className="inline-flex items-center gap-3 rounded-[var(--radius-md)] bg-ink text-white text-[var(--fs-bold-sm)] font-semibold uppercase tracking-[0.08em] px-8 py-[18px] transition-colors duration-200 hover:bg-accent"
       >
         {children}
         <ArrowIcon />
@@ -39,7 +39,7 @@ export function TextBtn({
     <Magnetic>
       <a
         href={href}
-        className="inline-flex items-center gap-3 mt-6 text-[16px] font-semibold group"
+        className="inline-flex items-center gap-3 mt-6 text-[var(--fs-body)] font-semibold group"
       >
         <span className="underline underline-offset-8 decoration-1 group-hover:decoration-2">
           {children}

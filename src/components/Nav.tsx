@@ -1,41 +1,52 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Magnetic } from "@/components/Magnetic";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import type gsap from "gsap";
 
-const navLinks = NAV_LINKS.filter((link) => link.key !== "contact");
+/* eslint-disable @next/next/no-img-element */
 
-const LOGO = "halcyzhuo";
+const LINKS = [
+  { key: "home", label: "Home", href: "/", image: "/hero/hero-1.svg" },
+  { key: "work", label: "Works", href: "/work", image: "/hero/hero-2.svg" },
+  { key: "about", label: "About", href: "/about", image: "/hero/hero-3.svg" },
+  {
+    key: "journal",
+    label: "Journal",
+    href: "/journal",
+    image: "/hero/hero-4.svg",
+  },
+  {
+    key: "contact",
+    label: "Contact",
+    href: "/#contact",
+    image: "/hero/hero-5.svg",
+  },
+] as const;
 
-const socials = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "X", href: "https://x.com" },
-];
+let gsapPromise: Promise<typeof gsap> | null = null;
+
+function loadGsap(): Promise<typeof gsap> {
+  gsapPromise ??= import("gsap").then((m) => m.default);
+  return gsapPromise;
+}
 
 export function Nav() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [hash, setHash] = useState("");
   const [open, setOpen] = useState(false);
-  const lastY = useRef(0);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const [lastIndex, setLastIndex] = useState(0);
+  const [showDelay, setShowDelay] = useState(true);
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 10);
-      const dy = y - lastY.current;
-      if (y > 140 && dy > 2 && !open) setHidden(true);
-      else if (dy < -2 || y < 140) setHidden(false);
-      lastY.current = y;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [open]);
+    const update = () => setHash(window.location.hash);
+    update();
+    window.addEventListener("hashchange", update);
+    return () => window.removeEventListener("hashchange", update);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -44,131 +55,164 @@ export function Nav() {
     };
   }, [open]);
 
+  const isActive = (href: string) => {
+    const [path, section] = href.split("#");
+    if (section) return pathname === (path || "/") && hash === `#${section}`;
+    const base = path || "/";
+    if (base === "/") return pathname === "/" && hash !== "#contact";
+    return pathname === base || pathname.startsWith(`${base}/`);
+  };
+
+  const activeIndex = LINKS.findIndex((link) => isActive(link.href));
+  const displayedIndex = hoverIndex ?? activeIndex;
+
+  /* drawer open reveal (roshan-style: title fade + items stagger) */
+  useEffect(() => {
+    if (!open) return;
+    let cancelled = false;
+    let kill: (() => void) | undefined;
+
+    loadGsap()
+      .then((gsap) => {
+        if (cancelled || !drawerRef.current) return;
+        const title = drawerRef.current.querySelector("[data-nav-title]");
+        const items = Array.from(
+          drawerRef.current.querySelectorAll<HTMLElement>("[data-nav-item]")
+        );
+        if (!title) return;
+        const tl = gsap.timeline({ delay: 0.8 });
+        tl.fromTo(
+          title,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6, ease: "power4.out" }
+        );
+        tl.fromTo(
+          items,
+          { y: "100%" },
+          { y: "0%", duration: 0.6, stagger: 0.1, ease: "power4.out" },
+          0
+        );
+        kill = () => gsap.killTweensOf([title, ...items]);
+      })
+      .catch(() => undefined);
+
+    return () => {
+      cancelled = true;
+      kill?.();
+    };
+  }, [open]);
+
+  const toggle = () => {
+    if (open) {
+      setOpen(false);
+    } else {
+      setShowDelay(true);
+      window.setTimeout(() => {
+        setShowDelay(false);
+      }, 800);
+      setOpen(true);
+    }
+  };
+
+  const close = () => setOpen(false);
+
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          hidden ? "-translate-y-full" : "translate-y-0"
-        } ${
-          scrolled || open
-            ? "bg-bg/85 backdrop-blur-md border-b border-surface"
-            : "bg-transparent"
-        }`}
+      <nav className="navbar" aria-label="Primary">
+        <Link className="navbar__logo" href="/" aria-label="halcyzhuo">
+          H.
+        </Link>
+        <button
+          type="button"
+          className={`navbar__menu ${open ? "navbar__menu--open" : ""}`}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={toggle}
+        >
+          <span className="navbar__bar" />
+          <span className="navbar__bar" />
+        </button>
+      </nav>
+
+      <div
+        className={`nav-drawer ${open ? "nav-drawer--open" : ""}`}
+        ref={drawerRef}
       >
-        <div className="mx-auto max-w-[var(--max-w)] px-[var(--pad-inner)] py-4 flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            <Link
-              href="/"
-              className="logo-mask text-xl font-semibold tracking-tight text-ink"
-            >
-              {LOGO.split("").map((c, i) => (
-                <span
-                  key={i}
-                  className="logo-char"
-                  style={{ "--i": i } as CSSProperties}
-                >
-                  {c}
-                </span>
-              ))}
-              <span
-                className="logo-char text-muted"
-                style={{ "--i": LOGO.length } as CSSProperties}
-              >
-                .
-              </span>
-            </Link>
-            <nav className="flex items-center gap-8 max-[809px]:hidden">
-              {navLinks.map((link) => (
-                <Link
+        <div className="nav-drawer__content">
+          <h1 className="nav-drawer__title" data-nav-title>
+            Engineered
+            <br />
+            to
+            <br />
+            last.
+          </h1>
+          <div className="nav-drawer__preview" aria-hidden="true">
+            {LINKS.map((link, i) => {
+              const isCurrent = open && i === displayedIndex;
+              const isLast = open && i === lastIndex;
+              let y = 100;
+              let z = 0;
+              let transition = "transform 0.7s cubic-bezier(0.25, 1, 0.5, 1)";
+              if (isCurrent) {
+                y = 0;
+                z = 2;
+                if (showDelay)
+                  transition =
+                    "transform 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.4s";
+              } else if (isLast) {
+                y = 0;
+                z = 1;
+                transition = "none";
+              }
+              return (
+                <div
                   key={link.key}
+                  className="nav-drawer__preview-img"
+                  style={{
+                    transform: `translateY(${y}%)`,
+                    zIndex: z,
+                    transition,
+                  }}
+                >
+                  <img src={link.image} alt="" />
+                </div>
+              );
+            })}
+          </div>
+          <ul className="nav-drawer__list">
+            {LINKS.map((link, i) => (
+              <li className="nav-drawer__item" key={link.key}>
+                <Link
                   href={link.href}
-                  data-active={pathname === link.href}
-                  className="relative text-[15px] font-semibold transition-opacity after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-200 hover:opacity-70 hover:after:w-full data-[active=true]:after:w-full"
+                  className={`nav-drawer__link ${
+                    isActive(link.href) ? "nav-drawer__link--active" : ""
+                  }`}
+                  data-nav-item
+                  onClick={close}
+                  onMouseEnter={() => {
+                    setLastIndex(hoverIndex ?? activeIndex);
+                    setHoverIndex(i);
+                  }}
+                  onMouseLeave={() => {
+                    setLastIndex(i);
+                    setHoverIndex(null);
+                  }}
                 >
                   {link.label}
                 </Link>
-              ))}
-            </nav>
-          </div>
-          <div className="flex items-center gap-3">
-            <Magnetic className="max-[809px]:hidden">
-              <a
-                href={`mailto:${SITE.email}`}
-                className="inline-flex items-center rounded-[8px] border border-outline px-4 py-2 text-[13px] font-semibold transition-colors duration-200 hover:border-ink hover:bg-bg"
-              >
-                Email
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center rounded-[8px] bg-ink px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-accent"
-              >
-                Let&apos;s talk
-              </Link>
-            </Magnetic>
-            <button
-              className="hidden w-7 h-5 flex-col justify-center gap-[6px] bg-transparent border-0 cursor-pointer max-[809px]:flex"
-              aria-label="Menu"
-              aria-expanded={open}
-              onClick={() => setOpen(!open)}
-            >
-              <span
-                className={`block h-[2px] bg-ink transition-transform ${
-                  open ? "translate-y-[4px] rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block h-[2px] bg-ink transition-transform ${
-                  open ? "-translate-y-[4px] -rotate-45" : ""
-                }`}
-              />
-            </button>
-          </div>
-        </div>
-      </header>
-      <div
-        className={`fixed inset-0 z-40 bg-bg flex flex-col px-[var(--pad-inner)] pt-24 pb-8 transition-opacity duration-300 ${
-          open ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <nav className="flex flex-col">
-          {navLinks.map((link) => (
-            <Link
-              key={link.key}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-between border-b border-surface py-5 text-3xl font-semibold tracking-tight transition-opacity hover:opacity-70"
-            >
-              {link.label}
-              <span aria-hidden className="text-2xl text-muted">
-                →
-              </span>
-            </Link>
-          ))}
-        </nav>
-        <div className="mt-auto flex flex-col gap-6">
-          <Link
-            href="/#contact"
-            onClick={() => setOpen(false)}
-            className="inline-flex items-center justify-center rounded-[8px] bg-ink px-4 py-3.5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-accent"
-          >
-            Let&apos;s talk
-          </Link>
-          <ul className="flex justify-around border-t border-surface pt-6">
-            {socials.map((s) => (
-              <li key={s.label}>
-                <a
-                  href={s.href}
-                  className="text-[15px] font-semibold text-muted transition-opacity hover:opacity-70"
-                >
-                  {s.label}
-                </a>
               </li>
             ))}
           </ul>
         </div>
       </div>
+
+      <div
+        className={`nav-drawer__overlay ${
+          open ? "nav-drawer__overlay--open" : ""
+        }`}
+        onClick={close}
+        aria-hidden="true"
+      />
     </>
   );
 }
