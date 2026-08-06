@@ -41,10 +41,10 @@ function loadGsap(): Promise<GsapBundle> {
 }
 
 const HERO_POINTERS = [
-  { src: "/hero/hero-1.svg", label: "Pixel-perfect execution" },
-  { src: "/hero/hero-2.svg", label: "Performance-first" },
-  { src: "/hero/hero-3.svg", label: "Scale-ready systems" },
-  { src: "/hero/hero-4.svg", label: "Clean maintainable code" },
+  { src: "/hero/hero-1.svg", label: "Fast, clear interfaces" },
+  { src: "/hero/hero-2.svg", label: "Performance under load" },
+  { src: "/hero/hero-3.svg", label: "Systems ready to scale" },
+  { src: "/hero/hero-4.svg", label: "Code built for handover" },
 ];
 
 export function Hero() {
@@ -318,7 +318,7 @@ export function Hero() {
         <div className="hero__big-heading">
           <h1
             className="hero__heading"
-            aria-label="Engineering software that lasts."
+            aria-label="Engineering software that holds up."
           >
             <span className="hero__heading-top" data-hero-heading aria-hidden="true">
               Engineering software
@@ -346,7 +346,7 @@ export function Hero() {
               data-hero-heading
               aria-hidden="true"
             >
-              that lasts.
+              that holds up.
             </div>
           </div>
           <div

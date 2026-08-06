@@ -73,8 +73,8 @@ export default function AboutPage() {
               className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              An engineering studio chasing measurable results — not just code
-              that runs. Based in Jakarta, working remotely.
+              Product engineering for teams moving beyond the MVP. Based in
+              Jakarta, working remotely.
             </p>          </div>
         </Reveal>
       </header>
@@ -151,14 +151,14 @@ export default function AboutPage() {
       </section>
 
       <Reveal variant="mask">
-        <Cta
-          pillLabel="let's build"
+      <Cta
+          pillLabel="ready to build"
           title={
             <>
               Tell us what you&apos;re <span className="accent-word">building</span>.
             </>
           }
-          btnLabel="~/start-a-project"
+          btnLabel="start a project"
         />
       </Reveal>
     </div>

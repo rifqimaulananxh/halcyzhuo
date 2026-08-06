@@ -123,7 +123,7 @@ export default async function JournalPost({ params }: Props) {
                 href={`mailto:${SITE.email}`}
                 className="inline-flex items-center gap-3 rounded-[var(--radius-md)] bg-ink text-white text-[var(--fs-bold-sm)] font-semibold uppercase tracking-[0.08em] px-8 py-[18px] transition-colors duration-200 hover:bg-ink/85"
               >
-                ~/lets-talk
+                start a conversation
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>

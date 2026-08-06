@@ -11,23 +11,23 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     q: "Do you take on small projects?",
-    a: "Yes. MVPs, single features, and focused bug-fixes — as long as the scope is clear, we'll take it. Sometimes small projects are the ones that matter most.",
+    a: "Yes. We take on MVPs, focused features, and well-scoped fixes. A small project still deserves a thoughtful approach.",
   },
   {
     q: "Can you work with an existing codebase?",
-    a: "Absolutely. We're used to stepping into existing codebases, reading the context first, and refactoring incrementally without stopping the development that's already underway.",
+    a: "Yes. We start by reading the code and understanding the constraints, then improve it incrementally without putting development on hold.",
   },
   {
     q: "What's a typical project timeline?",
-    a: "MVPs typically take 4–8 weeks depending on scope. Retainer partners run monthly with weekly milestones you can track at every check-in.",
+    a: "Most MVPs take 4–8 weeks, depending on scope. Retainer work runs monthly with weekly milestones and clear check-ins.",
   },
   {
     q: "What happens after I reach out?",
-    a: "We'll book 20 minutes and talk through goals and constraints. If it's a fit, we'll send a proposal with timeline and pricing within 2–3 days. If it's not, we'll tell you straight.",
+    a: "We'll book a 20-minute call to understand the goals and constraints. If it's a fit, you'll get a proposal with timeline and pricing within 2–3 days. If it isn't, we'll say so.",
   },
   {
     q: "Do you provide support after launch?",
-    a: "Every project gets 2 weeks of post-launch support. For ongoing maintenance — monitoring, tuning, new features — a monthly retainer is available.",
+    a: "Every project includes two weeks of post-launch support. Ongoing monitoring, performance work, and new features are available on a monthly retainer.",
   },
 ];
 

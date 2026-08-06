@@ -13,12 +13,12 @@ export interface Post {
 export const posts: Post[] = [
   {
     slug: "react-query-fetch",
-    title: "Why I dropped React Query for a plain fetch layer",
+    title: "When a plain fetch layer beats React Query",
     date: "Jul 3, 2026",
     readTime: "8 min read",
     category: "/engineering",
     description:
-      "Sometimes the popular dependency isn't the right fit for your product.",
+      "The popular dependency is not always the right fit for the product in front of you.",
     blocks: [
       {
         type: "p",

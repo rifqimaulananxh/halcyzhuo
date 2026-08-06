@@ -39,8 +39,8 @@ export default function JournalPage() {
               className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[420px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Technical notes on engineering, performance, and product decisions
-              — written while building, not after.
+              Technical notes on engineering, performance, and product decisions,
+              written while the work is still fresh.
             </p>
           </div>
         </Reveal>
@@ -79,9 +79,9 @@ export default function JournalPage() {
 
       <Reveal variant="mask">
         <Cta
-          pillLabel="writing about building"
+          pillLabel="notes from the work"
           title="Ideas worth shipping."
-          sub="Have a project that needs to ship? We're happy to talk through scope and architecture — free, no commitment."
+          sub="Have a product that needs to move forward? We can talk through scope, architecture, and next steps."
         />
       </Reveal>
     </div>

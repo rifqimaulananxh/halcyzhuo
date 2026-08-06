@@ -31,11 +31,10 @@ const COL_COUNT = 10;
 const ROW_COL_COUNT = 8;
 
 /**
- * "Stack" grid — a 1:1 replica of the paulkalkbrenner.net experience
+ * Value grid — a 1:1 replica of the paulkalkbrenner.net experience
  * section. A wide grid of columns (numbered 01-09) with vertical rules that,
  * together with the text rows, pan left as you scroll (scrubbed, ~4.75
- * columns), while the words slide in with a small stagger. Only the text
- * differs from the original ("Stack the Systems behind Great Software").
+ * columns), while the words slide in with a small stagger.
  */
 export function ExperienceGrid({
   rows,
@@ -121,7 +120,7 @@ export function ExperienceGrid({
   }, []);
 
   return (
-    <section className={`exp-section ${className}`} aria-label="Stack">
+    <section className={`exp-section ${className}`} aria-label="What we deliver">
       <div ref={wrapRef} className="exp-wrap" data-experience-wrap>
         <div className="exp-lines">
           <div className="exp-lines__cover">

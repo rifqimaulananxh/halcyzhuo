@@ -40,7 +40,7 @@ export default function WorkPage() {
               className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] text-right max-[809px]:text-left"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Case studies with measurable outcomes — not just screenshots.
+              Real products, measurable gains, and the decisions behind them.
             </p>
           </div>
         </Reveal>
@@ -86,10 +86,10 @@ export default function WorkPage() {
 
       <Reveal variant="mask">
         <Cta
-          pillLabel="open to new work"
-          title="Like what you see?"
-          sub="Tell us about your product — we'll give you an honest take on scope, architecture, and estimates."
-          btnLabel="~/start-a-project"
+          pillLabel="taking on new work"
+          title="Have a product to move forward?"
+          sub="Tell us about the product, the constraints, and where it needs to go. We'll give you a clear take on scope, architecture, and next steps."
+          btnLabel="start a project"
         />
       </Reveal>
     </div>

@@ -4,14 +4,14 @@ import { SolidBtn } from "@/components/UI";
 import { TextReveal } from "@/components/TextReveal";
 
 export function Cta({
-  pillLabel = "free 20-min intro call",
+  pillLabel = "free 20-minute intro",
   title = (
     <>
       Tell us what you&apos;re <span className="accent-word">building</span>.
     </>
   ),
-  sub = "Tell us about your product — we'll give you an honest take on scope, architecture, and estimates. No drama, no jargon.",
-  btnLabel = "~/lets-talk",
+  sub = "Tell us about the product, the constraints, and where it needs to go. We'll give you a clear take on scope, architecture, and next steps.",
+  btnLabel = "start a conversation",
 }: {
   pillLabel?: string;
   title?: ReactNode;

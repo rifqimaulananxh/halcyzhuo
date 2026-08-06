@@ -5,9 +5,7 @@ import { FaqList } from "@/components/FaqList";
 import { TextBtn } from "@/components/UI";
 import { Cta } from "@/components/Cta";
 import { Hero } from "@/components/Hero";
-import { StackMarquee } from "@/components/StackMarquee";
 import { ExperienceGrid } from "@/components/ExperienceGrid";
-import { BeliefList } from "@/components/BeliefList";
 import { ServiceCard } from "@/components/ServiceCard";
 import { posts } from "@/lib/posts";
 import type { CSSProperties } from "react";
@@ -18,10 +16,10 @@ export const metadata: Metadata = {
 };
 
 const stackGridRows = [
-  [{ word: "Built", col: 1 }],
-  [{ word: "measured", col: 2 }],
-  [{ word: "shipped", col: 3 }],
-  [{ word: "repeated", col: 4 }],
+  [{ word: "fast", col: 1 }],
+  [{ word: "reliable", col: 2 }],
+  [{ word: "accessible", col: 3 }],
+  [{ word: "scalable", col: 4 }],
 ];
 
 const stackRows = [
@@ -51,57 +49,38 @@ const specRows = [
   {
     num: "01",
     title: "Frontend systems",
-    desc: "Interfaces people actually want to use — fast, accessible, and built to hold up under real traffic.",
+    desc: "Fast, accessible interfaces that stay clear under real traffic and real use.",
   },
   {
     num: "02",
     title: "Backend & APIs",
-    desc: "Services designed around data, not frameworks. Clean contracts, honest performance, predictable scale.",
+    desc: "Typed services, stable contracts, and data flows that stay predictable as usage grows.",
   },
   {
     num: "03",
     title: "Infrastructure & ops",
-    desc: "From Dockerfile to deploy — pipelines, monitoring, and the glue that keeps products running at night.",
+    desc: "Deployments, monitoring, and the operational glue that keeps products healthy after launch.",
   },
 ];
 
 const approachSteps = [
   {
     step: "01 · discover",
-    title: "Understanding the problem",
-    desc: "Scope, spike, architecture. No rush to write code — making sure we build the right thing first.",
+    title: "Frame the problem",
+    desc: "We align on goals, constraints, and the smallest useful path forward before code starts.",
     tags: ["product thinking", "architecture", "roadmap"],
   },
   {
     step: "02 · build",
-    title: "Production-grade code",
-    desc: "Clean TypeScript, real tests, CI/CD from day one. Code that can be reviewed and maintained.",
+    title: "Build for the next version",
+    desc: "Typed code, real tests, and delivery from the start. The system should be easy to review, change, and hand over.",
     tags: ["typescript", "tests", "CI/CD"],
   },
   {
     step: "03 · ship",
-    title: "Launch, measure, iterate",
-    desc: "Deploys with full observability. Tracked performance, real feedback, continuous improvement.",
+    title: "Launch with feedback built in",
+    desc: "We deploy with observability, watch the numbers, and use real behavior to decide what comes next.",
     tags: ["observability", "monitoring", "iterations"],
-  },
-];
-
-const beliefs = [
-  {
-    title: "Craft over speed",
-    desc: "Good work takes the time it takes. We move deliberately and ask the right questions before writing any code.",
-  },
-  {
-    title: "Form with intent",
-    desc: "Nothing we ship is decorative. Every decision carries meaning, from the first commit to the final release.",
-  },
-  {
-    title: "Restraint as a tool",
-    desc: "Knowing what to remove is as important as knowing what to add. We strip back until only what matters remains.",
-  },
-  {
-    title: "Built to last",
-    desc: "We don't build for the moment. Our systems are made to hold their shape as products grow and shift.",
   },
 ];
 
@@ -111,61 +90,8 @@ export default function Home() {
       {/* HERO */}
       <Hero />
 
-      {/* STACK GRID — PK experience-style */}
+      {/* VALUE GRID */}
       <ExperienceGrid rows={stackGridRows} />
-
-      {/* STACK MARQUEE */}
-      <StackMarquee />
-
-      {/* MANIFESTO */}
-      <section className="manifesto">
-        <Reveal variant="mask">
-          <div className="flex flex-col gap-7 border-b border-surface pb-[clamp(40px,5vw,72px)] max-w-[1400px]">
-            <span
-              className="rv rv-label manifesto__label"
-              style={{ "--i": 0 } as CSSProperties}
-            >
-              <span className="manifesto__square" aria-hidden="true" />
-              Manifesto <span className="text-accent">·</span> what we believe
-            </span>
-            <TextReveal
-              as="h2"
-              className="manifesto__text"
-              trigger="scroll"
-              start="top 85%"
-              split="chars"
-              duration={0.9}
-            >
-              We make things that{" "}
-              <span className="manifesto__accent">mean something</span>
-              <span className="text-muted">.</span>
-            </TextReveal>
-            <p
-              className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[480px]"
-              style={{ "--i": 2 } as CSSProperties}
-            >
-              Most studios don&apos;t struggle with what to build — they struggle
-              with how to make it land. We build systems, not screenshots.
-            </p>
-          </div>
-        </Reveal>
-        <div className="pt-[clamp(40px,5vw,72px)] max-w-[1400px]">
-          <Reveal variant="mask">
-            <span
-              className="rv rv-label manifesto__label block mb-[clamp(24px,3vw,40px)]"
-              style={{ "--i": 0 } as CSSProperties}
-            >
-              <span className="manifesto__square" aria-hidden="true" />
-              The principles <span className="text-accent">·</span> what we
-              build by
-            </span>
-          </Reveal>
-          <BeliefList beliefs={beliefs} />
-          <div className="mt-[clamp(40px,5vw,64px)] flex justify-start">
-            <TextBtn href="#contact">Get in touch</TextBtn>
-          </div>
-        </div>
-      </section>
 
       {/* ABOUT */}
       <section
@@ -186,9 +112,9 @@ export default function Home() {
               className="rv rv-desc text-muted text-[15px] leading-[1.4] max-w-[460px]"
               style={{ "--i": 1 } as CSSProperties}
             >
-              We&apos;re a small product-engineering studio for teams that
-              outgrew the MVP. We build the full stack — interfaces, APIs,
-              infrastructure — and we stick around to keep it fast.
+              We&apos;re a product engineering studio for teams that have
+              outgrown the MVP. We build systems, not screenshots: interfaces,
+              APIs, and infrastructure that take products into their next stage.
             </p>
           </Reveal>
         </div>
@@ -210,7 +136,7 @@ export default function Home() {
                 className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                Works <span className="text-accent">·</span> 2026
+                Works <span className="text-accent">·</span> selected projects
               </p>
               <TextReveal
                 as="h2"
@@ -227,7 +153,7 @@ export default function Home() {
                 className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] text-right max-[809px]:text-left"
                 style={{ "--i": 3 } as CSSProperties}
               >
-                Case studies with measurable outcomes — not just screenshots.
+                Real products, measurable gains, and the decisions behind them.
               </p>
               <div className="rv rv-cta" style={{ "--i": 4 } as CSSProperties}>
                 <TextBtn href="/work">view all work</TextBtn>
@@ -252,16 +178,16 @@ export default function Home() {
               as="h2"
               className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[820px]"
             >
-              From <span className="accent-word">idea</span> to ship,
+              From <span className="accent-word">problem</span> to product,
               <br />
-              clearly<span className="text-accent">.</span>
+              without the guesswork<span className="text-accent">.</span>
             </TextReveal>
             <p
               className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[460px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Not a vague agency process — a working rhythm you can follow at
-              every stage.
+              A practical rhythm from first conversation to production: scope
+              clearly, build carefully, learn quickly.
             </p>
           </div>
         </Reveal>
@@ -307,7 +233,7 @@ export default function Home() {
                 className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5 block"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                Stack <span className="text-accent">·</span> production-proven
+                Stack <span className="text-accent">·</span> tools in production
               </span>
             </Reveal>
             <TextReveal
@@ -320,7 +246,7 @@ export default function Home() {
               <span className="text-accent">.</span>
             </TextReveal>
             <p className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] mt-7">
-              No buzzword bingo — only what&apos;s been used in production.
+              A focused stack, chosen for the product and proven in production.
             </p>
           </div>
           <div>
@@ -359,15 +285,16 @@ export default function Home() {
               className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
               style={{ "--i": 0 } as CSSProperties}
             >
-              FAQ <span className="text-accent">·</span> common questions
+              FAQ <span className="text-accent">·</span> before we start
             </p>
             <TextReveal
               as="h2"
               className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[760px]"
             >
-              Questions <span className="accent-word">asked</span>
+              What you need
               <br />
-              most often<span className="text-accent">.</span>
+              to know <span className="accent-word">first</span>
+              <span className="text-accent">.</span>
             </TextReveal>
           </div>
         </Reveal>
@@ -383,7 +310,7 @@ export default function Home() {
                 className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
                 style={{ "--i": 0 } as CSSProperties}
               >
-                Journal <span className="text-accent">·</span> insights
+                Journal <span className="text-accent">·</span> notes from the work
               </p>
               <TextReveal
                 as="h2"
@@ -398,7 +325,7 @@ export default function Home() {
                 style={{ "--i": 2 } as CSSProperties}
               >
                 Technical notes on engineering, performance, and product
-                decisions.
+                decisions, written while the work is still fresh.
               </p>
               <div className="rv rv-cta" style={{ "--i": 3 } as CSSProperties}>
                 <TextBtn href="/journal">see all articles →</TextBtn>
