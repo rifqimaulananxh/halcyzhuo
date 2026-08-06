@@ -8,6 +8,7 @@ import { Hero } from "@/components/Hero";
 import { StackMarquee } from "@/components/StackMarquee";
 import { ExperienceGrid } from "@/components/ExperienceGrid";
 import { BeliefList } from "@/components/BeliefList";
+import { ServiceCard } from "@/components/ServiceCard";
 import { posts } from "@/lib/posts";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
@@ -167,9 +168,12 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about">
+      <section
+        id="about"
+        className="about-section grid grid-cols-[2fr_1fr] gap-8 px-[var(--pad-inner)] pb-[clamp(120px,15vw,200px)] max-[1024px]:grid-cols-1 max-[1024px]:pb-[clamp(80px,10vw,120px)]"
+      >
         <Reveal variant="mask">
-          <div className="flex flex-col gap-7 border-b border-surface pb-[clamp(48px,7vw,104px)] mb-12">
+          <div className="flex flex-col gap-6">
             <span
               className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted"
               style={{ "--i": 0 } as CSSProperties}
@@ -178,13 +182,13 @@ export default function Home() {
             </span>
             <TextReveal
               as="h2"
-              className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[1100px]"
+              className="about-heading text-[clamp(24px,3.5vw,32px)] font-semibold tracking-[-0.05em] leading-[1.2] text-ink"
             >
-              Code with <span className="accent-word">intent</span>
-              <span className="text-accent">.</span>
+              Code with <span className="text-accent">intent</span>
+              <span className="text-muted">.</span>
             </TextReveal>
             <p
-              className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[560px]"
+              className="rv rv-desc text-muted text-[15px] leading-[1.4] max-w-[460px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               We&apos;re a small product-engineering studio for teams that
@@ -193,25 +197,13 @@ export default function Home() {
             </p>
           </div>
         </Reveal>
-        <Reveal variant="stagger">
-          {specRows.map((row, i) => (
-            <div
-              key={row.num}
-              style={{ "--i": i } as CSSProperties}
-              className="grid grid-cols-[120px_1fr_1fr] gap-8 items-baseline py-11 border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[100px_1fr] max-[809px]:grid-cols-1 max-[809px]:gap-3"
-            >
-              <span className="text-[var(--fs-body-sm)] font-semibold text-accent tracking-wide">
-                {row.num}
-              </span>
-              <h3 className="text-[var(--fs-h4)] font-semibold tracking-[-0.04em] leading-[1.4]">
-                {row.title}
-              </h3>
-              <p className="text-muted text-[var(--fs-body)] leading-normal max-w-[460px] max-[1024px]:col-start-2 max-[809px]:col-start-1">
-                {row.desc}
-              </p>
-            </div>
-          ))}
-        </Reveal>
+        <div className="about-cards border-l border-surface pl-[clamp(32px,5vw,80px)] max-[1024px]:border-l-0 max-[1024px]:pl-0 max-[1024px]:pt-12 max-[1024px]:border-t max-[1024px]:border-surface">
+          <Reveal variant="stagger">
+            {specRows.map((row, i) => (
+              <ServiceCard key={row.num} item={row} index={i} />
+            ))}
+          </Reveal>
+        </div>
       </section>
 
       {/* WORKS */}
