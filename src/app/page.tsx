@@ -5,6 +5,9 @@ import { FaqList } from "@/components/FaqList";
 import { TextBtn } from "@/components/UI";
 import { Cta } from "@/components/Cta";
 import { Hero } from "@/components/Hero";
+import { StackMarquee } from "@/components/StackMarquee";
+import { ExperienceGrid } from "@/components/ExperienceGrid";
+import { BeliefList } from "@/components/BeliefList";
 import { posts } from "@/lib/posts";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
@@ -13,17 +16,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const marqueeItems = [
-  "TypeScript",
-  "Next.js",
-  "React",
-  "NestJS",
-  "Prisma",
-  "PostgreSQL",
-  "Redis",
-  "AWS",
-  "Docker",
-  "Tailwind",
+const stackGridRows = [
+  [{ word: "Built", col: 1 }],
+  [{ word: "measured", col: 2 }],
+  [{ word: "shipped", col: 3 }],
+  [{ word: "repeated", col: 4 }],
 ];
 
 const stackRows = [
@@ -49,21 +46,21 @@ const stackRows = [
   },
 ];
 
-const aboutRows = [
+const specRows = [
   {
     num: "01",
-    title: "End-to-end delivery",
-    desc: "Frontend, backend, infra — one team, from mockup to deploy. One point of contact, zero miscommunication.",
+    title: "Frontend systems",
+    desc: "Interfaces people actually want to use — fast, accessible, and built to hold up under real traffic.",
   },
   {
     num: "02",
-    title: "Performance is a feature",
-    desc: 'Fast loads, resilient systems. Every deploy is measured — not just "feels fast".',
+    title: "Backend & APIs",
+    desc: "Services designed around data, not frameworks. Clean contracts, honest performance, predictable scale.",
   },
   {
     num: "03",
-    title: "Built to be maintained",
-    desc: "Clean code, real tests, clear docs. Built to be handed over, not just to work.",
+    title: "Infrastructure & ops",
+    desc: "From Dockerfile to deploy — pipelines, monitoring, and the glue that keeps products running at night.",
   },
 ];
 
@@ -88,42 +85,46 @@ const approachSteps = [
   },
 ];
 
+const beliefs = [
+  {
+    title: "Craft over speed",
+    desc: "Good work takes the time it takes. We move deliberately and ask the right questions before writing any code.",
+  },
+  {
+    title: "Form with intent",
+    desc: "Nothing we ship is decorative. Every decision carries meaning, from the first commit to the final release.",
+  },
+  {
+    title: "Restraint as a tool",
+    desc: "Knowing what to remove is as important as knowing what to add. We strip back until only what matters remains.",
+  },
+  {
+    title: "Built to last",
+    desc: "We don't build for the moment. Our systems are made to hold their shape as products grow and shift.",
+  },
+];
+
 export default function Home() {
   return (
     <div id="main">
       {/* HERO */}
       <Hero />
 
+      {/* STACK GRID — PK experience-style */}
+      <ExperienceGrid rows={stackGridRows} />
+
       {/* STACK MARQUEE */}
-      <section className="marquee" aria-label="Tech stack">
-        <div className="marquee-row">
-          <div className="marquee-track marquee-track--fill">
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <span key={i} aria-hidden={i >= marqueeItems.length}>
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="marquee-row marquee-row--accent">
-          <div className="marquee-track marquee-track--reverse">
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <span key={i} aria-hidden={i >= marqueeItems.length}>
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StackMarquee />
 
       {/* MANIFESTO */}
       <section className="manifesto">
         <Reveal variant="mask">
-          <div className="flex flex-col gap-7 border-b border-surface pb-[clamp(56px,8vw,120px)] max-w-[1400px]">
+          <div className="flex flex-col gap-7 border-b border-surface pb-[clamp(40px,5vw,72px)] max-w-[1400px]">
             <span
               className="rv rv-label manifesto__label"
               style={{ "--i": 0 } as CSSProperties}
             >
+              <span className="manifesto__square" aria-hidden="true" />
               Manifesto <span className="text-accent">·</span> what we believe
             </span>
             <TextReveal
@@ -131,20 +132,38 @@ export default function Home() {
               className="manifesto__text"
               trigger="scroll"
               start="top 85%"
+              split="chars"
+              duration={0.9}
             >
-              We build software where engineering rigor meets{" "}
-              <span className="manifesto__accent">product instinct</span>
+              We make things that{" "}
+              <span className="manifesto__accent">mean something</span>
               <span className="text-muted">.</span>
             </TextReveal>
             <p
               className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[480px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              Typed end to end, measured in production, designed to be
-              maintained — every project is a system, not a screenshot.
+              Most studios don&apos;t struggle with what to build — they struggle
+              with how to make it land. We build systems, not screenshots.
             </p>
           </div>
         </Reveal>
+        <div className="pt-[clamp(40px,5vw,72px)] max-w-[1400px]">
+          <Reveal variant="mask">
+            <span
+              className="rv rv-label manifesto__label block mb-[clamp(24px,3vw,40px)]"
+              style={{ "--i": 0 } as CSSProperties}
+            >
+              <span className="manifesto__square" aria-hidden="true" />
+              The principles <span className="text-accent">·</span> what we
+              build by
+            </span>
+          </Reveal>
+          <BeliefList beliefs={beliefs} />
+          <div className="mt-[clamp(40px,5vw,64px)] flex justify-start">
+            <TextBtn href="#contact">Get in touch</TextBtn>
+          </div>
+        </div>
       </section>
 
       {/* ABOUT */}
@@ -168,13 +187,14 @@ export default function Home() {
               className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[560px]"
               style={{ "--i": 2 } as CSSProperties}
             >
-              We help founders and teams take products from an idea to production
-              — with clean architecture, honest performance, and no fluff.
+              We&apos;re a small product-engineering studio for teams that
+              outgrew the MVP. We build the full stack — interfaces, APIs,
+              infrastructure — and we stick around to keep it fast.
             </p>
           </div>
         </Reveal>
         <Reveal variant="stagger">
-          {aboutRows.map((row, i) => (
+          {specRows.map((row, i) => (
             <div
               key={row.num}
               style={{ "--i": i } as CSSProperties}

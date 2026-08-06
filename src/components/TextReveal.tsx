@@ -38,7 +38,7 @@ function loadGsap(): Promise<GsapBundle> {
   return gsapBundlePromise;
 }
 
-type SplitType = "lines" | "chars";
+type SplitType = "lines" | "words" | "chars";
 type TriggerType = "load" | "scroll";
 
 interface TextRevealProps {
@@ -52,6 +52,7 @@ interface TextRevealProps {
   stagger?: number;
   delay?: number;
   y?: number;
+  rotate?: number;
   start?: string;
 }
 
@@ -72,6 +73,7 @@ export function TextReveal({
   stagger = 0.12,
   delay = 0,
   y = 120,
+  rotate = 0,
   start = "top 80%",
 }: TextRevealProps) {
   const ref = useRef<HTMLElement>(null);
@@ -151,7 +153,11 @@ export function TextReveal({
         );
 
         const targets =
-          split === "lines" ? instance.lines : instance.chars;
+          split === "lines"
+            ? instance.lines
+            : split === "words"
+              ? instance.words
+              : instance.chars;
         if (instant) {
           gsap.set(targets, { yPercent: 0 });
           return;
@@ -159,13 +165,16 @@ export function TextReveal({
 
         tween = gsap.fromTo(
           targets,
-          { yPercent: y },
+          { yPercent: y, rotate },
           {
             yPercent: 0,
+            rotate: 0,
             duration,
             ease: "power4.out",
             stagger:
-              split === "lines" ? stagger : { amount: duration },
+              split === "lines" || split === "words"
+                ? stagger
+                : { amount: duration },
             delay,
             clearProps: "transform",
           }
@@ -224,7 +233,7 @@ export function TextReveal({
       if (resizeHandler) window.removeEventListener("resize", resizeHandler);
       teardown();
     };
-  }, [split, trigger, duration, stagger, delay, y, start]);
+  }, [split, trigger, duration, stagger, delay, y, rotate, start]);
 
   return (
     <Tag
