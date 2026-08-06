@@ -170,34 +170,29 @@ export default function Home() {
       {/* ABOUT */}
       <section
         id="about"
-        className="about-section grid grid-cols-[2fr_1fr] gap-8 px-[var(--pad-inner)] pb-[clamp(120px,15vw,200px)] max-[1024px]:grid-cols-1 max-[1024px]:pb-[clamp(80px,10vw,120px)]"
+        className="about-section grid grid-cols-3 gap-8 max-w-[var(--max-w)] mx-auto pl-[var(--pad-inner)] pr-[48px] max-[1024px]:grid-cols-1 max-[1024px]:pr-[var(--pad-inner)] max-[1024px]:pb-[56px]"
       >
-        <Reveal variant="mask">
-          <div className="flex flex-col gap-6">
+        <div className="about-heading col-span-2 max-[1024px]:col-span-1 flex flex-col gap-6 place-self-start overflow-hidden">
+          <Reveal variant="mask">
             <span
-              className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted"
+              className="rv rv-label block text-[56px] font-bold uppercase tracking-normal leading-[1.1] text-ink max-[999px]:text-[32px]"
               style={{ "--i": 0 } as CSSProperties}
             >
               About <span className="text-accent">·</span> the studio
             </span>
-            <TextReveal
-              as="h2"
-              className="about-heading text-[clamp(24px,3.5vw,32px)] font-semibold tracking-[-0.05em] leading-[1.2] text-ink"
-            >
-              Code with <span className="text-accent">intent</span>
-              <span className="text-muted">.</span>
-            </TextReveal>
+          </Reveal>
+          <Reveal variant="mask">
             <p
               className="rv rv-desc text-muted text-[15px] leading-[1.4] max-w-[460px]"
-              style={{ "--i": 2 } as CSSProperties}
+              style={{ "--i": 1 } as CSSProperties}
             >
               We&apos;re a small product-engineering studio for teams that
               outgrew the MVP. We build the full stack — interfaces, APIs,
               infrastructure — and we stick around to keep it fast.
             </p>
-          </div>
-        </Reveal>
-        <div className="about-cards border-l border-surface pl-[clamp(32px,5vw,80px)] max-[1024px]:border-l-0 max-[1024px]:pl-0 max-[1024px]:pt-12 max-[1024px]:border-t max-[1024px]:border-surface">
+          </Reveal>
+        </div>
+        <div className="about-cards col-span-1 border-l border-outline pl-[48px] pb-[200px] max-[1024px]:border-l-0 max-[1024px]:pl-0 max-[1024px]:pt-8 max-[1024px]:border-t max-[1024px]:border-surface max-[1024px]:pb-0">
           <Reveal variant="stagger">
             {specRows.map((row, i) => (
               <ServiceCard key={row.num} item={row} index={i} />
