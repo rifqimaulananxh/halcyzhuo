@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { onMotionReady } from "@/lib/motion";
 
 export function ScrollProgress() {
   const [p, setP] = useState(0);
@@ -11,10 +12,13 @@ export function ScrollProgress() {
       const total = h.scrollHeight - h.clientHeight;
       setP(total > 0 ? Math.min(1, window.scrollY / total) : 0);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    const unsubscribe = onMotionReady(() => {
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+    });
     return () => {
+      unsubscribe();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };

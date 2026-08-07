@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import type gsap from "gsap";
 import type { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onMotionReady } from "@/lib/motion";
 
 type GsapBundle = {
   gsap: typeof gsap;
@@ -36,6 +37,8 @@ export function SmoothScroll() {
     let ticker: ((time: number) => void) | undefined;
     let scrollHandler: (() => void) | undefined;
     let onClick: ((e: MouseEvent) => void) | undefined;
+    let removeScrollListener: (() => void) | undefined;
+    let routeHandler: (() => void) | undefined;
 
     const run = async () => {
       const instance = new Lenis({ duration: 1.15, smoothWheel: true });
@@ -49,13 +52,20 @@ export function SmoothScroll() {
         }
         gsapInstance = gsap;
         instance.on("scroll", ScrollTrigger.update);
+        removeScrollListener = () => {
+          instance?.off("scroll", ScrollTrigger.update);
+        };
         ticker = (time: number) => instance.raf(time * 1000);
         gsap.ticker.add(ticker);
         gsap.ticker.lagSmoothing(0);
 
-        scrollHandler = () => ScrollTrigger.refresh();
+        scrollHandler = () => {
+          if (!destroyed) ScrollTrigger.refresh();
+        };
+        routeHandler = scrollHandler;
         if (document.fonts?.ready) document.fonts.ready.then(scrollHandler);
         window.addEventListener("load", scrollHandler);
+        window.addEventListener("route-transition:done", routeHandler);
       } catch {
         if (!destroyed) instance.destroy();
         return;
@@ -77,13 +87,20 @@ export function SmoothScroll() {
       document.addEventListener("click", onClick);
     };
 
-    run();
+    const unsubscribe = onMotionReady(() => {
+      void run();
+    });
 
     return () => {
       destroyed = true;
+      unsubscribe();
       if (gsapInstance && ticker) gsapInstance.ticker.remove(ticker);
       if (scrollHandler) window.removeEventListener("load", scrollHandler);
+      if (routeHandler) {
+        window.removeEventListener("route-transition:done", routeHandler);
+      }
       if (onClick) document.removeEventListener("click", onClick);
+      removeScrollListener?.();
       lenis?.destroy();
     };
   }, []);

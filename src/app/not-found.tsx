@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div id="main" className="page-main pt-40">
+    <main id="main" className="page-main pt-40">
       <Reveal variant="mask">
         <div className="flex flex-col items-start gap-8 max-w-[900px]">
           <p
@@ -50,6 +50,6 @@ export default function NotFound() {
           </div>
         </div>
       </Reveal>
-    </div>
+    </main>
   );
 }

@@ -48,7 +48,7 @@ export default async function JournalPost({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div id="main" className="page-main">
+    <main id="main" className="page-main">
       <header className="page-header">
         <BackLink href="/journal">All articles</BackLink>
         <Reveal variant="mask">
@@ -79,7 +79,7 @@ export default async function JournalPost({ params }: Props) {
       </header>
 
       <article>
-        <Reveal variant="mask">
+        <Reveal variant="fade">
           <header className="py-14 flex flex-col gap-6 max-w-[860px]">
             <div className="flex flex-wrap gap-5 text-[var(--fs-body)] text-muted">
               <span>{post.date}</span>
@@ -91,7 +91,7 @@ export default async function JournalPost({ params }: Props) {
           </header>
         </Reveal>
 
-        <Reveal variant="mask">
+        <Reveal variant="fade">
           <div className="max-w-[720px] pt-8 pb-6">
             {post.blocks.map((block, i) =>
               block.type === "p" ? (
@@ -132,6 +132,6 @@ export default async function JournalPost({ params }: Props) {
           </Reveal>
         </div>
       </article>
-    </div>
+    </main>
   );
 }

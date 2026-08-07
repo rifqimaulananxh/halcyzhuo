@@ -59,7 +59,7 @@ export default async function WorkDetail({ params }: Props) {
   ];
 
   return (
-    <div id="main" className="page-main">
+    <main id="main" className="page-main">
       <header className="page-header">
         <BackLink href="/work">All work</BackLink>
         <Reveal variant="mask">
@@ -101,7 +101,7 @@ export default async function WorkDetail({ params }: Props) {
                 />
               </Parallax>
             </div>
-            <div className="flex flex-col gap-[14px]">
+            <dl className="flex flex-col gap-[14px]">
               {meta.map((m) => (
                 <div key={m.dt} className="flex flex-col gap-[6px] border-b border-surface pb-[14px] last:border-b-0 max-[1024px]:flex-1 max-[1024px]:basis-[200px]">
                   <dt className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-[0.16em] text-muted">
@@ -110,14 +110,14 @@ export default async function WorkDetail({ params }: Props) {
                   <dd className="text-[var(--fs-body)] font-medium">{m.dd}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </header>
         </Reveal>
 
         <div className="flex flex-col gap-16 py-[72px]">
           {project.sections.map((s, si) => (
             <Reveal key={s.heading}>
-              <section>
+              <section data-section-skip>
                 <h2 className="font-display mb-5 text-[clamp(28px,3vw,48px)] font-semibold leading-[1.05] tracking-[-0.055em]">
                   <span className="text-muted text-[0.5em] align-[0.3em] mr-[14px]">
                     {String(si + 1).padStart(2, "0")}
@@ -136,7 +136,7 @@ export default async function WorkDetail({ params }: Props) {
           ))}
         </div>
 
-        <Reveal variant="mask">
+        <Reveal variant="fade">
           <figure className="border-y border-surface py-[clamp(56px,7vw,96px)]">
             <span
               className="block text-accent font-display text-[var(--fs-hero)] leading-[0.5] select-none mb-8"
@@ -166,7 +166,7 @@ export default async function WorkDetail({ params }: Props) {
           </figure>
         </Reveal>
 
-        <Reveal variant="mask">
+        <Reveal variant="fade">
           <Link
             href={`/work/${next.slug}`}
             className="block border-t border-surface py-16 group"
@@ -183,6 +183,6 @@ export default async function WorkDetail({ params }: Props) {
           </Link>
         </Reveal>
       </article>
-    </div>
+    </main>
   );
 }

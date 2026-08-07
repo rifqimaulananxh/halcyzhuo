@@ -8,6 +8,8 @@ import { PagePreload } from "@/components/PagePreload";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Spotlight } from "@/components/Spotlight";
+import { PageTransition } from "@/components/PageTransition";
+import { SectionEntrance } from "@/components/SectionEntrance";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -70,6 +72,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
+        <link
+          rel="preconnect"
+          href="https://cdn.prod.website-files.com"
+          crossOrigin="anonymous"
+        />
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js','is-loading')" }} />
         <script
           type="application/ld+json"
@@ -98,10 +105,15 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full bg-bg text-ink font-sans">
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
         <SmoothScroll />
         <Preloader />
         <Spotlight />
         <ScrollProgress />
+        <PageTransition />
+        <SectionEntrance />
         <CursorProvider>
           <CustomCursor />
           <PagePreload />

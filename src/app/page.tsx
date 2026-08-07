@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
 import { WorksGrid } from "@/components/WorksGrid";
@@ -49,17 +50,17 @@ const specRows = [
   {
     num: "01",
     title: "Frontend systems",
-    desc: "Fast, accessible interfaces that stay clear under real traffic and everyday use.",
+    desc: "Fast, accessible interfaces that stay clear under load and in everyday use.",
   },
   {
     num: "02",
     title: "Backend & APIs",
-    desc: "Typed services, stable contracts, and data flows that stay predictable as usage grows.",
+    desc: "Typed services and stable contracts for data flows that stay predictable as usage grows.",
   },
   {
     num: "03",
     title: "Infrastructure & operations",
-    desc: "Deployments, monitoring, and the operational layer that keeps products healthy after launch.",
+    desc: "Deployments, observability, and the operational layer that keeps products healthy after launch.",
   },
 ];
 
@@ -67,26 +68,26 @@ const approachSteps = [
   {
     step: "01 · discover",
       title: "Find the constraint",
-      desc: "We align on the outcome, constraints, and smallest useful path before code starts.",
-    tags: ["product thinking", "architecture", "roadmap"],
+      desc: "We align on the outcome, the constraints, and the smallest useful path before code starts.",
+      tags: ["product", "architecture", "roadmap"],
   },
   {
     step: "02 · build",
       title: "Build the next version",
-      desc: "Typed code, real tests, and delivery from the start. Every decision stays easy to review, change, and hand over.",
-    tags: ["typescript", "tests", "CI/CD"],
+      desc: "Typed code, real tests, and delivery from day one. Decisions stay easy to review, change, and hand over.",
+      tags: ["typescript", "tests", "delivery"],
   },
   {
     step: "03 · ship",
       title: "Learn from production",
-      desc: "We launch with observability, watch real behavior, and use it to decide what the product needs next.",
+      desc: "We launch with observability, watch real behavior, and let production decide what comes next.",
       tags: ["observability", "monitoring", "iteration"],
   },
 ];
 
 export default function Home() {
   return (
-    <div id="main">
+    <main id="main">
       {/* HERO */}
       <Hero />
 
@@ -98,33 +99,61 @@ export default function Home() {
         id="about"
         className="about-section mx-auto grid w-full max-w-[var(--max-w)] grid-cols-3 gap-8 px-[var(--pad-inner)] max-[1024px]:grid-cols-1 max-[1024px]:pb-[56px] max-[809px]:px-0"
       >
-        <div className="about-heading col-span-2 max-[1024px]:col-span-1 flex flex-col gap-6 place-self-start overflow-hidden">
-          <Reveal variant="mask">
-            <span
-              className="rv rv-label block text-[56px] font-bold uppercase tracking-normal leading-[1.1] text-ink max-[999px]:text-[32px]"
-              style={{ "--i": 0 } as CSSProperties}
-            >
-              About <span className="text-accent">·</span> the studio
-            </span>
-          </Reveal>
-          <Reveal variant="mask">
-            <p
-              className="rv rv-desc text-muted text-[15px] leading-[1.4] max-w-[460px]"
-              style={{ "--i": 1 } as CSSProperties}
-            >
-              We help product teams turn growing complexity into software they
-              can ship, operate, and hand over. We build systems, not
-              screenshots: interfaces, APIs, and infrastructure for the next
-              stage of the product.
-            </p>
+        <div className="about-intro-grid col-span-3 grid grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] items-end gap-16 max-[1024px]:grid-cols-1 max-[1024px]:gap-10">
+          <div className="about-heading flex flex-col gap-6 place-self-start overflow-hidden">
+            <Reveal variant="mask">
+              <span
+                className="rv rv-label block text-[clamp(36px,4vw,56px)] font-bold uppercase tracking-normal leading-[1.1] text-ink"
+                style={{ "--i": 0 } as CSSProperties}
+              >
+                About <span className="text-accent">·</span> the studio
+              </span>
+            </Reveal>
+            <Reveal variant="mask">
+              <p
+                className="rv rv-desc max-w-[560px] text-[clamp(22px,2.8vw,42px)] leading-[1.02] tracking-[-0.025em] text-ink"
+                style={{ "--i": 1 } as CSSProperties}
+              >
+                We turn growing product complexity into software teams can
+                ship, operate, and hand over.
+              </p>
+            </Reveal>
+            <Reveal variant="mask">
+              <p
+                className="rv rv-desc max-w-[460px] text-[15px] leading-[1.4] text-muted"
+                style={{ "--i": 2 } as CSSProperties}
+              >
+                Interfaces, APIs, and infrastructure for the next stage of the
+                product. Systems, not screenshots.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal variant="fade" className="about-feature-card">
+            <div className="about-feature-card__image">
+              <img
+                src="/hero/hero-3.avif"
+                alt="Abstract visual system from the halcyzhuo studio"
+                loading="lazy"
+              />
+            </div>
+            <div className="about-feature-card__meta">
+              <span>01 - the studio</span>
+              <span>Jakarta / remote</span>
+            </div>
           </Reveal>
         </div>
-        <div className="about-cards col-span-1 border-l border-outline pl-[48px] pb-[200px] max-[1024px]:border-l-0 max-[1024px]:pl-0 max-[1024px]:pt-8 max-[1024px]:border-t max-[1024px]:border-surface max-[1024px]:pb-0">
-          <Reveal variant="stagger">
+        <div className="about-services col-span-3">
+          <div className="about-services__top">
+            <span className="about-services__label">What we build</span>
+            <span className="about-services__count">(03)</span>
+          </div>
+          <div className="about-cards grid grid-cols-3 gap-8 max-[1024px]:grid-cols-1 max-[1024px]:gap-0">
             {specRows.map((row, i) => (
-              <ServiceCard key={row.num} item={row} index={i} />
+              <Reveal key={row.num} variant="fade" delay={i * 100}>
+                <ServiceCard item={row} index={i} />
+              </Reveal>
             ))}
-          </Reveal>
+          </div>
         </div>
       </section>
 
@@ -141,7 +170,7 @@ export default function Home() {
                   className="rv rv-label mb-5 text-[var(--fs-body-sm)] font-semibold uppercase tracking-[0.16em] text-white/55"
                   style={{ "--i": 0 } as CSSProperties}
                 >
-                  Work <span className="text-white/80">·</span> selected projects
+                   Work <span className="text-white/80">·</span> selected systems
                 </p>
                 <TextReveal
                   as="h2"
@@ -157,7 +186,7 @@ export default function Home() {
                 className="rv rv-desc max-w-[360px] text-right text-[var(--fs-body)] leading-normal text-white/60 max-[809px]:text-left"
                 style={{ "--i": 2 } as CSSProperties}
               >
-                A few products, the constraints behind them, and what changed after launch.
+                A few systems, the constraints behind them, and what changed after launch.
               </p>
             </div>
           </Reveal>
@@ -190,8 +219,8 @@ export default function Home() {
                 className="rv rv-desc max-w-[420px] text-right text-[var(--fs-body)] leading-normal text-muted max-[809px]:text-left"
                 style={{ "--i": 2 } as CSSProperties}
               >
-                We define the constraint, build the smallest useful system, and
-                learn from what ships.
+                   We find the constraint, build the smallest useful system, and
+                   learn from what ships.
               </p>
             </div>
           </Reveal>
@@ -222,7 +251,7 @@ export default function Home() {
                 <span className="text-accent">.</span>
               </TextReveal>
               <p className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] mt-7">
-                A focused stack chosen for speed, clarity, and the realities of production.
+                 A focused stack chosen for speed, clarity, and production reality.
               </p>
             </div>
             <div>
@@ -274,7 +303,7 @@ export default function Home() {
                   className="rv rv-label mb-5 text-[var(--fs-body-sm)] font-semibold uppercase tracking-[0.16em] text-muted"
                   style={{ "--i": 0 } as CSSProperties}
                 >
-                  Journal <span className="text-accent">·</span> notes from the work
+                   Journal <span className="text-accent">·</span> notes from production
                 </p>
                 <TextReveal
                   as="h2"
@@ -288,11 +317,11 @@ export default function Home() {
                   className="rv rv-desc max-w-[360px] text-right text-[var(--fs-body)] leading-normal text-muted max-[809px]:text-left"
                   style={{ "--i": 2 } as CSSProperties}
                 >
-                  Notes on engineering, performance, and product decisions,
-                  written close to the work.
+                   Notes on engineering, performance, and product decisions,
+                   written close to the work.
                 </p>
                 <div className="rv rv-cta" style={{ "--i": 3 } as CSSProperties}>
-                  <TextBtn href="/journal">see all articles →</TextBtn>
+                  <TextBtn href="/journal">read all notes →</TextBtn>
                 </div>
               </div>
             </div>
@@ -343,6 +372,6 @@ export default function Home() {
       <Reveal variant="mask" className="page-cta-reveal">
         <Cta />
       </Reveal>
-    </div>
+    </main>
   );
 }

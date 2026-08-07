@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { onMotionReady } from "@/lib/motion";
 
 type Variant = "fade" | "mask" | "stagger" | "stagger-left" | "stagger-right" | "none";
 
@@ -20,23 +21,32 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (!("IntersectionObserver" in window)) {
-      el.classList.add("visible");
-      return;
-    }
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.classList.add("visible");
-            obs.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+
+    let observer: IntersectionObserver | undefined;
+    const start = () => {
+      if (!("IntersectionObserver" in window)) {
+        el.classList.add("visible");
+        return;
+      }
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              el.classList.add("visible");
+              observer?.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      observer.observe(el);
+    };
+
+    const unsubscribe = onMotionReady(start);
+    return () => {
+      unsubscribe();
+      observer?.disconnect();
+    };
   }, []);
 
   return (

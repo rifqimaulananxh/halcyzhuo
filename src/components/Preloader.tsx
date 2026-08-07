@@ -4,12 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import type gsap from "gsap";
 import { Wordmark } from "./Wordmark";
 
-declare global {
-  interface Window {
-    __preloaderDone?: boolean;
-  }
-}
-
 let gsapPromise: Promise<typeof gsap> | null = null;
 
 function loadGsap(): Promise<typeof gsap> {
@@ -59,12 +53,21 @@ export function Preloader() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    let cancelled = false;
+    let timeline: gsap.core.Timeline | null = null;
+    let finishTimer = 0;
+    let finished = false;
+
     const finish = () => {
+      if (cancelled || finished) return;
+      finished = true;
       document.documentElement.classList.remove("is-loading");
-      window.__preloaderDone = true;
-      window.dispatchEvent(new CustomEvent("preloader:done"));
       document.body.style.overflow = "";
       setGone(true);
+      finishTimer = window.setTimeout(() => {
+        window.__preloaderDone = true;
+        window.dispatchEvent(new CustomEvent("preloader:done"));
+      }, 0);
     };
 
     if (reduce) {
@@ -72,10 +75,17 @@ export function Preloader() {
       return;
     }
 
-    let cancelled = false;
-    let timeline: gsap.core.Timeline | null = null;
+    const gsapReady = Promise.race([
+      loadGsap(),
+      new Promise<never>((_, reject) => {
+        window.setTimeout(
+          () => reject(new Error("GSAP preload timeout")),
+          3000
+        );
+      }),
+    ]);
 
-    loadGsap()
+    gsapReady
       .then(async (gsap) => {
         if (cancelled) return;
 
@@ -142,12 +152,16 @@ export function Preloader() {
           },
           "<"
         )
-        .add(finish, "+=0.15");
-    });
+         .add(finish, "+=0.15");
+      })
+      .catch(() => {
+        if (!cancelled) finish();
+      });
 
     return () => {
       cancelled = true;
       timeline?.kill();
+      window.clearTimeout(finishTimer);
       document.documentElement.classList.remove("is-loading");
       document.body.style.overflow = "";
     };

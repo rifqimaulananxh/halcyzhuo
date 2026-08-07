@@ -37,7 +37,7 @@ export const projects: Project[] = [
     slug: "pulse",
     title: "Pulse",
     tagline:
-      "Real-time analytics dashboard. From slow batch reporting to live, sub-second insight.",
+      "Real-time analytics for teams that need the signal before the next report.",
     category: "web-app",
     client: "Pulse Labs",
     role: "Full-stack · Architecture",
@@ -47,28 +47,28 @@ export const projects: Project[] = [
     cover: "/projects/pulse.svg",
     url: "pulse.app",
     quote:
-      "Real-time dashboards we can trust. Decisions now run on fresh data, and our team catches issues before customers do.",
+      "We can finally trust the dashboard. Decisions run on fresh data, and issues surface before customers notice.",
     quoteBy: { name: "Maya Raharja", role: "CEO · Pulse Labs" },
     sections: [
       {
         heading: "Challenge",
         paragraphs: [
-          "Pulse's analytics pipeline was batch-only: dashboards refreshed every few hours and failed under traffic spikes. Product needed <strong>real-time</strong> insight; engineering needed stability.",
-          "Users were churning because decisions were based on stale data. The goal was sub-second insight at scale without burning the budget on infrastructure.",
+          "Pulse's analytics pipeline ran in batches. Dashboards refreshed every few hours and buckled under traffic spikes. Product needed <strong>real-time</strong> signal; engineering needed a stable path to deliver it.",
+          "Stale data was slowing decisions and driving churn. The target was sub-second insight at scale without turning infrastructure cost into the new problem.",
         ],
       },
       {
         heading: "Approach",
         paragraphs: [
-          "We replaced polling with a WebSocket push layer fed by ClickHouse. Charts render from a normalized event stream, so the frontend stays responsive as data volume grows.",
-          "Aggregations moved from application code into SQL: precomputed rollups with hot-path caching. The result is real-time insight without unnecessary complexity.",
+          "We replaced polling with a WebSocket push layer fed by ClickHouse. Charts render from a normalized event stream, keeping the frontend responsive as volume grows.",
+          "Aggregations moved into SQL through precomputed rollups and hot-path caching. The result is live insight without unnecessary moving parts.",
         ],
       },
       {
         heading: "Outcome",
         paragraphs: [
-          "LCP dropped from 2.3s to <strong>0.4s</strong>. Dashboards now stream live data, and the platform handles 10× the event volume on the same infrastructure. Uptime held at <strong>99.9%</strong> through the post-launch month.",
-          "More importantly: decisions are now made on fresh data. The team reports a measurable lift in how fast they catch issues.",
+          "LCP fell from 2.3s to <strong>0.4s</strong>. Dashboards stream live data, and the platform handles 10x the event volume on the same infrastructure. Uptime held at <strong>99.9%</strong> through the first month after launch.",
+          "More importantly, the team makes decisions on fresh data and catches issues earlier.",
         ],
       },
     ],
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     slug: "finread",
     title: "Finread",
     tagline:
-      "Fintech app and marketing site. A bloated frontend trimmed down and shipped in six weeks.",
+      "A fintech app and marketing site rebuilt in six weeks, with 42% less bundle weight.",
     category: "landing",
     client: "Finread",
     role: "Frontend lead",
@@ -87,25 +87,25 @@ export const projects: Project[] = [
     cover: "/projects/finread.svg",
     url: "finread.io",
     quote:
-      "The LCP dropped from 2.1s to 0.4s. Our signups went up 38% the next month. Nobody asks about our tech stack anymore — it just works.",
+      "LCP fell from 2.1s to 0.4s. Signups rose 38% the next month. No one asks about the stack anymore. It just works.",
     quoteBy: { name: "Daniel Kusuma", role: "CTO · Finread" },
     sections: [
       {
         heading: "Challenge",
         paragraphs: [
-          "The marketing site and app were two separate codebases with duplicated components and a bundle that kept growing. Load times were driving signups away.",
+          "The marketing site and app lived in separate codebases. Components were duplicated, the bundle kept growing, and load time was costing signups.",
         ],
       },
       {
         heading: "Approach",
         paragraphs: [
-          "Unified both under a single design system, migrated to Vite, and cut dependencies that duplicated native browser features. Images moved to modern formats with proper priority hints.",
+          "We brought both products under one design system, migrated to Vite, and removed dependencies that duplicated browser features. Images moved to modern formats with deliberate priority hints.",
         ],
       },
       {
         heading: "Outcome",
         paragraphs: [
-          "Bundle size fell <strong>42%</strong>. LCP dropped from 2.1s to <strong>0.4s</strong>, and signups rose <strong>38%</strong> the following month. Existing traffic finally converted.",
+          "Bundle size fell <strong>42%</strong>. LCP dropped from 2.1s to <strong>0.4s</strong>, and signups rose <strong>38%</strong> the following month. Existing traffic finally had a faster path to conversion.",
         ],
       },
     ],
@@ -114,7 +114,7 @@ export const projects: Project[] = [
     slug: "nusantara",
     title: "Nusantara Labs",
     tagline:
-      "E-commerce platform rebuild. A legacy monolith untangled into a storefront that converts.",
+      "An e-commerce rebuild that untangled a legacy monolith into a storefront built to convert.",
     category: "ecommerce",
     client: "Nusantara Labs",
     role: "Tech lead",
@@ -124,25 +124,25 @@ export const projects: Project[] = [
     cover: "/projects/nusantara.svg",
     url: "nusantara.co.id",
     quote:
-      "Shipped two weeks ahead of schedule. Clean code, honest reviews, and measurable performance wins — not just promises.",
+      "We shipped two weeks early. The reviews were honest, the code was clear, and the performance wins were measurable.",
     quoteBy: { name: "Rina Setiawan", role: "Founder · Nusantara Labs" },
     sections: [
       {
         heading: "Challenge",
         paragraphs: [
-          "A legacy storefront with slow checkout, an aging stack, and abandonment at an all-time high. Every fix risked breaking something else.",
+          "The storefront had a slow checkout, an aging stack, and abandonment at an all-time high. Every fix risked breaking something else.",
         ],
       },
       {
         heading: "Approach",
         paragraphs: [
-          "Rebuilt the storefront in Next.js with an incremental migration — catalog first, then checkout, then auth. Server components cut round trips, and a typed API layer kept the frontend honest.",
+          "We rebuilt the storefront in Next.js through an incremental migration: catalog first, checkout next, auth after that. Server components cut round trips, and a typed API kept the frontend honest.",
         ],
       },
       {
         heading: "Outcome",
         paragraphs: [
-          "Conversion rate doubled and average order value grew. Checkout abandonment fell sharply. The platform finally feels like the product, not a workaround.",
+          "Conversion rate doubled and average order value grew. Checkout abandonment fell sharply. The platform now feels like the product, not a workaround.",
         ],
       },
     ],
@@ -151,7 +151,7 @@ export const projects: Project[] = [
     slug: "dokterku",
     title: "Dokterku",
     tagline:
-      "Telehealth booking platform. Scaled from 2k to 60k monthly active users without a rewrite.",
+      "Telehealth booking that grew from 2k to 60k monthly active users without a rewrite.",
     category: "web-app",
     client: "Dokterku",
     role: "Full-stack",
@@ -161,25 +161,25 @@ export const projects: Project[] = [
     cover: "/projects/dokterku.svg",
     url: "dokterku.id",
     quote:
-      "Halcyzhuo translated product chaos into a roadmap we could ship. Testing infrastructure, monitoring, and documentation were in place from day one.",
+      "Halcyzhuo turned product chaos into a roadmap we could ship. Tests, monitoring, and documentation were in place from day one.",
     quoteBy: { name: "Andi Malik", role: "Product Lead · Dokterku" },
     sections: [
       {
         heading: "Challenge",
         paragraphs: [
-          "Rapid growth from thousands to tens of thousands of monthly active users. The original architecture was built for a smaller scale, and scheduling conflicts were piling up.",
+          "Monthly active users grew from thousands to tens of thousands. The original architecture was built for a smaller scale, and scheduling conflicts were piling up.",
         ],
       },
       {
         heading: "Approach",
         paragraphs: [
-          "No rewrite. We hardened the booking core, introduced a read replica for availability queries, and added caching where data changed rarely. Auth and notifications were moved to a queue-backed worker.",
+          "We did not rewrite it. We hardened the booking core, added a read replica for availability queries, and cached data that changed rarely. Auth and notifications moved to a queue-backed worker.",
         ],
       },
       {
         heading: "Outcome",
         paragraphs: [
-          "The platform scaled from <strong>2k to 60k MAU</strong> without a re-architecture. Planning during the discovery phase paid for itself ten times over. The team ships features, not fixes.",
+          "The platform scaled from <strong>2k to 60k MAU</strong> without a re-architecture. Planning during discovery paid for itself many times over. The team ships features, not fixes.",
         ],
       },
     ],
@@ -188,7 +188,7 @@ export const projects: Project[] = [
     slug: "arunapay",
     title: "Aruna Pay",
     tagline:
-      "Payment gateway dashboard with edge delivery and observability from day one.",
+      "A payment dashboard with edge delivery and observability from day one.",
     category: "landing",
     client: "Aruna Pay",
     role: "Architecture · Backend",
@@ -198,25 +198,25 @@ export const projects: Project[] = [
     cover: "/projects/arunapay.svg",
     url: "arunapay.com",
     quote:
-      "Edge delivery and observability were in place from day one. Now our team sees problems before customers do, and we trust the numbers again.",
+      "Edge delivery and observability were there from day one. We see problems before customers do, and we trust the numbers again.",
     quoteBy: { name: "Sari Puspita", role: "Founder · Aruna Pay" },
     sections: [
       {
         heading: "Challenge",
         paragraphs: [
-          "A payment dashboard where merchants faced slow load times and unclear failures. Trust in the numbers was low.",
+          "Merchants faced slow load times and unclear failures in a payment dashboard they needed to trust.",
         ],
       },
       {
         heading: "Approach",
         paragraphs: [
-          "We served API responses from the edge with caching for hot queries, then wrapped every provider call with structured observability: latency, error codes, and retries visible at a glance.",
+          "We served hot API queries from the edge, then wrapped every provider call in structured observability: latency, error codes, and retries visible at a glance.",
         ],
       },
       {
         heading: "Outcome",
         paragraphs: [
-          "TTFB dropped to <strong>0.2s</strong>. Incident response went from merchant-reported to proactive. The team sees problems before customers do.",
+          "TTFB dropped to <strong>0.2s</strong>. Incident response moved from merchant-reported to proactive. The team sees problems before customers do.",
         ],
       },
     ],
@@ -225,7 +225,7 @@ export const projects: Project[] = [
     slug: "sahamrakyat",
     title: "Saham Rakyat",
     tagline:
-      "Investment platform where accessibility and retention are first-class features.",
+      "An investment platform built with accessibility and retention as first-class requirements.",
     category: "ecommerce",
     client: "Saham Rakyat",
     role: "Full-stack",
@@ -235,25 +235,25 @@ export const projects: Project[] = [
     cover: "/projects/sahamrakyat.svg",
     url: "sahamrakyat.id",
     quote:
-      "It is rare to find an engineer who cares about accessibility. Halcyzhuo shipped WCAG AA from the start, and our audit passed on the first try.",
+      "Accessibility was part of the build from the start. We shipped WCAG AA and passed the audit on the first try.",
     quoteBy: { name: "Bagus Firmansyah", role: "Founder · Saham Rakyat" },
     sections: [
       {
         heading: "Challenge",
         paragraphs: [
-          "An investment platform where onboarding lost users and accessibility was an afterthought, creating risk for both users and the business.",
+          "Onboarding was losing users, and accessibility had been treated as a later concern. That created risk for both users and the business.",
         ],
       },
       {
         heading: "Approach",
         paragraphs: [
-          "Rebuilt onboarding into short, focused steps with clear progress. Shipped <strong>WCAG AA</strong> across the app — proper focus management, semantic markup, and keyboard support throughout.",
+          "We rebuilt onboarding into short, focused steps with clear progress. The app shipped <strong>WCAG AA</strong> with proper focus management, semantic markup, and keyboard support throughout.",
         ],
       },
       {
         heading: "Outcome",
         paragraphs: [
-          "Retention tripled (<strong>+3×</strong>) and the accessibility audit passed on the first try. Accessibility turned out to be faster for everyone, not just a checkbox.",
+          "Retention tripled (<strong>+3x</strong>) and the accessibility audit passed on the first try. Accessibility proved faster for everyone, not just a checkbox.",
         ],
       },
     ],

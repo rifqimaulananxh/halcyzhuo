@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { onMotionReady } from "@/lib/motion";
 
 export function Spotlight() {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,8 +31,11 @@ export function Spotlight() {
       if (!raf) raf = requestAnimationFrame(loop);
     };
 
-    window.addEventListener("mousemove", onMove, { passive: true });
+    const unsubscribe = onMotionReady(() => {
+      window.addEventListener("mousemove", onMove, { passive: true });
+    });
     return () => {
+      unsubscribe();
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
     };

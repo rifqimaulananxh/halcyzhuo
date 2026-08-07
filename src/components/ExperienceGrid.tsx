@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import type gsap from "gsap";
 import type { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onMotionReady } from "@/lib/motion";
 
 type GsapBundle = {
   gsap: typeof gsap;
@@ -111,10 +112,13 @@ export function ExperienceGrid({
       cleanup = () => mm.revert();
     };
 
-    run();
+    const unsubscribe = onMotionReady(() => {
+      void run();
+    });
 
     return () => {
       destroyed = true;
+      unsubscribe();
       cleanup?.();
     };
   }, []);

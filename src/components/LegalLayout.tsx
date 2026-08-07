@@ -16,7 +16,7 @@ export function LegalLayout({
   sections: { title: string; body: string[] }[];
 }) {
   return (
-    <div id="main" className="page-main">
+    <main id="main" className="page-main">
       <header className="page-header">
         <BackLink href="/">Home</BackLink>
         <Reveal variant="mask">
@@ -43,7 +43,7 @@ export function LegalLayout({
         </Reveal>
       </header>
 
-      <section>
+      <section data-section-skip>
         <Reveal variant="stagger">
           {sections.map((s, i) => (
             <div
@@ -80,6 +80,6 @@ export function LegalLayout({
           </a>
         </p>
       </section>
-    </div>
+    </main>
   );
 }

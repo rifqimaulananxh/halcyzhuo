@@ -4,14 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import type gsap from "gsap";
 import type { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { SplitText } from "gsap/SplitText";
+import { onMotionReady } from "@/lib/motion";
 
 /* eslint-disable @next/next/no-img-element */
-
-declare global {
-  interface Window {
-    __preloaderDone?: boolean;
-  }
-}
 
 type GsapBundle = {
   gsap: typeof gsap;
@@ -61,9 +56,14 @@ export function Hero() {
       hour12: false,
     });
     const tick = () => setClock(formatter.format(new Date()));
-    const timeoutId = window.setTimeout(tick, 0);
-    const intervalId = window.setInterval(tick, 1000);
+    let timeoutId = 0;
+    let intervalId = 0;
+    const unsubscribe = onMotionReady(() => {
+      timeoutId = window.setTimeout(tick, 0);
+      intervalId = window.setInterval(tick, 1000);
+    });
     return () => {
+      unsubscribe();
       window.clearTimeout(timeoutId);
       window.clearInterval(intervalId);
     };
@@ -71,10 +71,16 @@ export function Hero() {
 
   /* mobile feature rotator (roshan-style, cycles every 1s) */
   useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setFeature((f) => (f + 1) % HERO_POINTERS.length);
-    }, 1000);
-    return () => window.clearInterval(intervalId);
+    let intervalId = 0;
+    const unsubscribe = onMotionReady(() => {
+      intervalId = window.setInterval(() => {
+        setFeature((f) => (f + 1) % HERO_POINTERS.length);
+      }, 1000);
+    });
+    return () => {
+      unsubscribe();
+      window.clearInterval(intervalId);
+    };
   }, []);
 
   /* hero reveal (SplitText words->chars) + cursor chrome (roshan-style) */
@@ -102,6 +108,8 @@ export function Hero() {
 
     let destroyed = false;
     let cleanupChrome: (() => void) | undefined;
+    const splitInstances: SplitText[] = [];
+    const animatedChars: Element[] = [];
 
     const els = (...list: (HTMLElement | null | undefined)[]) =>
       list.filter((e): e is HTMLElement => Boolean(e));
@@ -145,8 +153,13 @@ export function Hero() {
       gsap.set(headings, { opacity: 0 });
 
       headings.forEach((heading) => {
-        new SplitText(heading, { type: "words" }).words.forEach((word) => {
-          const chars = new SplitText(word, { type: "chars" }).chars;
+        const wordsSplit = new SplitText(heading, { type: "words" });
+        splitInstances.push(wordsSplit);
+        wordsSplit.words.forEach((word) => {
+          const charsSplit = new SplitText(word, { type: "chars" });
+          const chars = charsSplit.chars;
+          splitInstances.push(charsSplit);
+          animatedChars.push(...chars);
           gsap.set(chars, { yPercent: 100 });
           gsap.to(chars, {
             yPercent: 0,
@@ -245,23 +258,18 @@ export function Hero() {
         gsap.killTweensOf(
           els(crosshairV, crosshairH, ...pointers, ...meta, featuresMobile)
         );
+        gsap.killTweensOf(animatedChars);
+        splitInstances.forEach((split) => split.revert());
       };
     };
 
-    if (window.__preloaderDone) {
+    const unsubscribe = onMotionReady(() => {
       void play();
-    } else {
-      const onDone = () => void play();
-      window.addEventListener("preloader:done", onDone, { once: true });
-      return () => {
-        destroyed = true;
-        cleanupChrome?.();
-        window.removeEventListener("preloader:done", onDone);
-      };
-    }
+    });
 
     return () => {
       destroyed = true;
+      unsubscribe();
       cleanupChrome?.();
     };
   }, []);

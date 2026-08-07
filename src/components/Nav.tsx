@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type gsap from "gsap";
+import { onMotionReady } from "@/lib/motion";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -38,8 +39,10 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [lastIndex, setLastIndex] = useState(0);
   const [showDelay, setShowDelay] = useState(true);
+  const delayTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const update = () => setHash(window.location.hash);
@@ -71,34 +74,86 @@ export function Nav() {
     if (!open) return;
     let cancelled = false;
     let kill: (() => void) | undefined;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    let focusFrame = 0;
 
-    loadGsap()
-      .then((gsap) => {
-        if (cancelled || !drawerRef.current) return;
-        const title = drawerRef.current.querySelector("[data-nav-title]");
-        const items = Array.from(
-          drawerRef.current.querySelectorAll<HTMLElement>("[data-nav-item]")
-        );
-        if (!title) return;
-        const tl = gsap.timeline({ delay: 0.8 });
-        tl.fromTo(
-          title,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.6, ease: "power4.out" }
-        );
-        tl.fromTo(
-          items,
-          { y: "100%" },
-          { y: "0%", duration: 0.6, stagger: 0.1, ease: "power4.out" },
-          0
-        );
-        kill = () => gsap.killTweensOf([title, ...items]);
-      })
-      .catch(() => undefined);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !drawerRef.current) return;
+      const focusable = Array.from(
+        drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    focusFrame = window.requestAnimationFrame(() => {
+      drawerRef.current?.querySelector<HTMLElement>("[data-nav-item]")?.focus();
+    });
+
+    const start = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const title = drawerRef.current?.querySelector<HTMLElement>("[data-nav-title]");
+        const items = drawerRef.current?.querySelectorAll<HTMLElement>("[data-nav-item]");
+        if (title) title.style.opacity = "1";
+        items?.forEach((item) => {
+          item.style.transform = "translateY(0)";
+        });
+        return;
+      }
+
+      void loadGsap()
+        .then((gsap) => {
+          if (cancelled || !drawerRef.current) return;
+          const title = drawerRef.current.querySelector("[data-nav-title]");
+          const items = Array.from(
+            drawerRef.current.querySelectorAll<HTMLElement>("[data-nav-item]")
+          );
+          if (!title) return;
+          const tl = gsap.timeline({ delay: 0.8 });
+          tl.fromTo(
+            title,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.6, ease: "power4.out" }
+          );
+          tl.fromTo(
+            items,
+            { y: "100%" },
+            { y: "0%", duration: 0.6, stagger: 0.1, ease: "power4.out" },
+            0
+          );
+          kill = () => {
+            tl.kill();
+            gsap.killTweensOf([title, ...items]);
+          };
+        })
+        .catch(() => undefined);
+    };
+
+    const unsubscribe = onMotionReady(start);
 
     return () => {
       cancelled = true;
+      unsubscribe();
       kill?.();
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", onKeyDown);
+      if (previousFocus?.isConnected) previousFocus.focus();
     };
   }, [open]);
 
@@ -107,12 +162,17 @@ export function Nav() {
       setOpen(false);
     } else {
       setShowDelay(true);
-      window.setTimeout(() => {
+      window.clearTimeout(delayTimer.current);
+      delayTimer.current = window.setTimeout(() => {
         setShowDelay(false);
       }, 800);
       setOpen(true);
     }
   };
+
+  useEffect(() => {
+    return () => window.clearTimeout(delayTimer.current);
+  }, []);
 
   const close = () => setOpen(false);
 
@@ -122,7 +182,8 @@ export function Nav() {
         <Link className="navbar__logo" href="/" aria-label="halcyzhuo">
           H.
         </Link>
-        <button
+          <button
+            ref={menuButtonRef}
           type="button"
           className={`navbar__menu ${open ? "navbar__menu--open" : ""}`}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -138,14 +199,19 @@ export function Nav() {
         className={`nav-drawer ${open ? "nav-drawer--open" : ""}`}
         ref={drawerRef}
       >
-        <div className="nav-drawer__content">
-          <h1 className="nav-drawer__title" data-nav-title>
+        <div
+          className="nav-drawer__content"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+        >
+          <p className="nav-drawer__title" data-nav-title>
             Engineered
             <br />
             to
             <br />
             last.
-          </h1>
+          </p>
           <div className="nav-drawer__preview" aria-hidden="true">
             {LINKS.map((link, i) => {
               const isCurrent = open && i === displayedIndex;

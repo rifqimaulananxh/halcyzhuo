@@ -10,6 +10,7 @@ import {
 import type gsap from "gsap";
 import type { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { SplitText } from "gsap/SplitText";
+import { onMotionReady } from "@/lib/motion";
 
 type GsapBundle = {
   gsap: typeof gsap;
@@ -225,10 +226,13 @@ export function TextReveal({
       }
     };
 
-    run();
+    const unsubscribe = onMotionReady(() => {
+      void run();
+    });
 
     return () => {
       destroyed = true;
+      unsubscribe();
       window.clearTimeout(resizeTimer);
       if (resizeHandler) window.removeEventListener("resize", resizeHandler);
       teardown();

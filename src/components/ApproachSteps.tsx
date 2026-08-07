@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { onMotionReady } from "@/lib/motion";
 
 export type ApproachStep = {
   step: string;
@@ -29,6 +30,7 @@ export function ApproachSteps({
 
     const enteredIndexes = new Set<number>();
     let raf = 0;
+    let observer: IntersectionObserver | undefined;
 
     const updateActive = () => {
       const targetY = window.innerHeight * 0.46;
@@ -55,30 +57,35 @@ export function ApproachSteps({
       });
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let changed = false;
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const index = Number(
-            (entry.target as HTMLElement).dataset.approachIndex
-          );
-          if (enteredIndexes.has(index)) return;
-          enteredIndexes.add(index);
-          changed = true;
-        });
-        if (changed) setEntered(new Set(enteredIndexes));
-      },
-      { threshold: 0.12 }
-    );
+    const start = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          let changed = false;
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const index = Number(
+              (entry.target as HTMLElement).dataset.approachIndex
+            );
+            if (enteredIndexes.has(index)) return;
+            enteredIndexes.add(index);
+            changed = true;
+          });
+          if (changed) setEntered(new Set(enteredIndexes));
+        },
+        { threshold: 0.12 }
+      );
 
-    items.forEach((item) => observer.observe(item));
-    updateActive();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+      items.forEach((item) => observer?.observe(item));
+      updateActive();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+    };
+
+    const unsubscribe = onMotionReady(start);
 
     return () => {
-      observer.disconnect();
+      unsubscribe();
+      observer?.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       window.cancelAnimationFrame(raf);

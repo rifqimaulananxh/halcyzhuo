@@ -13,6 +13,7 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 import type gsap from "gsap";
+import { onMotionReady } from "@/lib/motion";
 
 function useMediaQuery(query: string): boolean {
   return useSyncExternalStore(
@@ -85,7 +86,9 @@ export function CustomCursor() {
   const { type, label, resetCursor } = useCursor();
   const pathname = usePathname();
   const elRef = useRef<HTMLDivElement>(null);
-  const enabled = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const enabled =
+    useMediaQuery("(hover: hover) and (pointer: fine)") && !reduced;
   const target = useRef({ x: 0, y: 0 });
   const size = useRef({ w: 10, h: 10 });
 
@@ -105,25 +108,29 @@ export function CustomCursor() {
       quickY?.(target.current.y);
     };
 
-    window.addEventListener("mousemove", onMove, { passive: true });
+    const start = () => {
+      window.addEventListener("mousemove", onMove, { passive: true });
 
-    loadGsap().then((gsap) => {
-      if (cancelled || !elRef.current) return;
-      gsapApi = gsap;
-      quickX = gsap.quickTo(el, "x", {
-        duration: 0.6,
-        ease: "power3.out",
+      void loadGsap().then((gsap) => {
+        if (cancelled || !elRef.current) return;
+        gsapApi = gsap;
+        quickX = gsap.quickTo(el, "x", {
+          duration: 0.6,
+          ease: "power3.out",
+        });
+        quickY = gsap.quickTo(el, "y", {
+          duration: 0.6,
+          ease: "power3.out",
+        });
+        quickX(target.current.x);
+        quickY(target.current.y);
       });
-      quickY = gsap.quickTo(el, "y", {
-        duration: 0.6,
-        ease: "power3.out",
-      });
-      quickX(target.current.x);
-      quickY(target.current.y);
-    });
+    };
+    const unsubscribe = onMotionReady(start);
 
     return () => {
       cancelled = true;
+      unsubscribe();
       window.removeEventListener("mousemove", onMove);
       gsapApi?.killTweensOf(el, "x,y");
     };
@@ -161,18 +168,21 @@ export function CustomCursor() {
     if (!enabled || !elRef.current) return;
     const el = elRef.current;
     let cancelled = false;
-    loadGsap().then((gsap) => {
-      if (cancelled || !elRef.current) return;
-      gsap.to(el, {
-        width: w,
-        height: h,
-        duration: 0.5,
-        ease: "back.out(1.4)",
-        overwrite: "auto",
+    const unsubscribe = onMotionReady(() => {
+      void loadGsap().then((gsap) => {
+        if (cancelled || !elRef.current) return;
+        gsap.to(el, {
+          width: w,
+          height: h,
+          duration: 0.5,
+          ease: "back.out(1.4)",
+          overwrite: "auto",
+        });
       });
     });
     return () => {
       cancelled = true;
+      unsubscribe();
     };
   }, [w, h, enabled]);
 

@@ -1,166 +1,179 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
-import { Reveal } from "@/components/Reveal";
-import { TextReveal } from "@/components/TextReveal";
 import { Cta } from "@/components/Cta";
-import { BackLink } from "@/components/PageHero";
+import { Reveal } from "@/components/Reveal";
+import { SolidBtn } from "@/components/UI";
+import { TextReveal } from "@/components/TextReveal";
+import { ValuesAccordion, type ValueItem } from "@/components/ValuesAccordion";
+import {
+  StudioExperience,
+  type StudioChapter,
+} from "@/components/StudioExperience";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About halcyzhuo: an engineering studio that ships. How we work, what we value, and where we've been.",
+    "About halcyzhuo: product engineering for teams moving beyond the MVP. How we work, what we value, and where we've shipped.",
   alternates: { canonical: "/about" },
 };
 
-const rows = [
+const values: readonly ValueItem[] = [
   {
     num: "01",
-    title: "Who we are",
-    desc: "We build TypeScript, React, and Node.js products for teams moving from an early prototype into dependable production.",
+    title: "Clarity over noise",
+    desc: "We reduce the problem to the decisions that matter, then make the system legible enough for the whole team to move with it.",
   },
   {
     num: "02",
-    title: "How we work",
-    desc: "Direct and transparent: clear scope, honest estimates, and progress you can track. Good communication matters as much as good code.",
+    title: "Performance with intent",
+    desc: "Speed is part of the product. We make deliberate tradeoffs so interfaces feel immediate and infrastructure stays affordable to operate.",
   },
   {
     num: "03",
-    title: "What we value",
-    desc: "Performance, accessibility, and code that is easy to operate and hand over. We build for the next release, not just the demo.",
+    title: "Systems that hand over",
+    desc: "The work should remain useful after launch. Typed contracts, documentation, testing, and observability are part of the build, not an afterthought.",
+  },
+  {
+    num: "04",
+    title: "Built for what comes next",
+    desc: "We design for the next release as carefully as the first: accessible, maintainable, and ready for the complexity after the demo.",
   },
 ];
 
-const timeline = [
+const chapters: readonly StudioChapter[] = [
   {
-    step: "2023 — now",
+    step: "2023 - now",
     title: "Independent studio",
     desc: "End-to-end client work across fintech, healthtech, and e-commerce: shaping architecture, leading the build, and keeping products healthy after launch.",
+    image: "/hero/hero-1.avif",
+    alt: "Abstract interface study",
   },
   {
-    step: "2020 — 2023",
-    title: "Senior full-stack engineer · fintech",
+    step: "2020 - 2023",
+    title: "Senior full-stack engineer",
     desc: "Led a five-engineer team, improved performance, and built payment infrastructure handling millions of transactions.",
+    image: "/hero/hero-3.avif",
+    alt: "Abstract systems study",
   },
   {
-    step: "2018 — 2020",
-    title: "Full-stack developer · startup",
+    step: "2018 - 2020",
+    title: "Full-stack developer",
     desc: "Worked across frontend, backend, and infrastructure, learning that fast shipping and clean architecture are not opposites.",
+    image: "/hero/hero-5.avif",
+    alt: "Abstract product study",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div id="main" className="page-main">
-      <header className="page-header">
-        <BackLink href="/">Home</BackLink>
-        <Reveal variant="mask">
-          <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start">
-            <div>
-              <p
-                className="rv rv-label page-eyebrow"
-                style={{ "--i": 0 } as CSSProperties}
-              >
-                About <span className="text-accent">·</span> the studio
-              </p>
-              <TextReveal
-                as="h1"
-                className="page-title"
-              >
-                About<span className="text-muted">.</span>
-              </TextReveal>
-            </div>
-            <p
-              className="rv rv-desc page-lede"
-              style={{ "--i": 2 } as CSSProperties}
+    <main id="main" className="page-main about-page">
+      <section className="about-index-hero" data-section-skip>
+        <div className="about-index-hero__top">
+          <Reveal variant="mask">
+            <span
+              className="rv rv-label about-eyebrow"
+              style={{ "--i": 0 } as CSSProperties}
             >
-                Product engineering for teams whose MVP has become a real
-                product. Based in Jakarta, working remotely.
-            </p>          </div>
-        </Reveal>
-      </header>
-
-      <section>
-        <Reveal variant="stagger">
-          {rows.map((row, i) => (
-            <div
-              key={row.num}
-              style={{ "--i": i } as CSSProperties}
-              className="grid grid-cols-[120px_1fr_1fr] gap-8 items-baseline py-11 border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[100px_1fr] max-[809px]:grid-cols-1 max-[809px]:gap-3"
+              About the studio
+            </span>
+          </Reveal>
+          <Reveal variant="mask">
+            <span
+              className="rv rv-label about-index-hero__year"
+              style={{ "--i": 1 } as CSSProperties}
             >
-              <span className="text-[var(--fs-body-sm)] font-semibold text-muted tracking-wide">
-                {row.num}
-              </span>
-              <h3 className="text-[var(--fs-h2)] font-semibold tracking-[-0.04em] leading-[1.2]">
-                {row.title}
-              </h3>
-              <p className="text-muted text-[var(--fs-body)] leading-normal max-w-[460px] max-[1024px]:col-start-2 max-[809px]:col-start-1">
-                {row.desc}
-              </p>
-            </div>
-          ))}
-        </Reveal>
+              Est. in Jakarta
+            </span>
+          </Reveal>
+        </div>
+        <div className="about-index-hero__title">
+          <TextReveal as="h1" trigger="load">
+            We build things
+            <br />
+            that hold up<span className="text-muted">.</span>
+          </TextReveal>
+        </div>
+        <div className="about-index-hero__bottom">
+          <span>Scroll to explore</span>
+          <span>01 - the studio</span>
+        </div>
       </section>
 
-      <section>
-        <Reveal variant="mask">
-          <div className="flex items-end justify-between gap-10 border-b border-surface pb-12 mb-12 max-[809px]:flex-col max-[809px]:items-start">
-            <div>
-              <p
-                  className="rv rv-label page-eyebrow"
-                style={{ "--i": 0 } as CSSProperties}
-              >
-                Experience · timeline
-              </p>
-              <TextReveal
-                as="h2"
-                className="page-title"
-              >
-                Where we&apos;ve shipped<span className="text-muted">.</span>
-              </TextReveal>
-            </div>
-            <p
-              className="rv rv-desc page-lede"
-              style={{ "--i": 2 } as CSSProperties}
-            >
-              A track record of taking products from idea to production, from
-              startup teams to an independent studio.
-            </p>
+      <section className="about-feature" data-section-skip>
+        <Reveal variant="fade">
+          <div className="about-feature__image">
+            <img
+              src="/hero/hero-3.avif"
+              alt="Abstract visual system created by halcyzhuo"
+              loading="lazy"
+            />
           </div>
         </Reveal>
-        <Reveal variant="stagger">
-          {timeline.map((item, i) => (
-            <div
-              key={item.title}
-              style={{ "--i": i } as CSSProperties}
-              className="grid grid-cols-[140px_1fr] gap-12 py-[52px] border-b border-surface transition-all duration-300 hover:pl-3 max-[1024px]:grid-cols-[110px_1fr] max-[1024px]:gap-8 max-[809px]:grid-cols-1 max-[809px]:gap-4"
-            >
-              <span className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-wide text-muted pt-2">
-                {item.step}
-              </span>
-              <div className="max-w-[720px]">
-                <h3 className="text-[var(--fs-h2)] mb-[18px] tracking-[-0.04em] leading-[1.2]">
-                  {item.title}
-                </h3>
-                <p className="text-muted text-[var(--fs-body)] leading-normal">
-                  {item.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </Reveal>
       </section>
+
+      <section className="about-intro" data-section-skip>
+        <div className="about-intro__top">
+          <span className="about-eyebrow">01 - the studio</span>
+          <span className="about-intro__year">Engineering that ships</span>
+        </div>
+        <div className="about-intro__grid">
+          <Reveal variant="mask">
+            <TextReveal as="h2" className="about-intro__heading">
+              Product engineering for teams moving beyond the MVP.
+            </TextReveal>
+          </Reveal>
+          <div className="about-intro__copy">
+            <Reveal variant="mask">
+              <p
+                className="rv rv-desc"
+                style={{ "--i": 0 } as CSSProperties}
+              >
+                We turn growing complexity into software teams can ship,
+                operate, and hand over. Interfaces, APIs, and infrastructure
+                for what comes next.
+              </p>
+            </Reveal>
+            <Reveal variant="mask">
+              <p
+                className="rv rv-desc"
+                style={{ "--i": 1 } as CSSProperties}
+              >
+                Direct and transparent: clear scope, honest estimates, and
+                progress you can track from the first constraint to production.
+              </p>
+            </Reveal>
+            <SolidBtn href={`mailto:${SITE.email}`}>
+              get in touch
+            </SolidBtn>
+          </div>
+        </div>
+      </section>
+
+      <section className="about-values" data-section-skip>
+        <div className="about-values__heading">
+          <span className="about-eyebrow">02 - what we believe</span>
+          <TextReveal as="h2">
+            Good systems make the next decision easier<span className="text-muted">.</span>
+          </TextReveal>
+        </div>
+        <ValuesAccordion items={values} />
+      </section>
+
+      <StudioExperience chapters={chapters} />
 
       <Reveal variant="mask" className="page-cta-reveal">
         <Cta
           pillLabel="ready for the next version"
           title={
             <>
-              Tell us what you&apos;re <span className="accent-word">building</span>.
+              Ready for the <span className="accent-word">next version</span>?
             </>
           }
           btnLabel="start a project"
         />
       </Reveal>
-    </div>
+    </main>
   );
 }

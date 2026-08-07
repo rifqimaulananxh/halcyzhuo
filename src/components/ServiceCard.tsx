@@ -15,7 +15,7 @@ export function ServiceCard({
 }) {
   return (
     <div
-      className="about-card group flex items-center gap-6 py-0.5 cursor-pointer"
+      className="about-card group flex items-center gap-6 py-0.5"
       style={{ "--i": index } as CSSProperties}
     >
       <div className="about-card__icon flex-none relative w-10 h-10 flex items-center justify-center">
