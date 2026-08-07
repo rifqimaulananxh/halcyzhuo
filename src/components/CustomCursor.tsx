@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -10,6 +11,7 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 import type gsap from "gsap";
 
 function useMediaQuery(query: string): boolean {
@@ -41,14 +43,24 @@ export function CursorProvider({ children }: { children: ReactNode }) {
     label: string | null;
   }>({ type: "default", label: null });
 
+  const setCursor = useCallback(
+    (type: CursorType, label: string | null = null) => {
+      setState({ type, label });
+    },
+    []
+  );
+  const resetCursor = useCallback(() => {
+    setState({ type: "default", label: null });
+  }, []);
+
   const api = useMemo<CursorApi>(
     () => ({
       type: state.type,
       label: state.label,
-      setCursor: (type, label = null) => setState({ type, label }),
-      resetCursor: () => setState({ type: "default", label: null }),
+      setCursor,
+      resetCursor,
     }),
-    [state]
+    [resetCursor, setCursor, state]
   );
 
   return (
@@ -70,7 +82,8 @@ function loadGsap(): Promise<typeof gsap> {
 }
 
 export function CustomCursor() {
-  const { type, label } = useCursor();
+  const { type, label, resetCursor } = useCursor();
+  const pathname = usePathname();
   const elRef = useRef<HTMLDivElement>(null);
   const enabled = useMediaQuery("(hover: hover) and (pointer: fine)");
   const target = useRef({ x: 0, y: 0 });
@@ -119,6 +132,29 @@ export function CustomCursor() {
   const isProject = type === "project";
   const w = isProject ? 140 : 10;
   const h = isProject ? 44 : 10;
+
+  useEffect(() => {
+    resetCursor();
+  }, [pathname, resetCursor]);
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    const reset = () => resetCursor();
+    const onVisibilityChange = () => {
+      if (document.hidden) resetCursor();
+    };
+
+    document.addEventListener("mouseleave", reset);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("blur", reset);
+
+    return () => {
+      document.removeEventListener("mouseleave", reset);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("blur", reset);
+    };
+  }, [enabled, resetCursor]);
 
   useEffect(() => {
     size.current = { w, h };

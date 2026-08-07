@@ -11,15 +11,22 @@ export function ArrowIcon({ className = "" }: { className?: string }) {
 export function SolidBtn({
   href,
   children,
+  tone = "dark",
 }: {
   href: string;
   children: React.ReactNode;
+  tone?: "dark" | "light";
 }) {
+  const toneClass =
+    tone === "light"
+      ? "bg-white text-ink hover:bg-white/85"
+      : "bg-ink text-white hover:bg-accent";
+
   return (
     <Magnetic>
       <a
         href={href}
-        className="inline-flex items-center gap-3 rounded-[var(--radius-md)] bg-ink text-white text-[var(--fs-bold-sm)] font-semibold uppercase tracking-[0.08em] px-8 py-[18px] transition-colors duration-200 hover:bg-accent"
+        className={`inline-flex items-center gap-3 rounded-[var(--radius-md)] px-8 py-[18px] text-[var(--fs-body)] font-semibold uppercase tracking-[0.08em] transition-colors duration-200 ${toneClass}`}
       >
         {children}
         <ArrowIcon />
@@ -31,15 +38,17 @@ export function SolidBtn({
 export function TextBtn({
   href,
   children,
+  className = "",
 }: {
   href: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <Magnetic>
       <a
         href={href}
-        className="inline-flex items-center gap-3 mt-6 text-[var(--fs-body)] font-semibold group"
+        className={`inline-flex items-center gap-3 mt-6 text-[var(--fs-body)] font-semibold group ${className}`}
       >
         <span className="underline underline-offset-8 decoration-1 group-hover:decoration-2">
           {children}

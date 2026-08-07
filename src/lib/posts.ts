@@ -16,7 +16,7 @@ export const posts: Post[] = [
     title: "When a plain fetch layer beats React Query",
     date: "Jul 3, 2026",
     readTime: "8 min read",
-    category: "/engineering",
+    category: "Engineering",
     description:
       "The popular dependency is not always the right fit for the product in front of you.",
     blocks: [
@@ -26,7 +26,7 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "The app had a handful of screens, each loading one or two resources. Data changed rarely, and there was no optimistic updating or infinite scrolling. In short: none of the features that make a data-fetching library earn its weight.",
+        text: "The app had a handful of screens, each loading one or two resources. Data changed rarely, and there was no optimistic updating or infinite scrolling. In short: none of the features that make a data-fetching library earn its place.",
       },
       {
         type: "p",
@@ -51,7 +51,7 @@ export const posts: Post[] = [
     title: "How to read a Lighthouse score (and when to ignore it)",
     date: "Jun 18, 2026",
     readTime: "6 min read",
-    category: "/performance",
+    category: "Performance",
     description:
       "Scores are not the goal. A practical guide to chasing the metrics that actually matter.",
     blocks: [
@@ -69,7 +69,7 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "When the score is an aesthetic gate, not a user signal. A 99 that cost you weeks of churn-risk refactors on an internal admin tool may not be worth it. Optimize for the experience users feel, then keep the score as a smoke alarm — not a target.",
+        text: "Ignore the score when it becomes an aesthetic gate rather than a user signal. A 99 that costs weeks of churn-risk refactors on an internal admin tool may not be worth it. Optimize for the experience users feel, then keep the score as a smoke alarm, not a target.",
       },
     ],
   },
@@ -78,7 +78,7 @@ export const posts: Post[] = [
     title: "The architecture that scaled to 60k users without a rewrite",
     date: "May 29, 2026",
     readTime: "10 min read",
-    category: "/architecture",
+    category: "Architecture",
     description:
       "Lessons from Dokterku: planning right from day one beats rebuilding later.",
     blocks: [
@@ -92,11 +92,11 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "Notifications, emails, and webhooks moved to a queue-backed worker. The API stopped being responsible for work that wasn't the request's business, which removed most of the latency spikes.",
+        text: "Notifications, emails, and webhooks moved to a queue-backed worker. The API stopped handling work outside the request's core responsibility, which removed most of the latency spikes.",
       },
       {
         type: "p",
-        text: "Scaling is a series of small, boring refactors applied before they hurt — not one dramatic event. Plan the seams (replicas, caches, queues) during the discover phase, and growth becomes an operational task, not an emergency.",
+        text: "Scaling is a series of small, boring refactors applied before they hurt, not one dramatic event. Plan the seams (replicas, caches, queues) during the discovery phase, and growth becomes an operational task, not an emergency.",
       },
     ],
   },

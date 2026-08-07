@@ -9,7 +9,7 @@ import type gsap from "gsap";
 
 const LINKS = [
   { key: "home", label: "Home", href: "/", image: "/hero/hero-1.svg" },
-  { key: "work", label: "Works", href: "/work", image: "/hero/hero-2.svg" },
+  { key: "work", label: "Work", href: "/work", image: "/hero/hero-2.svg" },
   { key: "about", label: "About", href: "/about", image: "/hero/hero-3.svg" },
   {
     key: "journal",

@@ -59,28 +59,28 @@ export default async function WorkDetail({ params }: Props) {
   ];
 
   return (
-    <div id="main">
-      <header className="pt-32 pb-12 max-[809px]:pt-24">
+    <div id="main" className="page-main">
+      <header className="page-header">
         <BackLink href="/work">All work</BackLink>
         <Reveal variant="mask">
           <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start max-[809px]:gap-6">
             <div>
               <p
-                className="rv rv-label text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted mb-5"
+                className="rv rv-label page-eyebrow"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 Case study <span className="text-accent">·</span> {project.year}
               </p>
               <TextReveal
                 as="h1"
-                className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
+                className="page-title"
               >
                 {project.title}
                 <span className="text-muted">.</span>
               </TextReveal>
             </div>
             <p
-              className="rv rv-desc text-muted text-[var(--fs-body)] leading-normal max-w-[360px] text-right max-[809px]:text-left"
+              className="rv rv-desc page-lede max-w-[360px] text-right max-[809px]:text-left"
               style={{ "--i": 2 } as CSSProperties}
             >
               {project.tagline}
@@ -104,10 +104,10 @@ export default async function WorkDetail({ params }: Props) {
             <div className="flex flex-col gap-[14px]">
               {meta.map((m) => (
                 <div key={m.dt} className="flex flex-col gap-[6px] border-b border-surface pb-[14px] last:border-b-0 max-[1024px]:flex-1 max-[1024px]:basis-[200px]">
-                  <dt className="text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted">
+                  <dt className="text-[var(--fs-body-sm)] font-semibold uppercase tracking-[0.16em] text-muted">
                     {m.dt}
                   </dt>
-                  <dd className="text-[var(--fs-body-sm)] font-medium">{m.dd}</dd>
+                  <dd className="text-[var(--fs-body)] font-medium">{m.dd}</dd>
                 </div>
               ))}
             </div>
@@ -118,7 +118,7 @@ export default async function WorkDetail({ params }: Props) {
           {project.sections.map((s, si) => (
             <Reveal key={s.heading}>
               <section>
-                <h2 className="text-[var(--fs-h2)] tracking-[-0.04em] mb-5 leading-[1.2]">
+                <h2 className="font-display mb-5 text-[clamp(28px,3vw,48px)] font-semibold leading-[1.05] tracking-[-0.055em]">
                   <span className="text-muted text-[0.5em] align-[0.3em] mr-[14px]">
                     {String(si + 1).padStart(2, "0")}
                   </span>
@@ -171,10 +171,10 @@ export default async function WorkDetail({ params }: Props) {
             href={`/work/${next.slug}`}
             className="block border-t border-surface py-16 group"
           >
-            <span className="text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-muted block mb-4">
+            <span className="mb-4 block text-[var(--fs-body-sm)] font-semibold uppercase tracking-[0.16em] text-muted">
               Next project
             </span>
-            <h3 className="text-[var(--fs-title)] tracking-[-0.04em] leading-[1.1] inline-flex items-center gap-5 transition-all duration-300 group-hover:pl-3">
+            <h3 className="inline-flex items-center gap-5 font-display text-[clamp(40px,4.5vw,78px)] font-medium leading-[0.98] tracking-[-0.07em] transition-all duration-300 group-hover:pl-3">
               {next.title}
               <span className="text-[30px] transition-transform duration-300 group-hover:translate-x-1.5">
                 →

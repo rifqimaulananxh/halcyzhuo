@@ -4,13 +4,13 @@ import { SolidBtn } from "@/components/UI";
 import { TextReveal } from "@/components/TextReveal";
 
 export function Cta({
-  pillLabel = "free 20-minute intro",
+  pillLabel = "free 20-minute intro call",
   title = (
     <>
       Tell us what you&apos;re <span className="accent-word">building</span>.
     </>
   ),
-  sub = "Tell us about the product, the constraints, and where it needs to go. We'll give you a clear take on scope, architecture, and next steps.",
+  sub = "Tell us what you're building, what's getting in the way, and where it needs to go. We'll respond with a clear take on scope, architecture, and next steps.",
   btnLabel = "start a conversation",
 }: {
   pillLabel?: string;
@@ -21,37 +21,45 @@ export function Cta({
   return (
     <section
       id="contact"
-      className="flex flex-col items-center text-center gap-6 border border-surface rounded-[var(--radius-md)] px-6 py-[88px]"
+      className="cta-section w-full bg-ink text-white max-[809px]:-mx-[var(--pad-inner)]"
     >
-      <span
-        className="rv rv-label inline-flex items-center gap-2.5 text-[var(--fs-label)] font-medium uppercase tracking-[0.16em]"
-        style={{ "--i": 0 } as CSSProperties}
-      >
-        <i className="w-[8px] h-[8px] rounded-full bg-online animate-pulse" />
-        {pillLabel}
-      </span>
-      <TextReveal
-        as="h2"
-        className="text-[var(--fs-h2)] font-bold tracking-[-0.05em] leading-[1.2] max-w-[700px]"
-      >
-        {title}
-      </TextReveal>
-      <p
-        className="rv rv-desc text-muted text-[var(--fs-body)] max-w-[560px] leading-normal"
-        style={{ "--i": 2 } as CSSProperties}
-      >
-        {sub}
-      </p>
-      <div className="rv rv-cta" style={{ "--i": 3 } as CSSProperties}>
-        <SolidBtn href={`mailto:${SITE.email}`}>{btnLabel}</SolidBtn>
+      <div className="mx-auto grid w-full max-w-[var(--max-w)] grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)] gap-16 px-[var(--pad-inner)] py-[clamp(80px,10vw,160px)] max-[1024px]:grid-cols-[minmax(0,1fr)_minmax(240px,0.8fr)] max-[809px]:grid-cols-1 max-[809px]:gap-10">
+        <div>
+          <span
+            className="rv rv-label inline-flex items-center gap-2.5 text-[var(--fs-body-sm)] font-medium uppercase tracking-[0.16em] text-white/55"
+            style={{ "--i": 0 } as CSSProperties}
+          >
+            <i className="h-[8px] w-[8px] rounded-full bg-online" />
+            {pillLabel}
+          </span>
+          <TextReveal
+            as="h2"
+            className="font-display mt-6 max-w-[900px] text-[clamp(44px,5.5vw,96px)] font-bold leading-[0.94] tracking-[-0.08em]"
+          >
+            {title}
+          </TextReveal>
+        </div>
+        <div className="flex flex-col items-start justify-end gap-7 max-[809px]:max-w-[520px]">
+          <p
+            className="rv rv-desc max-w-[460px] text-[var(--fs-body)] leading-normal text-white/60"
+            style={{ "--i": 2 } as CSSProperties}
+          >
+            {sub}
+          </p>
+          <div className="rv rv-cta" style={{ "--i": 3 } as CSSProperties}>
+            <SolidBtn href={`mailto:${SITE.email}`} tone="light">
+              {btnLabel}
+            </SolidBtn>
+          </div>
+          <a
+            href={`mailto:${SITE.email}`}
+            className="rv rv-desc text-[var(--fs-body)] text-white/55 transition-opacity duration-200 hover:opacity-75"
+            style={{ "--i": 4 } as CSSProperties}
+          >
+            {SITE.email}
+          </a>
+        </div>
       </div>
-      <a
-        href={`mailto:${SITE.email}`}
-        className="rv rv-desc text-[var(--fs-body-sm)] text-muted transition-opacity duration-200 hover:opacity-75"
-        style={{ "--i": 4 } as CSSProperties}
-      >
-        {SITE.email}
-      </a>
     </section>
   );
 }

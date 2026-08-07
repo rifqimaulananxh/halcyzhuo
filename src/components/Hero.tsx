@@ -44,7 +44,7 @@ const HERO_POINTERS = [
   { src: "/hero/hero-1.svg", label: "Fast, clear interfaces" },
   { src: "/hero/hero-2.svg", label: "Performance under load" },
   { src: "/hero/hero-3.svg", label: "Systems ready to scale" },
-  { src: "/hero/hero-4.svg", label: "Code built for handover" },
+  { src: "/hero/hero-4.svg", label: "Code ready for handover" },
 ];
 
 export function Hero() {

@@ -16,25 +16,25 @@ export function LegalLayout({
   sections: { title: string; body: string[] }[];
 }) {
   return (
-    <div id="main">
-      <header className="pt-32 pb-12 max-[809px]:pt-24">
+    <div id="main" className="page-main">
+      <header className="page-header">
         <BackLink href="/">Home</BackLink>
         <Reveal variant="mask">
           <div className="mt-10 border-b border-surface pb-12">
             <p
-              className="rv rv-label mb-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.08em] text-muted"
+              className="rv rv-label page-eyebrow"
               style={{ "--i": 0 } as CSSProperties}
             >
               {label}
             </p>
             <TextReveal
               as="h1"
-              className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
+              className="page-title"
             >
               {title}
             </TextReveal>
             <p
-              className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[560px] mt-8"
+              className="rv rv-desc page-lede mt-8 max-w-[560px]"
               style={{ "--i": 2 } as CSSProperties}
             >
               {intro}
@@ -55,7 +55,7 @@ export function LegalLayout({
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="max-w-[760px]">
-                <h2 className="text-[var(--fs-h4)] font-bold tracking-[-0.03em] leading-[1.4] mb-4">
+                <h2 className="font-display mb-4 text-[clamp(24px,2.3vw,36px)] font-semibold leading-[1.08] tracking-[-0.045em]">
                   {s.title}
                 </h2>
                 {s.body.map((p, j) => (

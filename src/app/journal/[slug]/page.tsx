@@ -48,28 +48,28 @@ export default async function JournalPost({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div id="main">
-      <header className="pt-32 pb-12 max-[809px]:pt-24">
+    <div id="main" className="page-main">
+      <header className="page-header">
         <BackLink href="/journal">All articles</BackLink>
         <Reveal variant="mask">
           <div className="mt-10 flex items-end justify-between gap-10 border-b border-surface pb-12 max-[809px]:flex-col max-[809px]:items-start">
             <div>
               <p
-                className="rv rv-label mb-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.08em] text-muted"
+                className="rv rv-label page-eyebrow"
                 style={{ "--i": 0 } as CSSProperties}
               >
                 {post.category} · {post.date}
               </p>
               <TextReveal
                 as="h1"
-                className="text-[var(--fs-title)] font-bold tracking-[-0.05em] leading-[1.1]"
+                className="page-title"
               >
                 {post.title}
                 <span className="text-muted">.</span>
               </TextReveal>
             </div>
             <p
-              className="rv rv-desc text-[var(--fs-body)] text-muted leading-normal max-w-[420px]"
+              className="rv rv-desc page-lede"
               style={{ "--i": 2 } as CSSProperties}
             >
               {post.description}
@@ -81,7 +81,7 @@ export default async function JournalPost({ params }: Props) {
       <article>
         <Reveal variant="mask">
           <header className="py-14 flex flex-col gap-6 max-w-[860px]">
-            <div className="flex gap-5 text-[var(--fs-body-sm)] text-muted">
+            <div className="flex flex-wrap gap-5 text-[var(--fs-body)] text-muted">
               <span>{post.date}</span>
               <span>·</span>
               <span>{post.readTime}</span>
@@ -104,7 +104,7 @@ export default async function JournalPost({ params }: Props) {
               ) : (
                 <pre
                   key={i}
-                  className="bg-surface rounded-[var(--radius-md)] p-6 overflow-x-auto font-mono text-[14px] leading-[1.6] my-7 text-ink"
+                  className="my-7 overflow-x-auto rounded-[var(--radius-md)] bg-surface p-6 font-mono text-[var(--fs-body-sm)] leading-[1.6] text-ink"
                 >
                   <code>{block.code}</code>
                 </pre>
@@ -115,8 +115,8 @@ export default async function JournalPost({ params }: Props) {
 
         <div className="border-t border-surface py-14 max-w-[720px]">
           <Reveal variant="mask">
-            <TextReveal as="h3" className="text-[var(--fs-h2)] tracking-[-0.04em] mb-6 leading-[1.2]">
-              Got a stack that feels heavier than the product?
+            <TextReveal as="h3" className="font-display mb-6 text-[clamp(28px,3vw,48px)] font-semibold leading-[1.05] tracking-[-0.055em]">
+              Is the stack slowing the product down?
             </TextReveal>
             <div className="rv rv-cta" style={{ "--i": 1 } as CSSProperties}>
               <a

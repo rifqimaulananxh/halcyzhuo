@@ -4,11 +4,11 @@ export const SITE = {
   email: "hello@halcyzhuo.dev",
   tagline: "Engineering that ships",
   description:
-    "halcyzhuo — product engineering for teams moving beyond the MVP. Interfaces, APIs, infrastructure, and systems that hold up.",
+    "halcyzhuo — product engineering for teams whose MVP has become a real product. Interfaces, APIs, and infrastructure that keep working as complexity grows.",
 } as const;
 
 export const NAV_LINKS = [
-  { key: "work", label: "Works", href: "/work" },
+  { key: "work", label: "Work", href: "/work" },
   { key: "about", label: "About", href: "/about" },
   { key: "stack", label: "Stack", href: "/#stack" },
   { key: "journal", label: "Journal", href: "/journal" },
