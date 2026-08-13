@@ -91,7 +91,7 @@ export function Preloader() {
 
         await Promise.race([
           document.fonts.ready.catch(() => undefined),
-          new Promise((resolve) => setTimeout(resolve, 300)),
+          new Promise((resolve) => setTimeout(resolve, 500)),
         ]);
         if (cancelled) return;
 
@@ -124,35 +124,35 @@ export function Preloader() {
 
         timeline = gsap.timeline({ defaults: { ease: easeInOut4 } });
         timeline
-          .to(metaEls, { yPercent: 0, duration: 0.55, ease: easeOutExpo, stagger: 0.08 }, 0)
-          .to(inkEls, { xPercent: 0, duration: 0.65, stagger: 0.08 }, 0.25)
-          .to(wordEls, { xPercent: 0, duration: 0.8, ease: easeOutExpo, stagger: 0.08 }, 0.25)
-          .to(counter, { prgs: 1, duration: 0.8, ease: easeInOut4, onUpdate: paintCount }, 0.25)
+          .to(metaEls, { yPercent: 0, duration: 0.7, ease: easeOutExpo, stagger: 0.09 }, 0)
+          .to(inkEls, { xPercent: 0, duration: 0.8, stagger: 0.09 }, 0.3)
+          .to(wordEls, { xPercent: 0, duration: 1.0, ease: easeOutExpo, stagger: 0.09 }, 0.3)
+          .to(counter, { prgs: 1, duration: 1.0, ease: easeInOut4, onUpdate: paintCount }, 0.3)
           .add(() => {
             if (numEl) numEl.textContent = "100";
-          }, "+=0.05")
-          .to(metaEls, { yPercent: -120, duration: 0.5, stagger: 0.08 }, "+=0.05")
+          }, "+=0.1")
+          .to(metaEls, { yPercent: -120, duration: 0.6, stagger: 0.09 }, "+=0.1")
           .to(
             inkEls,
-            { xPercent: -100.5, duration: 0.6, stagger: { each: 0.08, from: "end" } },
+            { xPercent: -100.5, duration: 0.75, stagger: { each: 0.09, from: "end" } },
             "<"
           )
           .to(
             greyEls,
-            { xPercent: 100.5, duration: 0.6, stagger: { each: 0.08, from: "end" } },
+            { xPercent: 100.5, duration: 0.75, stagger: { each: 0.09, from: "end" } },
             "<"
           )
           .to(
             wordEls,
             {
               x: (i: number) => wordEls[i].getBoundingClientRect().width * 0.4,
-              duration: 0.7,
+              duration: 0.85,
               ease: easeInOut4,
-              stagger: { each: 0.08 },
+              stagger: { each: 0.09 },
             },
             "<"
           )
-          .add(finish, "+=0.05");
+          .add(finish, "+=0.1");
       })
       .catch(() => {
         if (!cancelled) finish();
