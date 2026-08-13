@@ -1,9 +1,40 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import type { ScrollTrigger } from "gsap/ScrollTrigger";
 import { onMotionReady } from "@/lib/motion";
 
 type Variant = "fade" | "mask" | "stagger" | "stagger-left" | "stagger-right" | "none";
+
+let gsapBundlePromise: Promise<{
+  gsap: typeof gsap;
+  ScrollTrigger: typeof ScrollTrigger;
+}> | null = null;
+
+function loadGsapBundle(): Promise<{
+  gsap: typeof gsap;
+  ScrollTrigger: typeof ScrollTrigger;
+}> {
+  gsapBundlePromise ??= Promise.all([
+    import("gsap"),
+    import("gsap/ScrollTrigger"),
+  ]).then(([gsapModule, scrollTriggerModule]) => {
+    gsapModule.default.registerPlugin(scrollTriggerModule.ScrollTrigger);
+    return {
+      gsap: gsapModule.default,
+      ScrollTrigger: scrollTriggerModule.ScrollTrigger,
+    };
+  });
+  return gsapBundlePromise;
+}
+
+const variantDefaults: Record<Exclude<Variant, "none">, { start: string; once: boolean }> = {
+  fade: { start: "top 90%", once: true },
+  mask: { start: "top 90%", once: true },
+  stagger: { start: "top 90%", once: true },
+  "stagger-left": { start: "top 90%", once: true },
+  "stagger-right": { start: "top 90%", once: true },
+};
 
 export function Reveal({
   children,
@@ -20,38 +51,43 @@ export function Reveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || variant === "none") {
+      if (el) el.classList.add("visible");
+      return;
+    }
 
-    let observer: IntersectionObserver | undefined;
-    let fallback = 0;
+    let cancelled = false;
 
-    const start = () => {
-      if (!("IntersectionObserver" in window)) {
+    const init = async () => {
+      let bundle;
+      try {
+        bundle = await loadGsapBundle();
+      } catch {
         el.classList.add("visible");
         return;
       }
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              el.classList.add("visible");
-              observer?.unobserve(el);
-            }
-          });
-        },
-        { threshold: 0.12 }
-      );
-      observer.observe(el);
-      fallback = window.setTimeout(() => el.classList.add("visible"), 4000);
+      if (cancelled || !el.isConnected) return;
+
+      const { gsap, ScrollTrigger } = bundle;
+      const { start, once } = variantDefaults[variant];
+
+      gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: el,
+          start,
+          once,
+          onEnter: () => el.classList.add("visible"),
+          onEnterBack: () => el.classList.add("visible"),
+        });
+      }, el);
     };
 
-    const unsubscribe = onMotionReady(start);
+    const unsubscribe = onMotionReady(init);
     return () => {
       unsubscribe();
-      observer?.disconnect();
-      window.clearTimeout(fallback);
+      cancelled = true;
     };
-  }, []);
+  }, [variant]);
 
   return (
     <div

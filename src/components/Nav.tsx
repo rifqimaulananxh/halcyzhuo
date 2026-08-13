@@ -43,6 +43,41 @@ export function Nav() {
   const [lastIndex, setLastIndex] = useState(0);
   const [showDelay, setShowDelay] = useState(true);
   const delayTimer = useRef<number | undefined>(undefined);
+  const navRef = useRef<HTMLElement>(null);
+
+  /* navbar entrance — independent of preloader so menu appears fast */
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    let cancelled = false;
+
+    const run = async () => {
+      let gsap: typeof import("gsap").default;
+      try {
+        gsap = await loadGsap();
+      } catch {
+        nav.style.opacity = "1";
+        nav.style.transform = "translateY(0)";
+        return;
+      }
+      if (cancelled) return;
+
+      gsap.fromTo(
+        nav,
+        { opacity: 0, y: -12 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          delay: 0.4,
+        }
+      );
+    };
+
+    void run();
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     const update = () => setHash(window.location.hash);
@@ -178,7 +213,7 @@ export function Nav() {
 
   return (
     <>
-      <nav className="navbar" aria-label="Primary">
+      <nav ref={navRef} className="navbar" aria-label="Primary">
         <Link className="navbar__logo" href="/" aria-label="halcyzhuo">
           H.
         </Link>

@@ -2334,11 +2334,7 @@ html.js .approach-step.approach-step--entered {
 }
 
 /* ---------- navbar (roshan-style) ---------- */
-html.js.is-loading .navbar {
-  opacity: 0;
-}
-
-  .navbar {
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
