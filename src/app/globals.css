@@ -2335,20 +2335,22 @@ html.js .approach-step.approach-step--entered {
 
 /* ---------- navbar (roshan-style) ---------- */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 32px;
-    padding-top: 18px;
-    color: var(--color-bg);
-    mix-blend-mode: difference;
-    transition: opacity 0.35s ease;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 32px;
+  padding-top: 18px;
+  color: var(--color-bg);
+  mix-blend-mode: difference;
+  transition: opacity 0.35s ease;
+  opacity: 0;
+  transform: translateY(-12px);
+}
 
 .navbar__logo {
   z-index: 100;

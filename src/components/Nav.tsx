@@ -45,7 +45,7 @@ export function Nav() {
   const delayTimer = useRef<number | undefined>(undefined);
   const navRef = useRef<HTMLElement>(null);
 
-  /* navbar entrance — independent of preloader so menu appears fast */
+  /* navbar entrance — after preloader (onMotionReady) */
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
@@ -68,15 +68,14 @@ export function Nav() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.7,
+          duration: 0.6,
           ease: "power3.out",
-          delay: 0.4,
         }
       );
     };
 
-    void run();
-    return () => { cancelled = true; };
+    const unsubscribe = onMotionReady(run);
+    return () => { cancelled = true; unsubscribe(); };
   }, []);
 
   useEffect(() => {
