@@ -5,6 +5,7 @@ import type gsap from "gsap";
 import type { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { SplitText } from "gsap/SplitText";
 import { onMotionReady } from "@/lib/motion";
+import { projects } from "@/lib/projects";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -41,6 +42,8 @@ const HERO_POINTERS = [
   { src: "/hero/hero-3.svg", label: "Systems ready to scale" },
   { src: "/hero/hero-4.svg", label: "Code ready for handover" },
 ];
+
+const HERO_POINTER_PROJECTS = projects.slice(0, 4);
 
 export function Hero() {
   const rootRef = useRef<HTMLElement>(null);
@@ -290,16 +293,16 @@ export function Hero() {
       >
         <span className="hero__crosshair-text">Engineering studio</span>
       </div>
-      {HERO_POINTERS.map((pointer) => (
+      {HERO_POINTER_PROJECTS.map((project) => (
         <div
           className="hero__pointer"
           data-hero-pointer
           data-hero-chrome
-          key={pointer.src}
+          key={project.slug}
           aria-hidden="true"
         >
-          <img className="hero__pointer-img" src={pointer.src} alt="" />
-          <span className="hero__pointer-label">[ {pointer.label} ]</span>
+          <img className="hero__pointer-img" src={project.cover} alt="" />
+          <span className="hero__pointer-label">[ {project.title} ]</span>
         </div>
       ))}
 
@@ -314,12 +317,12 @@ export function Hero() {
           <div className="hero__feature-img">
             <img
               className="hero__feature-img-el"
-              src={HERO_POINTERS[feature].src}
+              src={HERO_POINTER_PROJECTS[feature].cover}
               alt=""
             />
           </div>
           <span className="hero__feature-label">
-            [ {HERO_POINTERS[feature].label} ]
+            [ {HERO_POINTER_PROJECTS[feature].title} ]
           </span>
         </div>
 

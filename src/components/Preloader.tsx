@@ -91,7 +91,7 @@ export function Preloader() {
 
         await Promise.race([
           document.fonts.ready.catch(() => undefined),
-          new Promise((resolve) => setTimeout(resolve, 1500)),
+          new Promise((resolve) => setTimeout(resolve, 400)),
         ]);
         if (cancelled) return;
 
@@ -124,35 +124,35 @@ export function Preloader() {
 
         timeline = gsap.timeline({ defaults: { ease: easeInOut4 } });
         timeline
-          .to(metaEls, { yPercent: 0, duration: 1.75, ease: easeOutExpo, stagger: 0.125 }, 0)
-          .to(inkEls, { xPercent: 0, duration: 1.5, stagger: 0.125 }, 0.7)
-          .to(wordEls, { xPercent: 0, duration: 2, ease: easeOutExpo, stagger: 0.125 }, 0.7)
-          .to(counter, { prgs: 1, duration: 1.8, ease: easeInOut4, onUpdate: paintCount }, 0.7)
+          .to(metaEls, { yPercent: 0, duration: 0.8, ease: easeOutExpo, stagger: 0.1 }, 0)
+          .to(inkEls, { xPercent: 0, duration: 0.9, stagger: 0.1 }, 0.35)
+          .to(wordEls, { xPercent: 0, duration: 1.1, ease: easeOutExpo, stagger: 0.1 }, 0.35)
+          .to(counter, { prgs: 1, duration: 1.1, ease: easeInOut4, onUpdate: paintCount }, 0.35)
           .add(() => {
-          if (numEl) numEl.textContent = "100";
-        }, "+=0.15")
-        .to(metaEls, { yPercent: -120, duration: 1.25, stagger: 0.125 }, "+=0.15")
-        .to(
-          inkEls,
-          { xPercent: -100.5, duration: 1.5, stagger: { each: 0.125, from: "end" } },
-          "<"
-        )
-        .to(
-          greyEls,
-          { xPercent: 100.5, duration: 1.5, stagger: { each: 0.125, from: "end" } },
-          "<"
-        )
-        .to(
-          wordEls,
-          {
-            x: (i: number) => wordEls[i].getBoundingClientRect().width * 0.4,
-            duration: 1.75,
-            ease: easeInOut4,
-            stagger: { each: 0.1 },
-          },
-          "<"
-        )
-         .add(finish, "+=0.15");
+            if (numEl) numEl.textContent = "100";
+          }, "+=0.1")
+          .to(metaEls, { yPercent: -120, duration: 0.7, stagger: 0.1 }, "+=0.1")
+          .to(
+            inkEls,
+            { xPercent: -100.5, duration: 0.9, stagger: { each: 0.1, from: "end" } },
+            "<"
+          )
+          .to(
+            greyEls,
+            { xPercent: 100.5, duration: 0.9, stagger: { each: 0.1, from: "end" } },
+            "<"
+          )
+          .to(
+            wordEls,
+            {
+              x: (i: number) => wordEls[i].getBoundingClientRect().width * 0.4,
+              duration: 1.0,
+              ease: easeInOut4,
+              stagger: { each: 0.1 },
+            },
+            "<"
+          )
+          .add(finish, "+=0.1");
       })
       .catch(() => {
         if (!cancelled) finish();

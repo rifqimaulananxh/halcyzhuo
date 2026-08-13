@@ -106,26 +106,26 @@ export function Nav() {
       drawerRef.current?.querySelector<HTMLElement>("[data-nav-item]")?.focus();
     });
 
-    const start = () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        const title = drawerRef.current?.querySelector<HTMLElement>("[data-nav-title]");
-        const items = drawerRef.current?.querySelectorAll<HTMLElement>("[data-nav-item]");
-        if (title) title.style.opacity = "1";
-        items?.forEach((item) => {
-          item.style.transform = "translateY(0)";
-        });
-        return;
-      }
+          const start = () => {
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+              const title = drawerRef.current?.querySelector<HTMLElement>("[data-nav-title]");
+              const items = drawerRef.current?.querySelectorAll<HTMLElement>("[data-nav-item]");
+              if (title) title.style.opacity = "1";
+              items?.forEach((item) => {
+                item.style.transform = "translateY(0)";
+              });
+              return;
+            }
 
-      void loadGsap()
-        .then((gsap) => {
-          if (cancelled || !drawerRef.current) return;
-          const title = drawerRef.current.querySelector("[data-nav-title]");
-          const items = Array.from(
-            drawerRef.current.querySelectorAll<HTMLElement>("[data-nav-item]")
-          );
-          if (!title) return;
-          const tl = gsap.timeline({ delay: 0.8 });
+            void loadGsap()
+              .then((gsap) => {
+                if (cancelled || !drawerRef.current) return;
+                const title = drawerRef.current.querySelector("[data-nav-title]");
+                const items = Array.from(
+                  drawerRef.current.querySelectorAll<HTMLElement>("[data-nav-item]")
+                );
+                if (!title) return;
+                const tl = gsap.timeline({ delay: 0.3 });
           tl.fromTo(
             title,
             { opacity: 0 },
@@ -165,7 +165,7 @@ export function Nav() {
       window.clearTimeout(delayTimer.current);
       delayTimer.current = window.setTimeout(() => {
         setShowDelay(false);
-      }, 800);
+      }, 300);
       setOpen(true);
     }
   };
