@@ -2026,33 +2026,42 @@ html.lenis body {
 }
 
 @media (max-width: 767px) {
-  .exp-content__h {
-    font-size: 3em;
-  }
   .exp-wrap {
-    font-size: 0.4em;
+    font-size: 1em;
+  }
+  .exp-lines {
+    display: none;
+  }
+  .exp-content {
+    border-bottom: 0;
   }
   .exp-content__row {
-    height: 13em;
-  }
-  .exp-bg__row {
-    height: 13em;
+    height: auto;
+    flex-direction: column;
+    padding-left: 0;
   }
   .exp-content__col {
-    width: calc(var(--exp-grid-col) + 1em);
+    display: none;
+  }
+  .exp-content__col--fill {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid var(--color-ink);
+    padding: 1.15em 0;
+    align-items: center;
   }
   .exp-content__el {
-    margin-top: 1.5em;
+    margin-left: 0;
+    gap: 1.25em;
   }
-  .exp-lines__cover {
-    width: calc(var(--exp-grid-col) / 2 + 2em);
-    left: -2em;
+  .exp-content__dot {
+    width: 0.9em;
+    margin-left: 0;
   }
-}
-
-@media (max-width: 479px) {
-  .exp-wrap {
-    font-size: 0.3em;
+  .exp-content__h {
+    font-size: clamp(42px, 12vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.045em;
   }
 }
 
@@ -2275,7 +2284,7 @@ html.js .approach-step.approach-step--entered {
 
 @media (max-width: 809px) {
   :root {
-    --gap-section: 80px;
+    --gap-section: 48px;
   }
   #main {
     padding: 0 var(--pad-inner) 40px;

@@ -23,6 +23,8 @@ export function Reveal({
     if (!el) return;
 
     let observer: IntersectionObserver | undefined;
+    let fallback = 0;
+
     const start = () => {
       if (!("IntersectionObserver" in window)) {
         el.classList.add("visible");
@@ -40,12 +42,14 @@ export function Reveal({
         { threshold: 0.12 }
       );
       observer.observe(el);
+      fallback = window.setTimeout(() => el.classList.add("visible"), 4000);
     };
 
     const unsubscribe = onMotionReady(start);
     return () => {
       unsubscribe();
       observer?.disconnect();
+      window.clearTimeout(fallback);
     };
   }, []);
 

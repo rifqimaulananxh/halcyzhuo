@@ -84,7 +84,7 @@ export function ExperienceGrid({
             const first = cols[0];
             return first ? first.getBoundingClientRect().width : 0;
           };
-          const shift = () => (isMobile ? -6 : -4.75) * colWidth();
+          const shift = () => (isMobile ? 0 : -4.75) * colWidth();
           const tl = gsapApi.timeline({
             scrollTrigger: {
               trigger: wrap,
@@ -154,7 +154,10 @@ export function ExperienceGrid({
               {Array.from({ length: ROW_COL_COUNT }, (_, ci) => {
                 const cell = row.find((w) => w.col === ci);
                 return (
-                  <div key={ci} className="exp-content__col">
+                  <div
+                    key={ci}
+                    className={`exp-content__col${cell ? " exp-content__col--fill" : ""}`}
+                  >
                     {cell && (
                       <div className="exp-content__el">
                         <div className="exp-content__dot" />

@@ -160,7 +160,7 @@ export default function Home() {
       {/* WORKS */}
       <section
         id="works"
-        className="w-full bg-ink py-[clamp(80px,9vw,144px)] font-sans text-white max-[809px]:-mx-[var(--pad-inner)]"
+        className="w-full bg-ink py-[clamp(80px,9vw,144px)] font-sans text-white max-[809px]:-mx-[var(--pad-inner)] max-[809px]:w-[calc(100%+2*var(--pad-inner))]"
       >
         <div className="mx-auto w-full max-w-[var(--max-w)] px-[var(--pad-inner)]">
           <Reveal variant="mask">

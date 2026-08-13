@@ -31,6 +31,7 @@ export function ApproachSteps({
     const enteredIndexes = new Set<number>();
     let raf = 0;
     let observer: IntersectionObserver | undefined;
+    let fallback = 0;
 
     const updateActive = () => {
       const targetY = window.innerHeight * 0.46;
@@ -76,6 +77,14 @@ export function ApproachSteps({
       );
 
       items.forEach((item) => observer?.observe(item));
+      fallback = window.setTimeout(() => {
+        items.forEach((item, index) => {
+          if (!enteredIndexes.has(index)) {
+            enteredIndexes.add(index);
+            setEntered(new Set(enteredIndexes));
+          }
+        });
+      }, 4000);
       updateActive();
       window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", onScroll);
@@ -86,6 +95,7 @@ export function ApproachSteps({
     return () => {
       unsubscribe();
       observer?.disconnect();
+      window.clearTimeout(fallback);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       window.cancelAnimationFrame(raf);
