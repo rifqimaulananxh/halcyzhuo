@@ -136,35 +136,37 @@ export default async function WorkDetail({ params }: Props) {
           ))}
         </div>
 
-        <Reveal variant="fade">
-          <figure className="border-y border-surface py-[clamp(56px,7vw,96px)]">
-            <span
-              className="block text-accent font-display text-[var(--fs-hero)] leading-[0.5] select-none mb-8"
-              aria-hidden="true"
-            >
-              “
-            </span>
-            <blockquote className="font-display text-[var(--fs-h4)] font-medium tracking-[-0.035em] leading-[1.4] max-w-[900px]">
-              {project.quote}
-            </blockquote>
-            <figcaption className="mt-10 flex items-center gap-4">
-              <span className="w-[44px] h-[44px] rounded-full bg-ink text-white flex items-center justify-center text-[var(--fs-bold-sm)] font-semibold flex-shrink-0">
-                {project.quoteBy.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
+        {project.quote && project.quoteBy && (
+          <Reveal variant="fade">
+            <figure className="border-y border-surface py-[clamp(56px,7vw,96px)]">
+              <span
+                className="block text-accent font-display text-[var(--fs-hero)] leading-[0.5] select-none mb-8"
+                aria-hidden="true"
+              >
+                “
               </span>
-              <div>
-                <strong className="text-[var(--fs-body)] font-semibold block">
-                  {project.quoteBy.name}
-                </strong>
-                <span className="text-[var(--fs-body-sm)] text-muted">
-                  {project.quoteBy.role}
+              <blockquote className="font-display text-[var(--fs-h4)] font-medium tracking-[-0.035em] leading-[1.4] max-w-[900px]">
+                {project.quote}
+              </blockquote>
+              <figcaption className="mt-10 flex items-center gap-4">
+                <span className="w-[44px] h-[44px] rounded-full bg-ink text-white flex items-center justify-center text-[var(--fs-bold-sm)] font-semibold flex-shrink-0">
+                  {project.quoteBy.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
                 </span>
-              </div>
-            </figcaption>
-          </figure>
-        </Reveal>
+                <div>
+                  <strong className="text-[var(--fs-body)] font-semibold block">
+                    {project.quoteBy.name}
+                  </strong>
+                  <span className="text-[var(--fs-body-sm)] text-muted">
+                    {project.quoteBy.role}
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </Reveal>
+        )}
 
         <Reveal variant="fade">
           <Link

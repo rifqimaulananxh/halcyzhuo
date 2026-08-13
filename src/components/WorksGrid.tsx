@@ -13,7 +13,7 @@ import { onMotionReady } from "@/lib/motion";
 export function WorksGrid() {
   const { setCursor, resetCursor } = useCursor();
   const rootRef = useRef<HTMLDivElement>(null);
-  const featured = projects.find((project) => project.slug === "pulse") ?? projects[0];
+  const featured = projects[0];
 
   useEffect(() => {
     const root = rootRef.current;
@@ -59,7 +59,7 @@ export function WorksGrid() {
           <div className="flex min-h-[360px] flex-col justify-between gap-10 p-8 max-[809px]:min-h-0 max-[809px]:gap-12 max-[576px]:p-6">
             <div>
               <div className="featured-work__meta mb-12 flex items-center justify-between gap-4 text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-white/55 max-[809px]:mb-8">
-                <span>01 / 06</span>
+                <span>01 / {String(projects.length).padStart(2, "0")}</span>
                 <span>{featured.year}</span>
               </div>
                 <span className="featured-work__category mb-4 block text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-white/55">
@@ -73,14 +73,16 @@ export function WorksGrid() {
               </p>
             </div>
             <div className="flex items-end justify-between gap-5 border-t border-white/20 pt-5">
-              <div>
-                <span className="featured-work__outcome-label block text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-white/45">
-                  Outcome
-                </span>
-                <strong className="mt-1 block text-[var(--fs-h4)] font-medium tracking-[-0.03em]">
-                  {featured.metric}
-                </strong>
-              </div>
+              {featured.metric && (
+                <div>
+                  <span className="featured-work__outcome-label block text-[var(--fs-label)] font-semibold uppercase tracking-[0.16em] text-white/45">
+                    Outcome
+                  </span>
+                  <strong className="mt-1 block text-[var(--fs-h4)] font-medium tracking-[-0.03em]">
+                    {featured.metric}
+                  </strong>
+                </div>
+              )}
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 ease-out group-hover:rotate-[45deg] group-hover:scale-110">
                 <svg
                   width="18"

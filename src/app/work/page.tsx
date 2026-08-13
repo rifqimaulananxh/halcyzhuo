@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
+  const years = [...new Set(projects.map((p) => p.year))].sort();
+  const yearRange = years.length > 1 ? `${years[0]}-${years[years.length - 1]}` : years[0];
+
   return (
     <main id="main" className="page-main work-page">
       <section className="work-index" data-section-skip>
@@ -40,7 +43,7 @@ export default function WorkPage() {
 
         <div className="work-index__bottom">
           <span>projects ({projects.length})</span>
-          <span>2025-2026</span>
+          <span>{yearRange}</span>
         </div>
       </section>
     </main>
