@@ -72,13 +72,13 @@ export function Hero() {
     };
   }, []);
 
-  /* mobile feature rotator (roshan-style, cycles every 1s) */
+  /* mobile feature rotator (roshan-style, cycles every ~2.2s) */
   useEffect(() => {
     let intervalId = 0;
     const unsubscribe = onMotionReady(() => {
       intervalId = window.setInterval(() => {
         setFeature((f) => (f + 1) % HERO_POINTERS.length);
-      }, 1000);
+      }, 2200);
     });
     return () => {
       unsubscribe();
@@ -316,6 +316,7 @@ export function Hero() {
         >
           <div className="hero__feature-img">
             <img
+              key={HERO_POINTER_PROJECTS[feature].slug}
               className="hero__feature-img-el"
               src={HERO_POINTER_PROJECTS[feature].cover}
               alt=""

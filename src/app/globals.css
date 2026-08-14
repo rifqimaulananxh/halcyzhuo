@@ -371,6 +371,9 @@
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     overflow-x: clip;
   }
 
@@ -1724,12 +1727,26 @@ html:not(.js) .hero__heading-right {
   position: relative;
   width: 100%;
   height: 112px;
+  overflow: hidden;
+  background: var(--color-surface);
 }
 
 .hero__feature-img-el {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  animation: hero-feature-in 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes hero-feature-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .hero__feature-label {
@@ -1810,7 +1827,7 @@ html:not(.js) .hero__heading-right {
 
 @media (max-width: 1024px) {
   .hero__heading {
-    font-size: clamp(44px, 11vw, 72px);
+    font-size: clamp(36px, 9.5vw, 72px);
   }
   .hero__content {
     padding-bottom: 20px;
@@ -2344,7 +2361,7 @@ html.js .approach-step.approach-step--entered {
   align-items: center;
   width: 100%;
   padding: 0 32px;
-  padding-top: 18px;
+  padding-top: calc(18px + env(safe-area-inset-top));
   color: var(--color-bg);
   mix-blend-mode: difference;
   transition: opacity 0.35s ease;
@@ -2366,6 +2383,7 @@ html.js .approach-step.approach-step--entered {
 }
 
 .navbar__menu {
+  position: relative;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -2376,6 +2394,13 @@ html.js .approach-step.approach-step--entered {
   border: 0;
   background: none;
   cursor: pointer;
+}
+
+.navbar__menu::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 4px;
 }
 
 .navbar__bar {
@@ -2402,7 +2427,9 @@ html.js .approach-step.approach-step--entered {
   z-index: 99;
   width: 100vw;
   height: 100vh;
-  padding: 32px;
+  top: -100svh;
+  height: 100svh;
+  padding: calc(32px + env(safe-area-inset-top)) calc(32px + env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) calc(32px + env(safe-area-inset-left));
   background: var(--color-bg);
   color: var(--color-ink);
   visibility: hidden;
@@ -2534,10 +2561,10 @@ html.js .approach-step.approach-step--entered {
 @media (max-width: 1024px) {
   .navbar {
     padding: 0 12px;
-    padding-top: 10px;
+    padding-top: calc(10px + env(safe-area-inset-top));
   }
   .nav-drawer {
-    padding: 12px;
+    padding: calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom));
   }
   .nav-drawer__content {
     grid-template-columns: 1fr 1fr;

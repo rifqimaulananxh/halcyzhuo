@@ -46,6 +46,9 @@ export function Preloader() {
     const root = rootRef.current;
     if (!root) return;
 
+    const startedAt = performance.now();
+    const MIN_TOTAL_MS = 4000;
+
     document.documentElement.classList.add("is-loading");
     document.body.style.overflow = "hidden";
 
@@ -80,7 +83,7 @@ export function Preloader() {
       new Promise<never>((_, reject) => {
         window.setTimeout(
           () => reject(new Error("GSAP preload timeout")),
-          3000
+          5000
         );
       }),
     ]);
@@ -151,8 +154,16 @@ export function Preloader() {
               stagger: { each: 0.09 },
             },
             "<"
-          )
-          .add(finish, "+=0.1");
+          );
+
+        const hold = Math.max(
+          0,
+          (MIN_TOTAL_MS - (performance.now() - startedAt)) / 1000 -
+            timeline.duration()
+        );
+        if (hold > 0) timeline.shiftChildren(hold);
+
+        timeline.add(finish, "+=0.1");
       })
       .catch(() => {
         if (!cancelled) finish();
