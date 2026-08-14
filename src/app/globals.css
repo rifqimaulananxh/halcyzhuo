@@ -2608,19 +2608,21 @@ html.js .approach-step.approach-step--entered {
   .nav-drawer__content {
     grid-template-columns: 1fr;
     align-content: start;
-    gap: 28px;
+    gap: 40px;
     padding-top: 64px;
   }
   .nav-drawer__title {
     font-size: 34px;
   }
   .nav-drawer__list {
-    justify-self: start;
+    justify-self: center;
+    align-items: center;
     padding-left: 0;
     padding-right: 0;
   }
   .nav-drawer__link {
     font-size: 26px;
+    text-align: center;
   }
 }
 
@@ -2727,13 +2729,17 @@ html.js .approach-step.approach-step--entered {
 
 @media (max-width: 767px) {
   .preloader__word {
-    height: clamp(52px, 18vw, 88px);
+    height: clamp(72px, 26vw, 140px);
   }
   .preloader__line {
     gap: 14px;
   }
   .preloader__meta {
     gap: 0.3em;
+  }
+  .preloader__meta-label,
+  .preloader__meta-count {
+    font-size: clamp(12px, 1.6vw, 18px);
   }
 }
 
