@@ -2641,7 +2641,7 @@ html.js .approach-step.approach-step--entered {
 .preloader__in {
   display: inline-block;
   text-align: left;
-  visibility: hidden;
+  animation: preloader-drive 3.2s linear forwards;
 }
 
 .preloader__line {
@@ -2670,7 +2670,7 @@ html.js .approach-step.approach-step--entered {
 
 .preloader__word-grey,
 .preloader__word-ink {
-  will-change: transform;
+  transform-box: fill-box;
 }
 
 .preloader__word-grey {
@@ -2725,6 +2725,113 @@ html.js .approach-step.approach-step--entered {
   min-width: 1.7em;
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+@keyframes preloader-drive {
+  to {
+    opacity: 1;
+  }
+}
+
+.preloader__meta-item > * {
+  transform: translateY(120%);
+  animation:
+    preloader-meta-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0s both,
+    preloader-meta-out 0.55s cubic-bezier(0.525, 0, 0.225, 1) 2.3s forwards;
+}
+
+.preloader__meta-item:last-child > * {
+  animation-delay: 0.06s, 2.36s;
+}
+
+.preloader__word {
+  transform: translateX(-25%);
+  animation:
+    preloader-word-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both,
+    preloader-word-out 0.8s cubic-bezier(0.525, 0, 0.225, 1) 2.3s forwards;
+}
+
+.preloader__word--zhuo,
+.preloader__word--zhuo .preloader__word-ink {
+  animation-delay: 0.44s, 2.39s;
+}
+
+.preloader__word--zhuo .preloader__word-grey {
+  animation-delay: 2.39s;
+}
+
+.preloader__word-ink {
+  clip-path: inset(0 100% 0 0);
+  animation:
+    preloader-ink-in 0.8s cubic-bezier(0.525, 0, 0.225, 1) 0.35s both,
+    preloader-ink-out 0.7s cubic-bezier(0.525, 0, 0.225, 1) 2.3s forwards;
+}
+
+.preloader__word-grey {
+  animation: preloader-grey-out 0.7s cubic-bezier(0.525, 0, 0.225, 1) 2.3s forwards;
+}
+
+@keyframes preloader-meta-in {
+  from {
+    transform: translateY(120%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes preloader-meta-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-120%);
+  }
+}
+
+@keyframes preloader-word-in {
+  from {
+    transform: translateX(-25%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes preloader-word-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(40%);
+  }
+}
+
+@keyframes preloader-ink-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes preloader-ink-out {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes preloader-grey-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(101%);
+  }
 }
 
 @media (max-width: 767px) {

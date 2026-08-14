@@ -1,6 +1,6 @@
 export const SITE = {
   name: "halcyzhuo",
-  url: "https://halcyzhuo.com",
+  url: "https://halcyzhuo.com/",
   email: "hello@halcyzhuo.com",
   tagline: "Engineering that ships",
   description:
